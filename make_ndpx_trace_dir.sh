@@ -12,12 +12,7 @@ do
     do
       sync_dir="sync_"$sync"_"
       echo $sync_dir
-      for ((simd=8; simd<=32; simd+=24))
-      do
-        simd_dir="simd_"$simd
-        echo $simd_dir
-        mkdir -p $packet_dir$buf_dir$gpu_dir$sync_dir$simd_dir
-      done
+      mkdir -p $packet_dir$buf_dir$gpu_dir$sync_dir"simd_8"
     done
   done
 done
