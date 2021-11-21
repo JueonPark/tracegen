@@ -1,1 +1,6 @@
 traces/*
+checkpoint_files/*
+*.out
+*.txt
+*.log
+*.log.gz
