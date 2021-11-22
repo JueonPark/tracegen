@@ -8,9 +8,11 @@ from shutil import move
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--path', required=True, help="traces/, make sure that '/' is added at the end")
+parser.add_argument('--gpus', required=True, help="numboer of gpus")
 args = parser.parse_args()
 
 print(args.path)
+print(args.gpus)
 
 files = os.listdir(args.path)
 for file in files:
@@ -24,7 +26,10 @@ for file in files:
     print("moving .traceg file to %s"%args.path + file[:-7])
     move(args.path + file, args.path + file[:-7]+"/GPU_0/")
     # write kernelslist.g to that directory
-    write_txt = file + "\ncudaDeviceSynchronize 0"
+    write_txt = file
+    for i in range(args.gpus - 1):
+        write_txt = write_txt + "\n" + file
+    write_txt = write_txt + "\ncudaDeviceSynchronize 0"
     kernelslist = open(args.path + file[:-7]+"/kernelslist.g", "w+")
     kernelslist.write(write_txt)
     kernelslist.close()
