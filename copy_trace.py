@@ -27,7 +27,7 @@ for file in files:
     move(args.path + file, args.path + file[:-7]+"/GPU_0/")
     # write kernelslist.g to that directory
     write_txt = file
-    for i in range(args.gpus - 1):
+    for i in range(int(args.gpus) - 1):
         write_txt = write_txt + "\n" + file
     write_txt = write_txt + "\ncudaDeviceSynchronize 0"
     kernelslist = open(args.path + file[:-7]+"/kernelslist.g", "w+")
