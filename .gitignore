@@ -1,4 +1,5 @@
 traces/*
+results/*
 checkpoint_files/*
 *.out
 *.txt

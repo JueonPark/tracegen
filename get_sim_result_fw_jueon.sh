@@ -7,8 +7,6 @@ SYNC=$5
 RESUBMIT=$6
 echo $SYNC
 DEVICE_SETTING=GPU_${GPUS}_Buffer_${BUFFERS}
-#SIMULATOR_DIR=/home/shared/CXL_memory_buffer/ASPLOS_simulator/cxl-simulator
-#SIMULATOR_BINARY_DIR=$SIMULATOR_DIR/multi_gpu_simulator/gpu-simulator/bin/release
 SIMULATOR_DIR=/home/jueonpark/cxl-simulator
 SIMULATOR_BINARY_DIR=$SIMULATOR_DIR/multi_gpu_simulator/gpu-simulator/bin/release
 TARGET_TRACE_DIR=`pwd`/traces/$TARGET_MODEL
@@ -37,6 +35,7 @@ do
     CYCLE2=`cat GPU_0.out | grep "sim_cycle" | tail -n1 | awk '{print($3)}'` 
     NAME=`cat GPU_0.out | grep "kernel_name" | head -n1 | awk '{print($3)}'` 
     JOB_NAME="${TARGET_MODEL}-GPU${3}-forward-${line}-${CONFIG}"
+		echo $JOB_NAME
     if [ ${SYNC} -eq 1 ]; then
         JOB_NAME="${JOB_NAME}-sync"
     else
@@ -49,7 +48,7 @@ do
             echo "RUNNING NOT FOUND ${line}" 
             if [ "$RESUBMIT" = "1" ]; then
                 rm GPU*
-                sbatch -J $JOB_NAME -n $GPUS --exclude=g1 -o sim_result.out -e sim_result.err run.sh;
+                sbatch -J $JOB_NAME -n $GPUS -p cpu-max80 -o sim_result.out -e sim_result.err run.sh;
             fi
         fi
         echo "NOT FOUND $line"
