@@ -1,7 +1,13 @@
 traces/*
+traces_fw/*
+traces_bw/*
 results/*
 checkpoint_files/*
+*.csv
 *.out
 *.txt
 *.log
 *.log.gz
+hlo_graph/*
+ndp_traces_backup/*
+results_baseline/*

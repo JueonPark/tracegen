@@ -6,4 +6,4 @@ MODEL=$MODEL'_batch_'$BATCH
 GPUS=1
 BUFFERS=1
 SYNC=0
-sh generate_simulation_env_fw_jueon.sh $CONFIG $MODEL $GPUS $BUFFERS $SYNC > $MODEL-$CONFIG-$GPUS-nosync
+sh generate_simulation_env_fw_baseline.sh $CONFIG $MODEL $GPUS $BUFFERS $SYNC > $MODEL-$CONFIG-$GPUS-nosync
