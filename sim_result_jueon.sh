@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CONFIG=V100_downscaled_HBM2_PCI6x1
+CONFIG=NDPX_baseline_64
 MODEL=simple_graph_ndpx
 GPUS=1
 BUFFERS=1
