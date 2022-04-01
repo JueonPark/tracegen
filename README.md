@@ -1,4 +1,4 @@
-# Scheduling traces
+# Handling NDPX traces
 0. `source setup_environment.sh`
 1. Use `copy_trace.py` to generate environment
 2. Change the address for the GPU kernels that **write** to NDPX kernel
@@ -15,6 +15,8 @@ There are two directories for experiment
  * `traces/` preserves traces of various directories
  * `results/` stores run.sh files for each trace, and these are run by `sim_result_jueon.sh`
 
+# Handling Baseline traces
+TBD
 
 # Running Trace
 ``` bash
