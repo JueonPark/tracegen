@@ -1,5 +1,6 @@
 """
 attach page table to kernel
+this is needed when data is loaded from ndpx to gpu
 """
 import os
 import argparse
