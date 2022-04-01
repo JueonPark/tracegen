@@ -1,5 +1,4 @@
 #!/bin/bash
-
 CONFIG=NDPX_baseline_64
 MODEL=simple_graph_ndpx
 GPUS=1

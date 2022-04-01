@@ -8,8 +8,9 @@
   * This is needed for the case when the data is loaded from NDPX and stored in GPU on-the-fly.
   * use `attach_page_table.py` for replacing individual trace.
   * use `attach_page_table.sh` for replacing multiple traces.
-4. You need to generate GPU_1, GPU_2, ... for cases that uses multi-gpu configuration. In that case, use `copy_gpu_folder.py` to copy scheduled `GPU_0` to `GPU_1`, `GPU_2`, ...
-  * For specific trace, use `copy_specific_gpu_folder.py`.
+<!-- 4. You need to generate GPU_1, GPU_2, ... for cases that uses multi-gpu configuration. In that case, use `copy_gpu_folder.py` to copy scheduled `GPU_0` to `GPU_1`, `GPU_2`, ...
+  * For specific trace, use `copy_specific_gpu_folder.py`. -->
+
 
 # Running Trace
 ``` bash

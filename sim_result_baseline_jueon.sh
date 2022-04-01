@@ -1,5 +1,4 @@
 #!/bin/bash
-
 CONFIG=V100_downscaled_HBM2_PCI6x1
 MODEL=bert_ndp
 BATCH=16
