@@ -10,17 +10,16 @@
   * use `attach_page_table.sh` for replacing multiple traces.
 <!-- 4. You need to generate GPU_1, GPU_2, ... for cases that uses multi-gpu configuration. In that case, use `copy_gpu_folder.py` to copy scheduled `GPU_0` to `GPU_1`, `GPU_2`, ...
   * For specific trace, use `copy_specific_gpu_folder.py`. -->
+## Two directories
+There are two directories for experiment
+ * `traces/` preserves traces of various directories
+ * `results/` stores run.sh files for each trace, and these are run by `sim_result_jueon.sh`
 
 
 # Running Trace
 ``` bash
-vi sim_env_fw_jueon.sh
-vi generate_simulation_env_fw_jueon.sh
-vi sim_result_fw_jueon.sh
-vi get_sim_result_fw_jueon.sh
-
 # make environment and run script
-sh sim_env_fw_jueon.sh
+sh sim_env_jueon.sh     # always modify the script first!
 # run the jobs
-sh sim_result_fw_jueon.sh
+sh sim_result_jueon.sh  # always modify the script first!
 ```
