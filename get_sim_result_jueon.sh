@@ -33,6 +33,7 @@ do
     NAME=`cat GPU_0.out | grep "kernel_name" | head -n1 | awk '{print($3)}'` 
     JOB_NAME="${TARGET_MODEL}-GPU${3}-${line}-${CONFIG}"
 		echo $JOB_NAME
+
     if [ ${SYNC} -eq 1 ]; then
         JOB_NAME="${JOB_NAME}-sync"
     else
@@ -45,7 +46,8 @@ do
             echo "RUNNING NOT FOUND ${line}" 
             if [ "$RESUBMIT" = "1" ]; then
                 rm GPU*
-                sbatch -J $JOB_NAME -n 1 --nodelist=g1 -o sim_result.out -e sim_result.err run.sh;
+                # run job
+                sbatch -J $JOB_NAME -n 1 --nodelist=n5 -o sim_result.out -e sim_result.err run.sh;
             fi
         fi
         echo "NOT FOUND $line"
