@@ -8,7 +8,7 @@ from shutil import move
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--path', required=True, help="traces/, make sure that '/' is added at the end")
-parser.add_argument('--gpus', required=True, help="numboer of gpus")
+parser.add_argument('--gpus', required=True, help="number of gpus")
 args = parser.parse_args()
 
 print(args.path)
