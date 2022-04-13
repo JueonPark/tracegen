@@ -47,7 +47,7 @@ do
             if [ "$RESUBMIT" = "1" ]; then
                 rm GPU*
                 # run job
-                sbatch -J $JOB_NAME -n 1 --nodelist=n5 -o sim_result.out -e sim_result.err run.sh;
+                sbatch -J $JOB_NAME -n 1 --partition=allcpu -o sim_result.out -e sim_result.err run.sh;
             fi
         fi
         echo "NOT FOUND $line"

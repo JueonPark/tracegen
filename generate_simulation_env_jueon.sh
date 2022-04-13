@@ -9,7 +9,6 @@ SIMULATOR_DIR=/home/jueonpark/cxl-simulator
 SIMULATOR_BINARY_DIR=$SIMULATOR_DIR/multi_gpu_simulator/gpu-simulator/bin/release
 CONFIG_DIR=/home/shared/CXL_memory_buffer/ASPLOS_simulator/cxl-simulator/sim_configs/$DEVICE_SETTING/$CONFIG
 TARGET_TRACE_DIR=`pwd`/traces/$TARGET_MODEL/traces
-PARSED_TRACES=$TARGET_TRACE_DIR/packet_32_buffer_${BUFFERS}_gpu_${GPUS}_sync_${SYNC}_simd_8_fw
 TARGET_RESULT_DIR=`pwd`"/results/"$DEVICE_SETTING"/"$TARGET_MODEL"/"$CONFIG
 if [ ${SYNC} -eq 1 ]; then
     TARGET_RESULT_DIR=$TARGET_RESULT_DIR"/"sync
