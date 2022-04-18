@@ -34,10 +34,10 @@ else:
 
 EXP_NAME = f'packet_{args.packet_size}_buffer_{args.buffer}_gpu_{args.gpu}_sync_{1 if args.sync else 0}_simd_{args.simd}'
 
-BASE_PATHS = [f'{args.model}/{EXP_NAME}_{p}' for p in passes]
-TRACES_PATHS = [f'{args.model}/traces_{p}/packet_32_buffer_1_gpu_1_sync_0_simd_8_{p}' for p in passes]
-HLO_PATHS = [f'{args.model}/xla_hlo_{p}/{EXP_NAME}' for p in passes]
-kernelslist_tmp_files = [open(f'{args.model}/traces_{p}/packet_32_buffer_1_gpu_1_sync_0_simd_8_{p}/kernelslist.g.tmp.{p}', 'r') for p in passes]
+BASE_PATHS = [f'/home/jueonpark/tracegen/traces/{args.model}/{EXP_NAME}_{p}' for p in passes]
+TRACES_PATHS = [f'/home/jueonpark/tracegen/traces/{args.model}/traces_{p}/packet_32_buffer_1_gpu_1_sync_0_simd_8_{p}' for p in passes]
+HLO_PATHS = [f'/home/jueonpark/tracegen/traces/{args.model}/xla_hlo_{p}/{EXP_NAME}' for p in passes]
+kernelslist_tmp_files = [open(f'/home/jueonpark/tracegen/traces/{args.model}/traces_{p}/packet_32_buffer_1_gpu_1_sync_0_simd_8_{p}/kernelslist.g.tmp.{p}', 'r') for p in passes]
 
 for p, kernelslist_tmp_file, base_path, traces_path, hlo_path in zip(passes, kernelslist_tmp_files, BASE_PATHS, TRACES_PATHS, HLO_PATHS):
     kernel_list = kernelslist_tmp_file.read().split('\n\n')

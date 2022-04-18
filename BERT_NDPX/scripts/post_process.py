@@ -33,17 +33,17 @@ else:
 
 EXP_NAME = f'packet_{args.packet_size}_buffer_{args.buffer}_gpu_{args.gpu}_sync_{1 if args.sync else 0}_simd_{args.simd}'
 
-BASE_PATHS = [f'{args.model}/traces_{p}/{EXP_NAME}_{p}' for p in passes]
+BASE_PATHS = [f'/home/jueonpark/tracegen/traces/{args.model}/traces_{p}/{EXP_NAME}_{p}' for p in passes]
 for base_path in BASE_PATHS:
     if os.path.exists(base_path):
         raise Exception(f'Please check the path {base_path}')
     else:
         os.mkdir(base_path)
 
-NDP_TRACE_PATHS = [f'{args.model}/xla_hlo_{p}/{EXP_NAME}' for p in passes]
+NDP_TRACE_PATHS = [f'/home/jueonpark/tracegen/traces/{args.model}/xla_hlo_{p}/{EXP_NAME}' for p in passes]
 
-kernelslist_files = [open(f'{args.model}/traces_{p}/kernelslist.g.{p}', 'r') for p in passes]
-kernelslist_tmp_files = [open(f'{args.model}/traces_{p}/{EXP_NAME}_{p}/kernelslist.g.tmp.{p}', 'w') for p in passes]
+kernelslist_files = [open(f'/home/jueonpark/tracegen/traces/{args.model}/traces_{p}/kernelslist.g.{p}', 'r') for p in passes]
+kernelslist_tmp_files = [open(f'/home/jueonpark/tracegen/traces/{args.model}/traces_{p}/{EXP_NAME}_{p}/kernelslist.g.tmp.{p}', 'w') for p in passes]
 
 for p, kernelslist_file, kernelslist_tmp_file in zip(passes, kernelslist_files, kernelslist_tmp_files):
     kernel_list = kernelslist_file.read().split('\n\n')
@@ -75,13 +75,13 @@ for p, kernelslist_file, kernelslist_tmp_file in zip(passes, kernelslist_files, 
                 kernelslist_tmp_file.write(kernel + '\n')
                 continue
             if 'kernel-' in kernel: # GPU kernel
-                input_file_path = f'{args.model}/traces_{p}/{kernel}'
-                output_file_path = f'{args.model}/traces_{p}/{EXP_NAME}_{p}/{kernel}_post.traceg'
+                input_file_path = f'/home/jueonpark/tracegen/traces/{args.model}/traces_{p}/{kernel}'
+                output_file_path = f'/home/jueonpark/tracegen/traces/{args.model}/traces_{p}/{EXP_NAME}_{p}/{kernel}_post.traceg'
                 f = open(input_file_path, 'r')
                 kernelslist_tmp_file.write(kernel + '_post.traceg\n')
                 output = open(output_file_path, 'w')
                 if page_table == True:
-                    page_table_file = open(f'{args.model}/xla_hlo_{p}/{EXP_NAME}/page_table_header_custom-call.{custom_call_id}.traceg', 'r')
+                    page_table_file = open(f'/home/jueonpark/tracegen/traces/{args.model}/xla_hlo_{p}/{EXP_NAME}/page_table_header_custom-call.{custom_call_id}.traceg', 'r')
                     output.write(page_table_file.read() + '\n')
                     page_table_file.close()
                 if not no_cxl:
