@@ -76,7 +76,7 @@ do
     CYCLE=`cat GPU_0.out | grep "sim_cycle" | head -n1 | awk '{print($3)}'` 
     CYCLE2=`cat GPU_0.out | grep "sim_cycle" | tail -n1 | awk '{print($3)}'` 
     NAME=`cat GPU_0.out | grep "kernel_name" | head -n1 | awk '{print($3)}'` 
-    JOB_NAME="${TARGET_MODEL}-GPU${3}-forward-${line}-${CONFIG}"
+    JOB_NAME="${TARGET_MODEL}-GPU${3}-backward-${line}-${CONFIG}"
 		echo $JOB_NAME
     if [ ${SYNC} -eq 1 ]; then
         JOB_NAME="${JOB_NAME}-sync"
@@ -95,13 +95,13 @@ do
         fi
         echo "NOT FOUND $line"
         echo `cat sim_result.out | tail -n1` 
-        echo $DEVICE_SETTING,$CONFIG,$5,$line,forward,$NAME,$CYCLE " NOT FOUND" >> $CSV_BW_PATH  ;
+        echo $DEVICE_SETTING,$CONFIG,$5,$line,backward,$NAME,$CYCLE " NOT FOUND" >> $CSV_BW_PATH  ;
     else    
         if [ -n "$RUNNING" ]; then
             echo "POSSIBLE DEADLOCK $line"
         fi
-        echo $DEVICE_SETTING,$CONFIG,$5,$line,forward,$NAME,$CYCLE >> $CSV_BW_PATH ;
-        echo $DEVICE_SETTING,$CONFIG,$5,$line,forward,NDP_OP,$(( CYCLE2 - CYCLE )) >> $CSV_BW_PATH ;
+        echo $DEVICE_SETTING,$CONFIG,$5,$line,backward,$NAME,$CYCLE >> $CSV_BW_PATH ;
+        echo $DEVICE_SETTING,$CONFIG,$5,$line,backward,NDP_OP,$(( CYCLE2 - CYCLE )) >> $CSV_BW_PATH ;
     fi
     popd
 done
