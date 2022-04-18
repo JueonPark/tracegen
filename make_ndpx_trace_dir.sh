@@ -1,5 +1,5 @@
 #!/bin/bash
-packet_dir="hlo_graph/packet_32_"
+packet_dir="xla_hlo/packet_32_"
 for ((buffer=1; buffer<=4; buffer*=2))
 do
   buf_dir="buffer_"$buffer"_"

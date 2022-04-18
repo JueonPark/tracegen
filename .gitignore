@@ -8,7 +8,7 @@ checkpoint_files/*
 *.txt
 *.log
 *.log.gz
-hlo_graph/*
+xla_hlo/*
 ndp_traces_backup/*
 results_baseline/*
 BERT_NDPX/scripts/utils2/__pycache__/*

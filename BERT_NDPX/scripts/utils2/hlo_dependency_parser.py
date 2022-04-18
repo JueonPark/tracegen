@@ -11,12 +11,12 @@ class HloDepdendencyManager(object):
   def __init__(self, hlo_string):
     self.hlo_table = dict()
     splitted_hlo_string = hlo_string.split('\n\n')
-    hlo_graph = ''
+    xla_hlo = ''
     for computing in splitted_hlo_string:
       if 'ENTRY %cluster' in computing:
-        hlo_graph = computing
+        xla_hlo = computing
         break
-    lines = hlo_graph.split('\n')
+    lines = xla_hlo.split('\n')
     for line in lines:
       start = line.find('%')
       end = line.find('=')
