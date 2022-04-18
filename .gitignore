@@ -11,3 +11,4 @@ checkpoint_files/*
 hlo_graph/*
 ndp_traces_backup/*
 results_baseline/*
+BERT_NDPX/scripts/utils2/__pycache__/*

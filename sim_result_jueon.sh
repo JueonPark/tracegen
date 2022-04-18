@@ -1,6 +1,7 @@
 #!/bin/bash
 CONFIG=NDPX_baseline_64
-MODEL=simple_graph_ndpx
+# MODEL is the directory of traces
+MODEL=ndpx_elementwise_524288
 GPUS=1
 BUFFERS=1
 SYNC=0
