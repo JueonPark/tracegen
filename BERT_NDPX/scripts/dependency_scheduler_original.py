@@ -6,6 +6,11 @@ from utils2 import parse_stats
 from utils2 import HloDepdendencyManager
 
 def match(ts_parsed, stats_parsed):
+  # while True:
+  #   if ts_parsed[0] == stats_parsed[0][1]:
+  #     break
+  #   ts_parsed = ts_parsed[1:]
+
   ts_matched = []
   stats_matched = []
   ts_unmatched = [i for i in ts_parsed]
@@ -52,6 +57,7 @@ def get_first_kernel_id(path):
     end = line.find('.')
     return int(line[start:end])
 
+      
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-m', '--model', type=str, help="Model name", required=True)
@@ -64,7 +70,6 @@ stats_path=f'/home/jueonpark/tracegen/traces/{args.model}/traces/stats.csv'
 list_path=f'/home/jueonpark/tracegen/traces/{args.model}/traces/kernelslist'
 ts_path=f'/home/jueonpark/tracegen/traces/{args.model}/xla_hlo/module_0000.thunk_schedule'
 graph_path=f'/home/jueonpark/tracegen/traces/{args.model}/xla_hlo/{args.model}.txt'
-# ewise_table_path=f'/home/jueonpark/tracegen/traces/{args.model}/xla_hlo/ndpx_scheduling_table_cluster_0.csv'
 output=f'/home/jueonpark/tracegen/traces/{args.model}/kernelslist.g'
 
 GPU_thunks, NDP_thunks = parse_thunk_schedule(open(ts_path).read())
@@ -89,8 +94,6 @@ for order, thunk in GPU_thunks:
   no_cxl_flags[name] = True
   if 'custom-call' in thunk:
     num_gpu_custom_call +=1
-
-overlapped_candidates = []
 
 """
 Forward schedule
@@ -217,53 +220,13 @@ for order, ndp_thunk_name in NDP_thunks_cpy:
             and len(scheduled_kernels[gpu_custom_call]) < len(scheduled_kernels[overlap_gpu_thunk])):
           overlap_gpu_thunk = gpu_custom_call
           print(f'NDP({ndp_thunk_name}) mapped to {gpu_thunk_name}')
-          overlapped_candidates.append(gpu_thunk_name)
 
     scheduled_kernels[overlap_gpu_thunk].append(ndp_thunk_name)
     if overlap_gpu_thunk != '':
       hops_map[overlap_gpu_thunk] = manager.get_custom_call_hops(overlap_gpu_thunk)  - 0.5
      
-    NDP_thunks.remove((order, ndp_thunk_name))
 
-"""
-Step 3, cost model overlapping
-warning: there might be ndp kernels that do not have overlapping kernel
-"""
-NDP_thunks_cpy = NDP_thunks.copy()
-for order, ndp_thunk_name in NDP_thunks_cpy:
-  ndp_custom_call = custom_call_name(ndp_thunk_name)
-  ndp_hops = manager.get_custom_call_hops(ndp_custom_call)
-  if 'wise' in ndp_thunk_name:
-    overlap_exist = False
-    overlap_candidate_name = ndp_thunk_name.split("$")[1]
-    # try overlapping for identified gpu thunk
-    for gpu_order, gpu_thunk_name in GPU_thunks:
-      gpu_thunk_name = custom_call_name(gpu_thunk_name)
-      if gpu_thunk_name == overlap_candidate_name:
-        print("initial try:" + gpu_thunk_name)
-        # there is overlap candidate in GPU kernel (typical case)
-        overlap_exist = True
-        overlapped_candidates.append(gpu_thunk_name)
-        scheduled_kernels[gpu_thunk_name].append(f'{ndp_thunk_name}.traceg')
-        print(f'NDP({ndp_thunk_name}) mapped to {gpu_thunk_name}')
-        break
-    if not overlap_exist:
-      # overlap NOT exist!!!
-      # find alternative overlapping gpu kernel      
-      for gpu_order, gpu_thunk_name in GPU_thunks:
-        gpu_thunk_name = custom_call_name(gpu_thunk_name)
-        if (not manager.is_dependent(ndp_custom_call, gpu_thunk_name)) \
-              and (gpu_thunk_name not in overlapped_candidates):
-          # set independent gpu kernel as new overlapping kernel
-          overlap_exist = True
-          scheduled_kernels[gpu_thunk_name].append(f'{ndp_thunk_name}.traceg')
-          print(f'NDP({ndp_thunk_name}) mapped to {gpu_thunk_name}')
-          overlapped_candidates.append(gpu_thunk_name)
-          break
-    if not overlap_exist:
-      # fatal error!!!
-      print("FFfffffffffffffffffffFFFFFFFFFFFF")
-      os.abort()
+    NDP_thunks.remove((order, ndp_thunk_name))
 
 for key in manager.get_hops_map():
   manager.refill_hops_map(hops_map, key)
@@ -310,8 +273,6 @@ with open(output+'.hops', 'w') as f_hops:
               f.write(f'_NDP_{ndp_thunk_name.split(":")[0]}_bw_bert_softmax_reduce_accum_2.traceg\n')
               f.write(f'_BAR_\n')
               f.write(f'_NDP_{ndp_thunk_name.split(":")[0]}_bw_bert_softmax_mul.traceg\n')
-            elif 'wise' in ndp_thunk_name:
-              f.write(f'_NDP_{ndp_thunk_name.split(":")[0]}_{ndp_thunk_name.split(":")[1]}\n')
             else:
               f.write(f'{ndp_thunk_name}\n')
           f.write(f'kernel-{kernel_no}.traceg\n')
