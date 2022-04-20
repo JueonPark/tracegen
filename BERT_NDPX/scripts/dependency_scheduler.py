@@ -235,7 +235,14 @@ for order, ndp_thunk_name in NDP_thunks_cpy:
   ndp_hops = manager.get_custom_call_hops(ndp_custom_call)
   if 'wise' in ndp_thunk_name:
     overlap_exist = False
-    overlap_candidate_name = ndp_thunk_name.split("$")[1]
+    overlap_candidate_name = ""
+    try:
+      overlap_candidate_name = ndp_thunk_name.split("$")[1]
+    except:
+      print("no overlapping kernel")
+      print(ndp_thunk_name)
+      overlap_candidate_name = ndp_thunk_name
+      continue
     # try overlapping for identified gpu thunk
     for gpu_order, gpu_thunk_name in GPU_thunks:
       gpu_thunk_name = custom_call_name(gpu_thunk_name)
