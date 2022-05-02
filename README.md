@@ -2,6 +2,7 @@
 Just do the followings:
 1. `source setup_environment.sh`
 2. `python BERT_NDPX/scripts/dependency_scheduler.py -m {model_name}_batch_{batch_size}`
+
     Remember to double-check the result so that both forward pass and backward pass are rightly configured.
     And you must copy `kernelslist.g.fw` and `kernelslist.g.bw` to `traces_fw` and `traces_bw` individually.
 3. `python BERT_NDPX/scripts/post_process.py --model {model_name}_batch_{batch_size} --packet-size 32 --gpu 1 --buffer 1 --simd 8 --passes all`
