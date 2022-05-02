@@ -1,7 +1,7 @@
 #!/bin/bash
 CONFIG=NDPX_baseline_64
-MODEL=bert_ndp_cost_model
-BATCH=16
+MODEL=220420_bert_large_cost_model
+BATCH=4
 MODEL=$MODEL'_batch_'$BATCH
 GPUS=1
 BUFFERS=1
