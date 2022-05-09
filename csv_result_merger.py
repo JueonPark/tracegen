@@ -13,7 +13,7 @@ if __name__ == "__main__":
 
   # we first merge fw and bw
   total_result = open(args.fw, 'r').read()
-  total_result += open(args.bw, 'r').read()
+  total_result += open(args.bw, 'r').read().split("\n", 1)[1]
   overall_file = open('output.csv', 'w')
   overall_file.write(total_result)
 
