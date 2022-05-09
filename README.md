@@ -10,7 +10,7 @@ Just do the followings:
 5. `sh sim_env_dl_model.sh`
 6. `sh sim_result_dl_model.sh`
 
-# Handling NDPX traces
+# Other Graphs
 0. `source setup_environment.sh`
 1. Use `copy_trace.py` to generate environment
 2. Change the address for the GPU kernels that **write** to NDPX kernel

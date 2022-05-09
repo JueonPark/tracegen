@@ -64,7 +64,6 @@ stats_path=f'/home/jueonpark/tracegen/traces/{args.model}/traces/stats.csv'
 list_path=f'/home/jueonpark/tracegen/traces/{args.model}/traces/kernelslist'
 ts_path=f'/home/jueonpark/tracegen/traces/{args.model}/xla_hlo/module_0000.thunk_schedule'
 graph_path=f'/home/jueonpark/tracegen/traces/{args.model}/xla_hlo/{args.model}.txt'
-# ewise_table_path=f'/home/jueonpark/tracegen/traces/{args.model}/xla_hlo/ndpx_scheduling_table_cluster_0.csv'
 output=f'/home/jueonpark/tracegen/traces/{args.model}/kernelslist.g'
 
 GPU_thunks, NDP_thunks = parse_thunk_schedule(open(ts_path).read())
