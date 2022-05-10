@@ -8,6 +8,19 @@ parser.add_argument('--kfw', type=str, help="kernelslist.g.fw", required=True)
 parser.add_argument('--kbw', type=str, help="kernelslist.g.bw", required=True)
 parser.add_argument('-g', '--ge', type=str, help="gpu_estimation.csv", required=True)
 
+def kernel_name_rewriter(kernel_name):
+  if kernel_name.find("turing_fp16") != -1:
+    if kernel_name.find("_nn") != -1:
+      return "GEMM_nn"
+    elif kernel_name.find("_nt") != -1:
+      return "GEMM_nt"
+    elif kernel_name.find("_tn") != -1:
+      return "GEMM_tn"
+    elif kernel_name.find("_tt") != -1:
+      return "GEMM_tt"
+  else:
+    return kernel_name.split("_")[0]
+
 if __name__ == "__main__":
   args = parser.parse_args()
 
@@ -23,9 +36,10 @@ if __name__ == "__main__":
   kernelslist = open(args.kfw, 'r').read() + '\n\n' + open(args.kbw, 'r').read()
   kernelslists = kernelslist.split('\n\n')
   ge_file_object = csv.reader(open(args.ge, 'r'))
-  ge_output = open("estimation_result.csv", "w+")
+  ge_output = open("gpu_estimation_result.csv", "w+")
   
-  new_header = "GpuKernel,KernelName,ShapeSize,InputSize,NdpxInput,#Ops,EstimatedCost,RealCycles"
+  new_header = "GpuKernel,KernelName,ShapeSize,InputSize,NdpxInput,#Ops,EstimatedCost,RealCycles\n"
+  ge_output.write(new_header)
   estimation_result = []
   estimation_result.append(new_header)
   prev_header = next(ge_file_object)
@@ -52,7 +66,7 @@ if __name__ == "__main__":
           kernel_cycle = tr_row.split(',')[6]
           break
     output_line = ge_row[0] + ',' + \
-                  kernel_name + ',' + \
+                  kernel_name_rewriter(kernel_name) + ',' + \
                   ge_row[1] + ',' + \
                   ge_row[2] + ',' + \
                   ge_row[3] + ',' + \
