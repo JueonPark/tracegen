@@ -1,3 +1,5 @@
+# input: ndpx_scheduling_table_cluster_0.csv
+# merges estimated ndpx cycles and real ndpx cycles
 import csv
 import argparse
 

@@ -1,3 +1,5 @@
+# input: gpu_kernel_estimation_table_cluster_0.csv
+# merges estimated gpu cycles and real gpu cycles
 import csv
 import argparse
 
@@ -63,6 +65,7 @@ if __name__ == "__main__":
       # find from total_results
       for tr_row in total_results:
         if tr_row.find(kernel_name) != -1:
+          print(tr_row)
           kernel_cycle = tr_row.split(',')[6]
           break
     output_line = ge_row[0] + ',' + \

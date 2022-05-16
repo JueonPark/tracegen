@@ -14,3 +14,4 @@ results_baseline/*
 BERT_NDPX/scripts/utils2/__pycache__/*
 *error
 *output
+*/__pycache__
