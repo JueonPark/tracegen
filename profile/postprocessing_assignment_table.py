@@ -12,8 +12,6 @@ if __name__ == "__main__":
   original_results = open(args.at, 'r').read().split("\n")
   new_output_name = args.at.split(".")[0]
   new_output = open(new_output_name + "_postprocessed.csv", "w+")
-  new_header = "NdpxOp,HopsFromRoot,NdpxKernelDimm,EstimatedNdpxCost,EstimatedGpuCost,Layer\n"
-  new_output.write(new_header)
   for original_row in original_results:
     print(original_row)
     new_results = ""
