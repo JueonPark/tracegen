@@ -1,5 +1,6 @@
 # input: ndpx_scheduling_table_cluster_0.csv
 # merges estimated ndpx cycles and real ndpx cycles
+import os
 import csv
 import argparse
 
@@ -13,19 +14,24 @@ parser.add_argument('-n', '--ne', type=str, help="ndpx_estimation.csv", required
 if __name__ == "__main__":
   args = parser.parse_args()
 
-  # we first merge fw and bw
+  # first merge fw and bw
   total_result = open(args.fw, 'r').read()
   total_result += open(args.bw, 'r').read().split("\n", 1)[1]
-  overall_file = open('output.csv', 'w')
-  overall_file.write(total_result)
+  exp_path = os.getenv("EXP_PATH")
+  overall_output_name = "overall_result.csv"
+  overall_output_path = os.path.join(exp_path, overall_output_name)
+  overall_output = open(overall_output_path, 'w+')
+  overall_output.write(total_result)
 
-  # we then merge the estimation
+  # then merge the estimation
   # - add the real result column to the estimation file
   # read gpu kernel name and find the appropriate kernel
   kernelslist = open(args.kfw, 'r').read() + '\n\n' + open(args.kbw, 'r').read()
   kernelslists = kernelslist.split('\n\n')
   ne_file_object = csv.reader(open(args.ne, 'r'))
-  ne_output = open("ndpx_estimation_result.csv", "w+")
+  ne_output_name = "ndpx_estimation_result.csv"
+  ne_output_path = os.path.join(exp_path, ne_output_name)
+  ne_output = open(ne_output_path, "w+")
   
   new_header = "NdpxKernel,OverlappedKernelNum,NdpxKernelDimm,#inputs,#outputs,#ops,EstimatedNdpxCost,RealNdpxCost,MultipleNdpx\n"
   ne_output.write(new_header)

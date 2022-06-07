@@ -281,6 +281,8 @@ with open(output+'.hops', 'w') as f_hops:
       for (order, thunk_name), kernels in matched:
         gpu_custom_call = custom_call_name(thunk_name)
         hops = manager.get_custom_call_hops(gpu_custom_call)
+        # TODO: 정확한 custom call hops를 계산한다
+        # model/bert_pretrainer/classification/predictions/transform/logits/MatMul와 일치하면서 
         if( hops > args.fw_hops):
           f = f_bw
         else:

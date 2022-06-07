@@ -15,7 +15,7 @@ parser.add_argument('-o', '--of', type=str, help="offline_execution_result.csv",
 if __name__ == "__main__":
   args = parser.parse_args()
 
-  # we first merge fw and bw
+  # first merge fw and bw
   total_result = open(args.fw, 'r').read()
   total_result += open(args.bw, 'r').read().split("\n", 1)[1]
   overall_file = open('output.csv', 'w')
@@ -29,7 +29,7 @@ if __name__ == "__main__":
   off_file_object = csv.reader(open(args.of, 'r'))
   off_output = open("offline_execution_result.csv", "w+")
   
-  new_header = "GpuKernel,GpuExecutionTime(ns),SimulationCycle\n"
+  new_header = "GpuKernel,SimulationCycle\n"
   off_output.write(new_header)
   estimation_result = []
   estimation_result.append(new_header)
@@ -57,7 +57,6 @@ if __name__ == "__main__":
           print(tr_row)
           kernel_cycle = tr_row.split(',')[6]
           break
-    output_line = off_row[0] + ',' + \
-                  off_row[1] + ',' + \
-                  str(kernel_cycle) + "\n"
+    # off_row[1] + ',' + \
+    output_line = off_row[0] + ',' + str(kernel_cycle) + "\n"
     off_output.write(output_line)

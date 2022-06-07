@@ -1,5 +1,6 @@
 # input: ndpx_assignment_table.csv
 # things to rewrite: NdpxOp, Layer
+import os
 import argparse
 from xla_metadata_parser import parse_metadata
 
@@ -10,8 +11,10 @@ if __name__ == "__main__":
   args = parser.parse_args()
 
   original_results = open(args.at, 'r').read().split("\n")
-  new_output_name = args.at.split(".")[0]
-  new_output = open(new_output_name + "_postprocessed.csv", "w+")
+  exp_path = os.getenv("EXP_PATH")
+  output_name = "ndpx_device_assignment_table_postprocessed.csv"
+  output_path = os.path.join(exp_path, output_name)
+  output = open(output_path, "w+")
   for original_row in original_results:
     print(original_row)
     new_results = ""
@@ -29,4 +32,4 @@ if __name__ == "__main__":
     except:
       new_results += original_elements[5]
     new_results += "\n"
-    new_output.write(new_results)
+    output.write(new_results)
