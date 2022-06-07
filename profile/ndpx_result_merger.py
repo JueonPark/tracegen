@@ -33,7 +33,7 @@ if __name__ == "__main__":
   ne_output_path = os.path.join(exp_path, ne_output_name)
   ne_output = open(ne_output_path, "w+")
   
-  new_header = "NdpxKernel,OverlappedKernelNum,NdpxKernelDimm,#inputs,#outputs,#ops,EstimatedNdpxCost,RealNdpxCost,MultipleNdpx\n"
+  new_header = "NdpxKernel,OverlappedKernelNum,NdpxKernelDimm,#inputs,#outputs,#ops,EstimatedNdpxCost,RealNdpxCost,MultipleNdpx,IntendedSchedule\n"
   ne_output.write(new_header)
   estimation_result = []
   estimation_result.append(new_header)
@@ -44,47 +44,50 @@ if __name__ == "__main__":
     # find kernel number and real cycle
     found = False
     multiple_ndpx = False
+    intended_schedule = False
     kernel_num = ""
     kernel_cycle = 0
     for kernel in kernelslists:
       # Thunk: custom-call.6:__cublas$gemm
       # Kernel Name: turing_fp16_s884gemm_fp16_64x64_ldg8_f2f_nn
+      # print(kernel)
       knl_elements = kernel.split('\n', 4)
       if knl_elements[4].find(ne_row[0]) != -1:
         found = True
         kernel_num = kernel.split('\n')[-1]
         kernel_num = kernel_num.split('-')[1]
         kernel_num = kernel_num.split('.')[0]
-        print(kernel_num)
+        # find whether there are multiple ndpx overlapped
         if knl_elements[4].count('_NDP_') > 1:
           multiple_ndpx = True
+        # find whether the scheduling is done as intended
+        candidate_ = ""
+        if ne_row[0].find("Reduce") != -1:
+          candidate_ = ne_row[0].rsplit('$', 1)[1]
+        else:
+          candidate_ = ne_row[0].split('$')[1]
+        candidate = candidate_.split('.traceg')[0]
+        if knl_elements[0].find(candidate) != -1 and knl_elements[4].find(ne_row[0]) != -1:
+          print("=============================")
+          print(candidate)
+          print(knl_elements[0])
+          intended_schedule = True
+          print("=============================")
         break
     if found:
       # find from total_results
       for tr_row in total_results:
         if tr_row.find(kernel_num) != -1 and tr_row.find('NDP_OP') != -1:
-          print(tr_row)
           kernel_cycle = tr_row.split(',')[6]
           break
-    output_line = ""
-    if multiple_ndpx:
-      output_line = ne_row[0] + ',' + \
-                    kernel_num + ',' + \
-                    ne_row[1] + ',' + \
-                    ne_row[3] + ',' + \
-                    ne_row[4] + ',' + \
-                    ne_row[5] + ',' + \
-                    ne_row[2] + ',' + \
-                    str(kernel_cycle) + ',' + \
-                    "True\n"
-    else:
-      output_line = ne_row[0] + ',' + \
-                    kernel_num + ',' + \
-                    ne_row[1] + ',' + \
-                    ne_row[3] + ',' + \
-                    ne_row[4] + ',' + \
-                    ne_row[5] + ',' + \
-                    ne_row[2] + ',' + \
-                    str(kernel_cycle) + ',' + \
-                    "False\n"
+    output_line = ne_row[0] + ',' + \
+                  kernel_num + ',' + \
+                  ne_row[1] + ',' + \
+                  ne_row[2] + ',' + \
+                  ne_row[3] + ',' + \
+                  ne_row[4] + ',' + \
+                  ne_row[5] + ',' + \
+                  str(kernel_cycle) + ',' + \
+                  str(multiple_ndpx) + ',' + \
+                  str(intended_schedule) + "\n"
     ne_output.write(output_line)
