@@ -16,7 +16,7 @@ if __name__ == "__main__":
   output_path = os.path.join(exp_path, output_name)
   output = open(output_path, "w+")
   for original_row in original_results:
-    print(original_row)
+    # print(original_row)
     new_results = ""
     original_elements = original_row.split(",")
     try:
@@ -26,10 +26,12 @@ if __name__ == "__main__":
     new_results += "," + original_elements[1] + "," \
                        + original_elements[2] + "," \
                        + original_elements[3] + "," \
-                       + original_elements[4] + ","
+                       + original_elements[4] + "," \
+                       + original_elements[5] + ","
     try:
-      new_results += parse_metadata(original_elements[5])
+      print(original_elements[6])
+      new_results += parse_metadata(original_elements[6])
     except:
-      new_results += original_elements[5]
+      new_results += original_elements[6]
     new_results += "\n"
     output.write(new_results)

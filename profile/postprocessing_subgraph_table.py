@@ -27,10 +27,12 @@ if __name__ == "__main__":
       except:
         new_results += original_elements[0]
     new_results += "," + original_elements[1] + "," \
-                       + original_elements[2] + ","
+                       + original_elements[2] + "," \
+                       + original_elements[3] + "," \
+                       + original_elements[4] + ","
     try:
-      new_results += parse_metadata(original_elements[3])
+      new_results += parse_metadata(original_elements[5])
     except:
-      new_results += original_elements[3]
+      new_results += original_elements[5]
     new_results += "\n"
     output.write(new_results)

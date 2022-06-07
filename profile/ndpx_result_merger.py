@@ -18,7 +18,7 @@ if __name__ == "__main__":
   total_result = open(args.fw, 'r').read()
   total_result += open(args.bw, 'r').read().split("\n", 1)[1]
   exp_path = os.getenv("EXP_PATH")
-  overall_output_name = "overall_result.csv"
+  overall_output_name = "ndpx_cycle_result.csv"
   overall_output_path = os.path.join(exp_path, overall_output_name)
   overall_output = open(overall_output_path, 'w+')
   overall_output.write(total_result)
