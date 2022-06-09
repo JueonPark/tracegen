@@ -4,8 +4,7 @@ import csv
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-f', '--fw', type=str, help="forward.csv", required=True)
-parser.add_argument('-b', '--bw', type=str, help="backward.csv", required=True)
+parser.add_argument('-c', '--csv', type=str, help="total_result.csv", required=True)
 parser.add_argument('--kfw', type=str, help="kernelslist.g.fw", required=True)
 parser.add_argument('--kbw', type=str, help="kernelslist.g.bw", required=True)
 parser.add_argument('-g', '--ge', type=str, help="gpu_estimation.csv", required=True)
@@ -27,8 +26,7 @@ if __name__ == "__main__":
   args = parser.parse_args()
 
   # we first merge fw and bw
-  total_result = open(args.fw, 'r').read()
-  total_result += open(args.bw, 'r').read().split("\n", 1)[1]
+  total_result = open(args.csv, 'r').read()
   overall_file = open('output.csv', 'w')
   overall_file.write(total_result)
 

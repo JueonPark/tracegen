@@ -62,11 +62,8 @@ if __name__ == "__main__":
           candidate_ = ne_row[0].split('$')[1]
         candidate = candidate_.split('.traceg')[0]
         if knl_elements[0].find(candidate) != -1 and knl_elements[4].find(ne_row[0]) != -1:
-          print("=============================")
-          print(candidate)
           print(knl_elements[0])
           intended_schedule = True
-          print("=============================")
         break
     if found:
       # find from total_results
