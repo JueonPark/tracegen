@@ -1,5 +1,7 @@
 #!/bin/bash
 # make sure that all the result files are properly made (no NOT FOUND!)
+# - sh sim_result_dl_model.sh
+# - sh sim_result_dl_model_full_cycle.sh
 # give model name as an argument
 # - e.g. 220606_bert_large_overall_sim_exec_batch_2
 if [ $# -eq 1 ]
@@ -14,7 +16,7 @@ then
   python profile/postprocessing_subgraph_table.py  --st traces/$1/xla_hlo/ndpx_device_assigner_subgraph_table_cluster_0.csv
 
   # overlap scheduling
-  python profile/ndpx_result_merger.py --fw csv_files/$1-NDPX_baseline_64-1-nosync-fw.csv --bw csv_files$1-NDPX_baseline_64-1-nosync-bw.csv --kfw traces/$1/traces_fw/kernelslist.g.fw --kbw traces/$1/traces_bw/kernelslist.g.bw --ne traces/$1/xla_hlo/ndpx_scheduling_table_cluster_0.csv
+  python profile/ndpx_result_merger.py --fw csv_files/$1-NDPX_baseline_64-1-nosync-fw-ndp-full-cycle.csv --bw csv_files/$1-NDPX_baseline_64-1-nosync-bw-ndp-full-cycle.csv --kfw traces/$1/traces_fw/kernelslist.g.fw --kbw traces/$1/traces_bw/kernelslist.g.bw --ne traces/$1/xla_hlo/ndpx_scheduling_table_cluster_0.csv
   python profile/postprocessing_scheduling_table.py --st traces/$1/xla_hlo/ndpx_scheduling_table_cluster_0.csv
 else
   echo "give experiment name(model name) as an argument"

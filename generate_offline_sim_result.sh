@@ -1,0 +1,1 @@
+python profile/offline_sim_result_merger.py --fw csv_files/$1-NDPX_baseline_64-1-nosync-fw.csv --bw csv_files/$1-NDPX_baseline_64-1-nosync-bw.csv --kfw traces/$1/traces_fw/kernelslist.g.fw --kbw traces/$1/traces_bw/kernelslist.g.bw --of traces/$1/xla_hlo/offline_execution_result.csv

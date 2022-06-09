@@ -5,24 +5,18 @@ import csv
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--fw', type=str, help="fw-full-cycle.csv", required=True)
-parser.add_argument('--bw', type=str, help="bw-full-cycle.csv", required=True)
+parser.add_argument('--csv', type=str, help="full-cycle.csv", required=True)
 parser.add_argument('--kfw', type=str, help="kernelslist.g.fw", required=True)
 parser.add_argument('--kbw', type=str, help="kernelslist.g.bw", required=True)
 parser.add_argument('-n', '--ne', type=str, help="ndpx_estimation.csv", required=True)
 
 if __name__ == "__main__":
   args = parser.parse_args()
-
-  # first merge fw and bw
-  total_result = open(args.fw, 'r').read()
-  total_result += open(args.bw, 'r').read().split("\n", 1)[1]
   exp_path = os.getenv("EXP_PATH")
-  overall_output_name = "ndpx_cycle_result.csv"
-  overall_output_path = os.path.join(exp_path, overall_output_name)
-  overall_output = open(overall_output_path, 'w+')
-  overall_output.write(total_result)
 
+  # full cycle information
+  total_result = open(args.csv, 'r').read()
+  
   # then merge the estimation
   # - add the real result column to the estimation file
   # read gpu kernel name and find the appropriate kernel
