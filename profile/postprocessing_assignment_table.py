@@ -16,7 +16,6 @@ if __name__ == "__main__":
   output_path = os.path.join(exp_path, output_name)
   output = open(output_path, "w+")
   for original_row in original_results[:-1]:
-    # print(original_row)
     new_results = ""
     original_elements = original_row.split(",")
     try:
