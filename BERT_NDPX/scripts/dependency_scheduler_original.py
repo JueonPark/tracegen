@@ -3,7 +3,7 @@ import argparse
 
 from utils2 import parse_thunk_schedule
 from utils2 import parse_stats
-from utils2 import HloDepdendencyManager
+from utils2 import HloDepdendencyManagerOriginal
 
 def match(ts_parsed, stats_parsed):
   # while True:
@@ -74,7 +74,7 @@ output=f'/home/jueonpark/tracegen/traces/{args.model}/kernelslist.g'
 
 GPU_thunks, NDP_thunks = parse_thunk_schedule(open(ts_path).read())
 stats_parsed = parse_stats(open(stats_path).read(), get_first_kernel_id(list_path), args.end)
-manager = HloDepdendencyManager(open(graph_path).read())
+manager = HloDepdendencyManagerOriginal(open(graph_path).read())
 (GPU_thunks_matched, stats_matched), (GPU_thunks_unmatched, stats_unmatched) = match(GPU_thunks, stats_parsed)
 matched = list(zip(GPU_thunks_matched, stats_matched))
 
