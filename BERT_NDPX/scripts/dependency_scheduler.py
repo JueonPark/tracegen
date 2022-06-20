@@ -108,20 +108,20 @@ for order, ndp_thunk_name in NDP_thunks_cpy:
     for gpu_order, gpu_thunk_name in GPU_thunks:
       gpu_custom_call = custom_call_name(gpu_thunk_name)
       gpu_hops = manager.get_custom_call_hops(gpu_custom_call)
-      if 'custom-call' in gpu_thunk_name and\
-          manager.is_dependent(ndp_custom_call, gpu_custom_call) and\
+      if 'custom-call' in gpu_thunk_name and \
+          manager.is_dependent(ndp_custom_call, gpu_custom_call) and \
           ndp_hops == gpu_hops + 1:
           if ph1_used:
-            print("ERROR")
+            print("ERROR: this IS the phase 1")
             exit()
           no_cxl_flags[gpu_custom_call] = False
           scheduled_kernels[gpu_custom_call].append(f'_ON_THE_FLY_{ndp_custom_call}_fw_bert_softmax_ph1.traceg')
           ph1_used = True
-      elif 'custom-call' in gpu_thunk_name and\
-          not manager.is_dependent(ndp_custom_call, gpu_custom_call) and\
+      elif 'custom-call' in gpu_thunk_name and \
+          not manager.is_dependent(ndp_custom_call, gpu_custom_call) and \
           ndp_hops == gpu_hops + 2:
           if ph3_used:
-            print("ERROR")
+            print("ERROR: this IS the phase 3")
             exit()
           scheduled_kernels[gpu_custom_call].append(f'_NDP_{ndp_custom_call}_fw_bert_softmax_reduce_max_1.traceg')
           scheduled_kernels[gpu_custom_call].append(f'_BAR_')
@@ -235,13 +235,22 @@ for order, ndp_thunk_name in NDP_thunks_cpy:
   if 'wise' in ndp_thunk_name:
     overlap_exist = False
     overlap_candidate_name = ""
-    try:
-      overlap_candidate_name = ndp_thunk_name.split("$")[1]
-    except:
-      print("no overlapping kernel")
-      print(ndp_thunk_name)
-      overlap_candidate_name = ndp_thunk_name
-      continue
+    if 'Reduce' in ndp_thunk_name:
+      try:
+        overlap_candidate_name = ndp_thunk_name.split("$")[2]
+      except:
+        print("no overlapping kernel")
+        print(ndp_thunk_name)
+        overlap_candidate_name = ndp_thunk_name
+        continue
+    else:
+      try:
+        overlap_candidate_name = ndp_thunk_name.split("$")[1]
+      except:
+        print("no overlapping kernel")
+        print(ndp_thunk_name)
+        overlap_candidate_name = ndp_thunk_name
+        continue
     # try overlapping for identified gpu thunk
     for gpu_order, gpu_thunk_name in GPU_thunks:
       gpu_thunk_name = custom_call_name(gpu_thunk_name)
