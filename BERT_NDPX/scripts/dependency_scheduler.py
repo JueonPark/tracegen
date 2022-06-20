@@ -52,11 +52,13 @@ def get_first_kernel_id(path):
     end = line.find('.')
     return int(line[start:end])
 
-
+# fw-hops argument:
+# - for xxx, fw-hops should be 29
+# - for one layer bert large, batch 2, fw-hops should be 15
 parser = argparse.ArgumentParser()
 parser.add_argument('-m', '--model', type=str, help="Model name", required=True)
 parser.add_argument('-E', '--end', type=int, help="kernel end number", default=-1)
-parser.add_argument('-f', '--fw-hops', type=int, help="forward kernel hops", default=29)
+parser.add_argument('-f', '--fw-hops', type=int, help="forward kernel hops", default=13)
 
 args = parser.parse_args()
 
@@ -142,29 +144,29 @@ for order, ndp_thunk_name in NDP_thunks_cpy:
     for gpu_order, gpu_thunk_name in GPU_thunks:
       gpu_custom_call = custom_call_name(gpu_thunk_name)
       gpu_hops = manager.get_custom_call_hops(gpu_custom_call)
-      if 'custom-call' in gpu_thunk_name and\
-          manager.is_dependent(ndp_custom_call, gpu_custom_call) and\
+      if 'custom-call' in gpu_thunk_name and \
+          manager.is_dependent(ndp_custom_call, gpu_custom_call) and \
           ndp_hops == gpu_hops + 1:
-          no_cxl_flags[gpu_custom_call] = False
-          scheduled_kernels[gpu_custom_call].append(f'_ON_THE_FLY_{ndp_custom_call}_fw_bert_output_ph1.traceg')
+        no_cxl_flags[gpu_custom_call] = False
+        scheduled_kernels[gpu_custom_call].append(f'_ON_THE_FLY_{ndp_custom_call}_fw_bert_output_ph1.traceg')
+        scheduled_kernels[gpu_custom_call].append(f'_BAR_')
+        scheduled_kernels[gpu_custom_call].append(f'_NDP_{ndp_custom_call}_fw_bert_output_ph2_mean.traceg')
+        scheduled_kernels[gpu_custom_call].append(f'_BAR_')
+        scheduled_kernels[gpu_custom_call].append(f'_NDP_{ndp_custom_call}_fw_bert_output_ph2_var.traceg')
+        if args.fw_hops - ndp_hops <= 2:
           scheduled_kernels[gpu_custom_call].append(f'_BAR_')
-          scheduled_kernels[gpu_custom_call].append(f'_NDP_{ndp_custom_call}_fw_bert_output_ph2_mean.traceg')
-          scheduled_kernels[gpu_custom_call].append(f'_BAR_')
-          scheduled_kernels[gpu_custom_call].append(f'_NDP_{ndp_custom_call}_fw_bert_output_ph2_var.traceg')
-          if args.fw_hops - ndp_hops <= 2:
-            scheduled_kernels[gpu_custom_call].append(f'_BAR_')
-            scheduled_kernels[gpu_custom_call].append(f'_NDP_{ndp_custom_call}_fw_bert_output_ph3.traceg')
-            ph3_used = True
-
-          if ph1_used:
-            print("ERROR")
-            exit()
-          ph1_used = True
-      elif 'custom-call' in gpu_thunk_name and\
-          manager.is_dependent(gpu_custom_call, ndp_custom_call) and\
-          ndp_hops + 1 == gpu_hops and not ph3_used:
           scheduled_kernels[gpu_custom_call].append(f'_ON_THE_FLY_{ndp_custom_call}_fw_bert_output_ph3.traceg')
           ph3_used = True
+
+        if ph1_used:
+          print("ERROR")
+          exit()
+        ph1_used = True
+      elif 'custom-call' in gpu_thunk_name and \
+          manager.is_dependent(gpu_custom_call, ndp_custom_call) and \
+          ndp_hops + 1 == gpu_hops and not ph3_used:
+        scheduled_kernels[gpu_custom_call].append(f'_ON_THE_FLY_{ndp_custom_call}_fw_bert_output_ph3.traceg')
+        ph3_used = True
     NDP_thunks.remove((order, ndp_thunk_name))
 
 """
@@ -178,22 +180,20 @@ for order, ndp_thunk_name in NDP_thunks_cpy:
     overlap_gpu_thunk = ''
     for gpu_order, gpu_thunk_name in GPU_thunks:
       gpu_custom_call = custom_call_name(gpu_thunk_name)
-      if 'custom-call' in gpu_thunk_name and\
-          not manager.is_dependent(ndp_custom_call, gpu_custom_call) and\
+      if 'custom-call' in gpu_thunk_name and \
+          not manager.is_dependent(ndp_custom_call, gpu_custom_call) and \
           manager.get_custom_call_hops(ndp_custom_call) > manager.get_custom_call_hops(gpu_custom_call) :
         if overlap_gpu_thunk == '' \
             or manager.get_custom_call_hops(gpu_custom_call) > manager.get_custom_call_hops(custom_call_name(overlap_gpu_thunk)):
           overlap_gpu_thunk = gpu_custom_call
     if overlap_gpu_thunk == '':
-      exit
+      exit()
     scheduled_kernels[overlap_gpu_thunk].append(ndp_thunk_name)
     hops_map[overlap_gpu_thunk] = manager.get_custom_call_hops(ndp_custom_call)
     NDP_thunks.remove((order, ndp_thunk_name))
     for opernd in manager.get_operands(ndp_custom_call):
       no_cxl_flags[opernd] = False
       
-  
-
 """
 Step 2, Schedule Wegith update
 """
@@ -268,7 +268,7 @@ for order, ndp_thunk_name in NDP_thunks_cpy:
           break
     if not overlap_exist:
       # fatal error!!!
-      print("FFfffffffffffffffffffFFFFFFFFFFFF")
+      print("no overlapping exist")
       os.abort()
 
 for key in manager.get_hops_map():
@@ -281,12 +281,14 @@ with open(output+'.hops', 'w') as f_hops:
       for (order, thunk_name), kernels in matched:
         gpu_custom_call = custom_call_name(thunk_name)
         hops = manager.get_custom_call_hops(gpu_custom_call)
-        # TODO: 정확한 custom call hops를 계산한다
-        # model/bert_pretrainer/classification/predictions/transform/logits/MatMul와 일치하면서 
-        if( hops > args.fw_hops):
+        if (hops > args.fw_hops):
           f = f_bw
         else:
           f = f_fw
+        # use metadata table for certifying whether it is on the right pass
+        if gpu_custom_call in manager.metadata_table and \
+            "gradient" in manager.metadata_table[gpu_custom_call]:
+          f = f_bw
         for kernel_no, kernel_name in kernels:
           f.write(f'// Thunk: {thunk_name}\n')
           f.write(f'// Kernel Name: {kernel_name}\n')
@@ -341,9 +343,9 @@ with open(output+'.hops', 'w') as f_hops:
         f.write(f'kernel-{kernel_no}.traceg\n')
         f.write('\n')
 
-print(f'Remaining ndp thunks {NDP_thunks}')
-print(num_gpu_custom_call)
+# print(f'Remaining ndp thunks {NDP_thunks}')
+# print(num_gpu_custom_call)
 
 for order2, ndp_thunk_name in NDP_thunks:
-  print('NAME: ' + ndp_thunk_name)
+  # print('NAME: ' + ndp_thunk_name)
   manager.print_unfinished_parent(ndp_thunk_name.split(":")[0])
