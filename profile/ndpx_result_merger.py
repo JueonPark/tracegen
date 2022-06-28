@@ -46,6 +46,8 @@ if __name__ == "__main__":
       # Kernel Name: turing_fp16_s884gemm_fp16_64x64_ldg8_f2f_nn
       # print(kernel)
       knl_elements = kernel.split('\n', 4)
+      if len(knl_elements) < 4:
+        continue
       if knl_elements[4].find(ne_row[0]) != -1:
         found = True
         kernel_num = kernel.split('\n')[-1]
@@ -62,7 +64,6 @@ if __name__ == "__main__":
           candidate_ = ne_row[0].split('$')[1]
         candidate = candidate_.split('.traceg')[0]
         if knl_elements[0].find(candidate) != -1 and knl_elements[4].find(ne_row[0]) != -1:
-          print(knl_elements[0])
           intended_schedule = True
         break
     if found:

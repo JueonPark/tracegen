@@ -28,7 +28,6 @@ if __name__ == "__main__":
                        + original_elements[4] + "," \
                        + original_elements[5] + ","
     try:
-      print(original_elements[6])
       new_results += parse_metadata(original_elements[6])
     except:
       new_results += original_elements[6]
