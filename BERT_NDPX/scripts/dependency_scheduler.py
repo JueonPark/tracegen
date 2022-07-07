@@ -66,6 +66,7 @@ stats_path=f'/home/jueonpark/tracegen/traces/{args.model}/traces/stats.csv'
 list_path=f'/home/jueonpark/tracegen/traces/{args.model}/traces/kernelslist'
 ts_path=f'/home/jueonpark/tracegen/traces/{args.model}/xla_hlo/module_0000.thunk_schedule'
 graph_path=f'/home/jueonpark/tracegen/traces/{args.model}/xla_hlo/{args.model}.txt'
+ndpx_trace_dir_path=f'./traces/{args.model}/xla_hlo/packet_32_buffer_1_gpu_1_sync_0_simd_8'  # for NdpEwiseFused files
 output=f'/home/jueonpark/tracegen/traces/{args.model}/kernelslist.g'
 
 GPU_thunks, NDP_thunks = parse_thunk_schedule(open(ts_path).read())
@@ -92,7 +93,7 @@ for order, thunk in GPU_thunks:
     num_gpu_custom_call +=1
 
 overlapped_candidates = []
-
+ndpx_trace_files = os.listdir(ndpx_trace_dir_path)
 """
 Forward schedule
 Step 1, Schedule Dgrad dependent NDP kernels (ex: LayerNorm)
@@ -232,7 +233,7 @@ NDP_thunks_cpy = NDP_thunks.copy()
 for order, ndp_thunk_name in NDP_thunks_cpy:
   ndp_custom_call = custom_call_name(ndp_thunk_name)
   ndp_hops = manager.get_custom_call_hops(ndp_custom_call)
-  if 'wise' in ndp_thunk_name:
+  if 'NdpEwiseFused' in ndp_thunk_name:
     overlap_exist = False
     overlap_candidate_name = ""
     if 'Reduce' in ndp_thunk_name:
@@ -329,8 +330,12 @@ with open(output+'.hops', 'w') as f_hops:
               f.write(f'_NDP_{ndp_thunk_name.split(":")[0]}_bw_bert_softmax_reduce_accum_2.traceg\n')
               f.write(f'_BAR_\n')
               f.write(f'_NDP_{ndp_thunk_name.split(":")[0]}_bw_bert_softmax_mul.traceg\n')
-            elif 'wise' in ndp_thunk_name:
-              f.write(f'_NDP_{ndp_thunk_name.split(":")[0]}_{ndp_thunk_name.split(":")[1]}\n')
+            elif 'NdpEwiseFused' in ndp_thunk_name:
+              # TODO: make the files to be written.
+              for trace_file in ndpx_trace_files:
+                if ndp_thunk_name.split(":")[0] in trace_file:
+                  print(trace_file)
+                  f.write(f'{trace_file}\n')
             else:
               f.write(f'{ndp_thunk_name}\n')
           f.write(f'kernel-{kernel_no}.traceg\n')

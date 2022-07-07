@@ -10,18 +10,26 @@ then
   export EXP_PATH=/home/jueonpark/tracegen/experiments_results/$1
 
   # merge fw and bw
-  python profile/fw_bw_merger.py  --fw csv_files/$1-NDPX_baseline_64-1-nosync-fw.csv --bw csv_files/$1-NDPX_baseline_64-1-nosync-bw.csv   --ffc csv_files/$1-NDPX_baseline_64-1-nosync-fw-ndp-full-cycle.csv --bfc csv_files/$1-NDPX_baseline_64-1-nosync-bw-ndp-full-cycle.csv --on $1
+  python profile/fw_bw_merger.py --fw csv_files/$1-NDPX_baseline_64-1-nosync-fw.csv \
+                                 --bw csv_files/$1-NDPX_baseline_64-1-nosync-bw.csv \
+                                 --ffc csv_files/$1-NDPX_baseline_64-1-nosync-fw-ndp-full-cycle.csv \
+                                 --bfc csv_files/$1-NDPX_baseline_64-1-nosync-bw-ndp-full-cycle.csv \
+                                 --on $1
 
   # breakdown
   python HLO_breakdown/main.py --csv $EXP_PATH/$1.csv --hlo traces/$1/xla_hlo/$1.txt
-  python HLO_breakdown/main.py --csv $EXP_PATH/$1-ndp-full-cycle.csv --hlo traces/$1/xla_hlo/$1.txt
+  python HLO_breakdown/main.py --csv $EXP_PATH/$1-ndp-full-cycle.csv \
+                               --hlo traces/$1/xla_hlo/$1.txt
 
   # device assignment
-  python profile/postprocessing_assignment_table.py --at traces/$1/xla_hlo/ndpx_device_assigner_assignment_table_cluster_0.csv
-  python profile/postprocessing_subgraph_table.py  --st traces/$1/xla_hlo/ndpx_device_assigner_subgraph_table_cluster_0.csv
+  # python profile/postprocessing_assignment_table.py --at traces/$1/xla_hlo/ndpx_device_assigner_assignment_table_cluster_0.csv
+  # python profile/postprocessing_subgraph_table.py  --st traces/$1/xla_hlo/ndpx_device_assigner_subgraph_table_cluster_0.csv
 
   # overlap scheduling
-  python profile/ndpx_result_merger.py --csv  $EXP_PATH/$1-ndp-full-cycle.csv --kfw traces/$1/traces_fw/kernelslist.g.fw --kbw traces/$1/traces_bw/kernelslist.g.bw --ne traces/$1/xla_hlo/ndpx_scheduling_table_cluster_0.csv
+  python profile/ndpx_result_merger.py --csv  $EXP_PATH/$1-ndp-full-cycle.csv \
+                                       --kfw traces/$1/traces_fw/kernelslist.g.fw \
+                                       --kbw traces/$1/traces_bw/kernelslist.g.bw \
+                                       --ne traces/$1/xla_hlo/ndpx_scheduling_table_cluster_0.csv
   python profile/postprocessing_scheduling_table.py --st traces/$1/xla_hlo/ndpx_scheduling_table_cluster_0.csv
 
   # after finishing all the jobs, compress to single zip file and 
