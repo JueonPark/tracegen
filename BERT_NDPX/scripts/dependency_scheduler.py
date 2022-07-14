@@ -1,3 +1,4 @@
+from inspect import trace
 import os 
 import argparse
 
@@ -58,14 +59,17 @@ def get_first_kernel_id(path):
 parser = argparse.ArgumentParser()
 parser.add_argument('-m', '--model', type=str, help="Model name", required=True)
 parser.add_argument('-E', '--end', type=int, help="kernel end number", default=-1)
-parser.add_argument('-f', '--fw-hops', type=int, help="forward kernel hops", default=13)
+# bert batch 2, one encoder layer: 13
+# bert batch 3, three encoder layer: 31
+parser.add_argument('-f', '--fw-hops', type=int, help="forward kernel hops", default=31)
 
 args = parser.parse_args()
 
 stats_path=f'/home/jueonpark/tracegen/traces/{args.model}/traces/stats.csv'
 list_path=f'/home/jueonpark/tracegen/traces/{args.model}/traces/kernelslist'
 ts_path=f'/home/jueonpark/tracegen/traces/{args.model}/xla_hlo/module_0000.thunk_schedule'
-graph_path=f'/home/jueonpark/tracegen/traces/{args.model}/xla_hlo/{args.model}.txt'
+# graph_path=f'/home/jueonpark/tracegen/traces/{args.model}/xla_hlo/{args.model}.txt'
+graph_path=f'/home/jueonpark/tracegen/traces/{args.model}/xla_hlo/after_optimizations.mlir'
 ndpx_trace_dir_path=f'./traces/{args.model}/xla_hlo/packet_32_buffer_1_gpu_1_sync_0_simd_8'  # for NdpEwiseFused files
 output=f'/home/jueonpark/tracegen/traces/{args.model}/kernelslist.g'
 
@@ -93,7 +97,13 @@ for order, thunk in GPU_thunks:
     num_gpu_custom_call +=1
 
 overlapped_candidates = []
+
+# ndpx_traces for scheduling cost-model compiler results
 ndpx_trace_files = os.listdir(ndpx_trace_dir_path)
+for i in range(3):
+  for trace_file in ndpx_trace_files:
+    if 'page_table' in trace_file:
+      ndpx_trace_files.remove(trace_file)
 """
 Forward schedule
 Step 1, Schedule Dgrad dependent NDP kernels (ex: LayerNorm)
@@ -112,29 +122,29 @@ for order, ndp_thunk_name in NDP_thunks_cpy:
       if 'custom-call' in gpu_thunk_name and \
           manager.is_dependent(ndp_custom_call, gpu_custom_call) and \
           ndp_hops == gpu_hops + 1:
-          if ph1_used:
-            print("ERROR: this IS the phase 1")
-            exit()
-          no_cxl_flags[gpu_custom_call] = False
-          scheduled_kernels[gpu_custom_call].append(f'_ON_THE_FLY_{ndp_custom_call}_fw_bert_softmax_ph1.traceg')
-          ph1_used = True
+        if ph1_used:
+          print("ERROR: this IS the phase 1")
+          exit()
+        no_cxl_flags[gpu_custom_call] = False
+        scheduled_kernels[gpu_custom_call].append(f'_ON_THE_FLY_{ndp_custom_call}_fw_bert_softmax_ph1.traceg')
+        ph1_used = True
       elif 'custom-call' in gpu_thunk_name and \
           not manager.is_dependent(ndp_custom_call, gpu_custom_call) and \
           ndp_hops == gpu_hops + 2:
-          if ph3_used:
-            print("ERROR: this IS the phase 3")
-            exit()
-          scheduled_kernels[gpu_custom_call].append(f'_NDP_{ndp_custom_call}_fw_bert_softmax_reduce_max_1.traceg')
-          scheduled_kernels[gpu_custom_call].append(f'_BAR_')
-          scheduled_kernels[gpu_custom_call].append(f'_NDP_{ndp_custom_call}_fw_bert_softmax_reduce_max_2.traceg')
-          scheduled_kernels[gpu_custom_call].append(f'_BAR_')
-          scheduled_kernels[gpu_custom_call].append(f'_NDP_{ndp_custom_call}_fw_bert_softmax_reduce_accum_1.traceg')
-          scheduled_kernels[gpu_custom_call].append(f'_BAR_')
-          scheduled_kernels[gpu_custom_call].append(f'_NDP_{ndp_custom_call}_fw_bert_softmax_reduce_accum_2.traceg')
-          scheduled_kernels[gpu_custom_call].append(f'_BAR_')
-          scheduled_kernels[gpu_custom_call].append(f'_NDP_{ndp_custom_call}_fw_bert_softmax_mul_and_dropout.traceg')  
-          ph3_used = True
-          hops_map[gpu_custom_call] = ndp_hops
+        if ph3_used:
+          print("ERROR: this IS the phase 3")
+          exit()
+        scheduled_kernels[gpu_custom_call].append(f'_NDP_{ndp_custom_call}_fw_bert_softmax_reduce_max_1.traceg')
+        scheduled_kernels[gpu_custom_call].append(f'_BAR_')
+        scheduled_kernels[gpu_custom_call].append(f'_NDP_{ndp_custom_call}_fw_bert_softmax_reduce_max_2.traceg')
+        scheduled_kernels[gpu_custom_call].append(f'_BAR_')
+        scheduled_kernels[gpu_custom_call].append(f'_NDP_{ndp_custom_call}_fw_bert_softmax_reduce_accum_1.traceg')
+        scheduled_kernels[gpu_custom_call].append(f'_BAR_')
+        scheduled_kernels[gpu_custom_call].append(f'_NDP_{ndp_custom_call}_fw_bert_softmax_reduce_accum_2.traceg')
+        scheduled_kernels[gpu_custom_call].append(f'_BAR_')
+        scheduled_kernels[gpu_custom_call].append(f'_NDP_{ndp_custom_call}_fw_bert_softmax_mul_and_dropout.traceg')  
+        ph3_used = True
+        hops_map[gpu_custom_call] = ndp_hops
     NDP_thunks.remove((order, ndp_thunk_name))
     
     
@@ -158,7 +168,6 @@ for order, ndp_thunk_name in NDP_thunks_cpy:
           scheduled_kernels[gpu_custom_call].append(f'_BAR_')
           scheduled_kernels[gpu_custom_call].append(f'_ON_THE_FLY_{ndp_custom_call}_fw_bert_output_ph3.traceg')
           ph3_used = True
-
         if ph1_used:
           print("ERROR")
           exit()
@@ -192,8 +201,8 @@ for order, ndp_thunk_name in NDP_thunks_cpy:
     scheduled_kernels[overlap_gpu_thunk].append(ndp_thunk_name)
     hops_map[overlap_gpu_thunk] = manager.get_custom_call_hops(ndp_custom_call)
     NDP_thunks.remove((order, ndp_thunk_name))
-    for opernd in manager.get_operands(ndp_custom_call):
-      no_cxl_flags[opernd] = False
+    for operand in manager.get_operands(ndp_custom_call):
+      no_cxl_flags[operand] = False
       
 """
 Step 2, Schedule Wegith update
@@ -228,58 +237,32 @@ for order, ndp_thunk_name in NDP_thunks_cpy:
 """
 Step 3, cost model overlapping
 warning: there might be ndp kernels that do not have overlapping kernel
+NDPX trace format: _NDP_custom-call.149_0_NdpEwiseFused$fusion.14.traceg
 """
 NDP_thunks_cpy = NDP_thunks.copy()
 for order, ndp_thunk_name in NDP_thunks_cpy:
   ndp_custom_call = custom_call_name(ndp_thunk_name)
   ndp_hops = manager.get_custom_call_hops(ndp_custom_call)
-  if 'NdpEwiseFused' in ndp_thunk_name:
-    overlap_exist = False
-    overlap_candidate_name = ""
-    if 'Reduce' in ndp_thunk_name:
-      try:
-        overlap_candidate_name = ndp_thunk_name.split("$")[2]
-      except:
-        print("no overlapping kernel")
-        print(ndp_thunk_name)
-        overlap_candidate_name = ndp_thunk_name
-        continue
-    else:
-      try:
-        overlap_candidate_name = ndp_thunk_name.split("$")[1]
-      except:
-        print("no overlapping kernel")
-        print(ndp_thunk_name)
-        overlap_candidate_name = ndp_thunk_name
-        continue
-    # try overlapping for identified gpu thunk
-    for gpu_order, gpu_thunk_name in GPU_thunks:
-      gpu_thunk_name = custom_call_name(gpu_thunk_name)
-      if gpu_thunk_name == overlap_candidate_name:
-        print("initial try:" + gpu_thunk_name)
-        # there is overlap candidate in GPU kernel (typical case)
-        overlap_exist = True
-        overlapped_candidates.append(gpu_thunk_name)
-        scheduled_kernels[gpu_thunk_name].append(f'{ndp_thunk_name}.traceg')
-        print(f'NDP({ndp_thunk_name}) mapped to {gpu_thunk_name}')
-        break
-    if not overlap_exist:
-      # overlap NOT exist!!!
-      # find alternative overlapping gpu kernel      
-      for gpu_order, gpu_thunk_name in GPU_thunks:
-        gpu_thunk_name = custom_call_name(gpu_thunk_name)
-        if (not manager.is_dependent(ndp_custom_call, gpu_thunk_name)) \
-              and (gpu_thunk_name not in overlapped_candidates):
-          # set independent gpu kernel as new overlapping kernel
-          overlap_exist = True
-          scheduled_kernels[gpu_thunk_name].append(f'{ndp_thunk_name}.traceg')
-          print(f'NDP({ndp_thunk_name}) mapped to {gpu_thunk_name}')
-          overlapped_candidates.append(gpu_thunk_name)
-          break
-    if not overlap_exist:
-      # fatal error!!!
-      print("no overlapping exist")
-      os.abort()
+  if "NdpEwiseFused" in ndp_thunk_name:
+    print(f"ndp_thunk_name: {ndp_thunk_name}")
+    # the custom call target itself do not have overlapping information, so find the 
+    # overlapping target from the file.
+    # file format: _ON_THE_FLY_custom-call.0_0_NdpEwiseFusedOnTheFly$fusion.21.traceg
+    # file format: _NDP_custom-call.163_0_NdpEwiseFused$custom-call.69.traceg
+    for trace_file in ndpx_trace_files:
+      if (ndp_custom_call in trace_file) and ('adam' not in trace_file):
+        # the trace file have the overlapping information 
+        overlap_candidate_name = (trace_file.split("$")[1]).split(".traceg")[0]
+        # try overlapping for identified gpu thunk
+        for gpu_order, gpu_thunk_name in GPU_thunks:
+          gpu_thunk_name = custom_call_name(gpu_thunk_name)
+          if gpu_thunk_name == overlap_candidate_name:
+            # there is overlap candidate in GPU kernel (typical case)
+            overlap_exist = True
+            overlapped_candidates.append(gpu_thunk_name)
+            scheduled_kernels[gpu_thunk_name].append(trace_file)
+            print(f'NDP({trace_file}) mapped to {gpu_thunk_name}')
+            break
 
 for key in manager.get_hops_map():
   manager.refill_hops_map(hops_map, key)
@@ -314,6 +297,7 @@ with open(output+'.hops', 'w') as f_hops:
           if adam_used:
             f.write(f'_BAR_\n')
           for ndp_thunk_name in scheduled_kernels[gpu_custom_call]:
+            # print(ndp_thunk_name)
             if 'Adam' in ndp_thunk_name:
               f.write(f'_NDP_{ndp_thunk_name.split(":")[0]}_adam.traceg\n')
             elif 'BackwardBertOutput' in ndp_thunk_name:
@@ -331,11 +315,13 @@ with open(output+'.hops', 'w') as f_hops:
               f.write(f'_BAR_\n')
               f.write(f'_NDP_{ndp_thunk_name.split(":")[0]}_bw_bert_softmax_mul.traceg\n')
             elif 'NdpEwiseFused' in ndp_thunk_name:
-              # TODO: make the files to be written.
+              ndp_custom_call = custom_call_name(ndp_thunk_name)
+              # make on-the-fly trace files to be written.
               for trace_file in ndpx_trace_files:
-                if ndp_thunk_name.split(":")[0] in trace_file:
-                  print(trace_file)
+                if ('NdpEwiseFused' in trace_file) and (ndp_custom_call in trace_file):
                   f.write(f'{trace_file}\n')
+                  if '_ON_THE_FLY' in trace_file:
+                    f.write(f'_BAR_\n')
             else:
               f.write(f'{ndp_thunk_name}\n')
           f.write(f'kernel-{kernel_no}.traceg\n')
