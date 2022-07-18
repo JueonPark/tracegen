@@ -54,7 +54,9 @@ for p, kernelslist_file, kernelslist_tmp_file in zip(passes, kernelslist_files, 
         page_table = False
         no_cxl = False
         kernels = ndp_gpu_kernels.split('\n')
+        tmp_on_the_fly_traceg = ""
         for kernel in kernels:
+            # print(kernel)
             if '//' in kernel:
                 continue
             if 'NO_CXL' in kernel: # write data to gpu memory, not thru CXL
@@ -72,6 +74,7 @@ for p, kernelslist_file, kernelslist_tmp_file in zip(passes, kernelslist_files, 
                 kernelslist_tmp_file.write(kernel + '\n')
                 continue
             elif '_ON_THE_FLY' in kernel and 'ph1' in kernel:
+                tmp_on_the_fly_traceg = kernel
                 kernelslist_tmp_file.write(kernel + '\n')
                 continue
             if 'kernel-' in kernel: # GPU kernel
@@ -85,15 +88,31 @@ for p, kernelslist_file, kernelslist_tmp_file in zip(passes, kernelslist_files, 
                     output.write(page_table_file.read() + '\n')
                     page_table_file.close()
                 if not no_cxl:
-                    for line in f.readlines():
-                        if 'STG' in line:
-                            for word in line.split():
-                                if "0x" in word:
-                                    line = re.sub('0x7', '0x1007', line)
-                        output.write(line)
-                    output.close()
+                  # handled 
+                  print(kernel)
+                  print(tmp_on_the_fly_traceg)
+                  on_the_fly_addr = ""
+                  # open tmp_on_the_fly_traceg file and get the target address
+                  try:
+                    tmp_on_the_fly_traceg = open(f'/home/jueonpark/tracegen/traces/{args.model}/xla_hlo_{p}/{EXP_NAME}/{tmp_on_the_fly_traceg}', 'r').read()
+                    on_the_fly_addr = tmp_on_the_fly_traceg.split("SET_FILTER ")[1].split(" ", 1)[0].split("0x100")[1]
+                  except:
+                    on_the_fly_addr = "qwerasdfzxcv"
+                  print(on_the_fly_addr)
+                  tmp_line_list = []
+                  last_stg_detected = False
+                  for line in reversed(f.readlines()):
+                    if ('STG' in line) and (on_the_fly_addr in line) and (not last_stg_detected):
+                      last_stg_detected = True
+                      for word in line.split():
+                        if "0x" in word:
+                          line = re.sub('0x7', '0x1007', line)
+                    tmp_line_list.append(line)
+                  for line in reversed(tmp_line_list):
+                    output.write(line)
+                  output.close()
                 else:
-                    output.write(f.read())
+                  output.write(f.read())
                 output.close()
                 f.close()
         kernelslist_tmp_file.write('\n')
