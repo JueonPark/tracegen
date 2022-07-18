@@ -13,6 +13,7 @@ from typing import Set
 # - custom call table for custom call information
 class HloDepdendencyManager(object):
   def __init__(self, hlo_string):
+    self.original_hlo_table = dict()
     self.hlo_table = dict()
     self.custom_call_table = dict()
     self.metadata_table = dict() # metadata table is used to find the fw/bw boundary
@@ -33,6 +34,7 @@ class HloDepdendencyManager(object):
       if end == -1:
         continue
       op_name = line[start+1:end-1]
+      self.original_hlo_table[op_name] = line
       # ignore argument or constant
       if 'arg' in op_name or 'constant' in op_name:
         continue
@@ -169,6 +171,17 @@ class HloDepdendencyManager(object):
       result = max(result, is_custom_call + hops_table[operand])
     hops_table[name] = result
     return hops_table
+
+  # tester: gpu custom call
+  # base: ndp custom call
+  def need_bert_ph3_scheduling(self, tester, base):
+    # TODO: get-tuple-element가 index 0여야 한다.
+    # first, get the operands
+    for arg in self.hlo_table[tester]:
+      if base in self.original_hlo_table[arg] and "index=0" in self.original_hlo_table[arg]:
+        # print(self.original_hlo_table[arg])
+        return True
+    return False
 
 if __name__ == "__main__":
   import argparse

@@ -55,12 +55,11 @@ def get_first_kernel_id(path):
 
 # fw-hops argument:
 # - for xxx, fw-hops should be 29
-# - for one layer bert large, batch 2, fw-hops should be 15
 parser = argparse.ArgumentParser()
 parser.add_argument('-m', '--model', type=str, help="Model name", required=True)
 parser.add_argument('-E', '--end', type=int, help="kernel end number", default=-1)
-# bert batch 2, one encoder layer: 13
-# bert batch 3, three encoder layer: 31
+# bert large, batch 2, one encoder layer: 13
+# bert large, batch 3, three encoder layer: 31
 parser.add_argument('-f', '--fw-hops', type=int, help="forward kernel hops", default=31)
 
 args = parser.parse_args()
@@ -104,6 +103,7 @@ for i in range(3):
   for trace_file in ndpx_trace_files:
     if 'page_table' in trace_file:
       ndpx_trace_files.remove(trace_file)
+print(ndpx_trace_files)
 """
 Forward schedule
 Step 1, Schedule Dgrad dependent NDP kernels (ex: LayerNorm)
@@ -164,19 +164,22 @@ for order, ndp_thunk_name in NDP_thunks_cpy:
         scheduled_kernels[gpu_custom_call].append(f'_NDP_{ndp_custom_call}_fw_bert_output_ph2_mean.traceg')
         scheduled_kernels[gpu_custom_call].append(f'_BAR_')
         scheduled_kernels[gpu_custom_call].append(f'_NDP_{ndp_custom_call}_fw_bert_output_ph2_var.traceg')
+        print(f'NDP({ndp_thunk_name}) mapped to {gpu_thunk_name}')
         if args.fw_hops - ndp_hops <= 2:
+          print(gpu_custom_call)
           scheduled_kernels[gpu_custom_call].append(f'_BAR_')
           scheduled_kernels[gpu_custom_call].append(f'_ON_THE_FLY_{ndp_custom_call}_fw_bert_output_ph3.traceg')
+          print(f'NDP({ndp_thunk_name}) mapped to {gpu_thunk_name}')
           ph3_used = True
         if ph1_used:
           print("ERROR")
           exit()
         ph1_used = True
-      elif 'custom-call' in gpu_thunk_name and \
-          manager.is_dependent(gpu_custom_call, ndp_custom_call) and \
-          ndp_hops + 1 == gpu_hops and not ph3_used:
+      elif manager.need_bert_ph3_scheduling(gpu_custom_call, ndp_custom_call) \
+          and not ph3_used:
         scheduled_kernels[gpu_custom_call].append(f'_ON_THE_FLY_{ndp_custom_call}_fw_bert_output_ph3.traceg')
         ph3_used = True
+        print(f'NDP({ndp_thunk_name}) mapped to {gpu_thunk_name}')
     NDP_thunks.remove((order, ndp_thunk_name))
 
 """
