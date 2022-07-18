@@ -97,7 +97,7 @@ for p, kernelslist_file, kernelslist_tmp_file in zip(passes, kernelslist_files, 
                     tmp_on_the_fly_traceg = open(f'/home/jueonpark/tracegen/traces/{args.model}/xla_hlo_{p}/{EXP_NAME}/{tmp_on_the_fly_traceg}', 'r').read()
                     on_the_fly_addr = tmp_on_the_fly_traceg.split("SET_FILTER ")[1].split(" ", 1)[0].split("0x100")[1]
                   except:
-                    on_the_fly_addr = "qwerasdfzxcv"
+                    on_the_fly_addr = "no on-the-fly, continuing..."
                   print(on_the_fly_addr)
                   tmp_line_list = []
                   last_stg_detected = False
