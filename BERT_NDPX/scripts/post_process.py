@@ -100,10 +100,10 @@ for p, kernelslist_file, kernelslist_tmp_file in zip(passes, kernelslist_files, 
                     on_the_fly_addr = "no on-the-fly, continuing..."
                   print(on_the_fly_addr)
                   tmp_line_list = []
-                  last_stg_detected = False
+                  rewritten_last_stg = False
                   for line in reversed(f.readlines()):
-                    if ('STG' in line) and (on_the_fly_addr in line) and (not last_stg_detected):
-                      last_stg_detected = True
+                    if ('STG' in line) and (on_the_fly_addr in line) and (not rewritten_last_stg):
+                      rewritten_last_stg = True
                       for word in line.split():
                         if "0x" in word:
                           line = re.sub('0x7', '0x1007', line)
