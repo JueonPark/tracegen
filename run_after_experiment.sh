@@ -17,9 +17,8 @@ then
                                  --on $1
 
   # breakdown
-  python HLO_breakdown/main.py --csv $EXP_PATH/$1.csv --hlo traces/$1/xla_hlo/$1.txt
-  python HLO_breakdown/main.py --csv $EXP_PATH/$1-ndp-full-cycle.csv \
-                               --hlo traces/$1/xla_hlo/$1.txt
+  python HLO_breakdown/main.py --csv $EXP_PATH/$1.csv --hlo traces/$1/xla_hlo/after_optimizations.mlir
+  python HLO_breakdown/main.py --csv $EXP_PATH/$1-ndp-full-cycle.csv --hlo traces/$1/xla_hlo/after_optimizations.mlir
 
   # device assignment
   # python profile/postprocessing_assignment_table.py --at traces/$1/xla_hlo/ndpx_device_assigner_assignment_table_cluster_0.csv
