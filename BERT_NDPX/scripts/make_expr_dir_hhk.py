@@ -44,6 +44,7 @@ for p, kernelslist_tmp_file, base_path, traces_path, hlo_path in zip(passes, ker
     if kernel_list[-1] == "":
         kernel_list = kernel_list[:-1]
     for ndp_gpu_kernels in tqdm(kernel_list):
+        # print(ndp_gpu_kernels)
         kernels = ndp_gpu_kernels.split('\n')
         kernel_name = kernel_num(ndp_gpu_kernels)
         for gpu in range(args.gpu):
@@ -59,23 +60,28 @@ for p, kernelslist_tmp_file, base_path, traces_path, hlo_path in zip(passes, ker
         for kernel in kernels:
             # NDP kernel
             if 'ON_THE_FLY' in kernel or 'NDP' in kernel:
-                ndp_kernel_path = f'{hlo_path}/{kernel}'
-                if 'fw' == p:
-                    # if not os.path.exists(ndp_kernel_path):
-                    #     print('Warning: ', ndp_kernel_path)
-                    #     on_the_fly_kernel_path = ndp_kernel_path.replace('NDP', 'ON_THE_FLY')
-                    #     on_the_fly_file = open(on_the_fly_kernel_path, 'r')
-                    #     not_on_the_fly_file = open(ndp_kernel_path, 'w')
-                    #     not_on_the_fly_file.write(on_the_fly_file.read().replace(f"STG.{args.packet_size} v0 BASE OFFSET\n", "####\n"))
-                    #     on_the_fly_file.close()
-                    #     not_on_the_fly_file.close()
-                    if os.path.exists(ndp_kernel_path):
-                        shutil.copy(ndp_kernel_path, f'{base_path}/{kernel_name}/GPU_0')
-                elif 'bw' == p:
-                    if not os.path.exists(ndp_kernel_path):
-                        print('Warning: ', ndp_kernel_path)
-                    else:
-                        shutil.copy(ndp_kernel_path, f'{base_path}/{kernel_name}/GPU_0')
+              ndp_kernel_path = f'{hlo_path}/{kernel}'
+              # print(ndp_kernel_path)
+              if 'fw' == p:
+                # if not os.path.exists(ndp_kernel_path):
+                #     print('Warning: ', ndp_kernel_path)
+                #     on_the_fly_kernel_path = ndp_kernel_path.replace('NDP', 'ON_THE_FLY')
+                #     on_the_fly_file = open(on_the_fly_kernel_path, 'r')
+                #     not_on_the_fly_file = open(ndp_kernel_path, 'w')
+                #     not_on_the_fly_file.write(on_the_fly_file.read().replace(f"STG.{args.packet_size} v0 BASE OFFSET\n", "####\n"))
+                #     on_the_fly_file.close()
+                #     not_on_the_fly_file.close()
+                if os.path.exists(ndp_kernel_path):
+                  shutil.copy(ndp_kernel_path, f'{base_path}/{kernel_name}/GPU_0')
+              elif 'bw' == p:
+                if not os.path.exists(ndp_kernel_path):
+                  print('Warning: ', ndp_kernel_path)
+                else:
+                  shutil.copy(ndp_kernel_path, f'{base_path}/{kernel_name}/GPU_0')
+              else:
+                # case for NdpEwiseFusedOnTheFly
+                if os.path.exists(ndp_kernel_path):
+                  shutil.copy(ndp_kernel_path, f'{base_path}/{kernel_name}/GPU_0')
             # GPU kernel
             if 'kernel-' in kernel:
                 gpu_kernel_path = f'{traces_path}/{kernel}'

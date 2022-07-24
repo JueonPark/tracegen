@@ -100,6 +100,7 @@ if __name__ == "__main__":
     # - MultipleNdpx
     # - IntendedSchedule
     output_line = ne_row[0] + ',' + \
+                  kernel_num + ',' + \
                   ne_row[1] + ',' + \
                   ne_row[2] + ',' + \
                   ne_row[3] + ',' + \

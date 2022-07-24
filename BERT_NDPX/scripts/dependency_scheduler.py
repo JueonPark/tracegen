@@ -258,14 +258,17 @@ for order, ndp_thunk_name in NDP_thunks_cpy:
         overlap_candidate_name = (trace_file.split("$")[1]).split(".traceg")[0]
         # try overlapping for identified gpu thunk
         for gpu_order, gpu_thunk_name in GPU_thunks:
-          gpu_thunk_name = custom_call_name(gpu_thunk_name)
-          if gpu_thunk_name == overlap_candidate_name:
+          gpu_custom_call = custom_call_name(gpu_thunk_name)
+          if gpu_custom_call == overlap_candidate_name:
             # there is overlap candidate in GPU kernel (typical case)
             overlap_exist = True
-            overlapped_candidates.append(gpu_thunk_name)
-            scheduled_kernels[gpu_thunk_name].append(trace_file)
-            print(f'NDP({trace_file}) mapped to {gpu_thunk_name}')
+            overlapped_candidates.append(gpu_custom_call)
+            scheduled_kernels[gpu_custom_call].append(trace_file)
+            print(f'NDP({trace_file}) mapped to {gpu_custom_call}')
+            if "NdpEwiseFusedOnTheFly" in ndp_thunk_name:
+              no_cxl_flags[gpu_custom_call] = False
             break
+  
 
 for key in manager.get_hops_map():
   manager.refill_hops_map(hops_map, key)
@@ -320,11 +323,12 @@ with open(output+'.hops', 'w') as f_hops:
             elif 'NdpEwiseFused' in ndp_thunk_name:
               ndp_custom_call = custom_call_name(ndp_thunk_name)
               # make on-the-fly trace files to be written.
+              # TODO: multiple scheduling + _ON_THE_FLY_ handling
               for trace_file in ndpx_trace_files:
                 if ('NdpEwiseFused' in trace_file) and (ndp_custom_call in trace_file):
                   f.write(f'{trace_file}\n')
-                  if '_ON_THE_FLY' in trace_file:
-                    f.write(f'_BAR_\n')
+                  # if '_ON_THE_FLY' in trace_file:
+                  #   f.write(f'_BAR_\n')
             else:
               f.write(f'{ndp_thunk_name}\n')
           f.write(f'kernel-{kernel_no}.traceg\n')

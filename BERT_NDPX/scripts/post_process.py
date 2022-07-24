@@ -77,6 +77,11 @@ for p, kernelslist_file, kernelslist_tmp_file in zip(passes, kernelslist_files, 
                 tmp_on_the_fly_traceg = kernel
                 kernelslist_tmp_file.write(kernel + '\n')
                 continue
+            elif '_ON_THE_FLY' in kernel:
+                # print(kernel)
+                tmp_on_the_fly_traceg = kernel
+                kernelslist_tmp_file.write(kernel + '\n')
+                continue
             if 'kernel-' in kernel: # GPU kernel
                 input_file_path = f'/home/jueonpark/tracegen/traces/{args.model}/traces_{p}/{kernel}'
                 output_file_path = f'/home/jueonpark/tracegen/traces/{args.model}/traces_{p}/{EXP_NAME}_{p}/{kernel}_post.traceg'
