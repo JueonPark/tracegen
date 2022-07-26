@@ -2,10 +2,6 @@
 Parse hlo graph for dependency check
 """
 
-from opcode import opname
-from posixpath import split
-from typing import Set
-
 # HloDepdendencyManager has 5 members
 # - hlo_table
 # - depend_table
