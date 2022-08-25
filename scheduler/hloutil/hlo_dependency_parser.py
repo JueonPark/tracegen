@@ -129,10 +129,10 @@ class HloDepdendencyManager(object):
     if name in self.hlo_hops:
       return self.hlo_hops[name]
     result = 0
-    # custom call target을 봐서 "NdpEwise"가 있으면 넘어가도록 하자.
+    # custom call target을 봐서 "wise"가 있으면 넘어가도록 하자.
     is_custom_call = 0
     if name in self.custom_call_table and \
-          self.custom_call_table[name].find("NdpEwise") == -1:
+          self.custom_call_table[name].find("wise") == -1:
       is_custom_call = 1
     result = is_custom_call
     for operand in self.hlo_table[name]:

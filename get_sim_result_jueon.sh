@@ -23,7 +23,7 @@ if [ ${SYNC} -eq 1 ]; then
 else
     CSV_PATH=$CSV_PATH-nosync.csv
 fi
-echo "GPUS,CONFIG,SYNC,ID,DIRECTION,NAME,CYCLE" > $CSV_PATH
+echo "GPUS,CONFIG,SYNC,ID,NAME,CYCLE" > $CSV_PATH
 ls $TARGET_RESULT_DIR | while read line 
 do
     pushd $TARGET_RESULT_DIR/$line/

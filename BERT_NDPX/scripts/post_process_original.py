@@ -54,8 +54,6 @@ for p, kernelslist_file, kernelslist_tmp_file in zip(passes, kernelslist_files, 
         page_table = False
         no_cxl = False
         kernels = ndp_gpu_kernels.split('\n')
-        tmp_on_the_fly_traceg = ""
-        is_pattern_matching_on_the_fly = False
         for kernel in kernels:
             if '//' in kernel:
                 continue
@@ -74,13 +72,11 @@ for p, kernelslist_file, kernelslist_tmp_file in zip(passes, kernelslist_files, 
                 kernelslist_tmp_file.write(kernel + '\n')
                 continue
             elif '_ON_THE_FLY' in kernel and 'ph1' in kernel:
-                tmp_on_the_fly_traceg = kernel
                 kernelslist_tmp_file.write(kernel + '\n')
                 continue
             elif '_ON_THE_FLY' in kernel:
                 # case for non-pattern-matching on-the-fly, 
                 # automatically generated from compiler
-                tmp_on_the_fly_traceg = kernel
                 kernelslist_tmp_file.write(kernel + '\n')
                 continue
             if 'kernel-' in kernel: # GPU kernel
@@ -90,49 +86,21 @@ for p, kernelslist_file, kernelslist_tmp_file in zip(passes, kernelslist_files, 
                 kernelslist_tmp_file.write(kernel + '_post.traceg\n')
                 output = open(output_file_path, 'w')
                 if page_table == True:
-                    # for on-the-fly write, usually for ph3
                     page_table_file = open(f'/home/jueonpark/tracegen/traces/{args.model}/xla_hlo_{p}/{EXP_NAME}/page_table_header_custom-call.{custom_call_id}.traceg', 'r')
                     output.write(page_table_file.read() + '\n')
                     page_table_file.close()
-                if not no_cxl: # meaning on-the-fly read
-                  if is_pattern_matching_on_the_fly:
-                    # original script for pattern matching
+                if not no_cxl:
                     for line in f.readlines():
-                      if 'STG' in line:
-                          for word in line.split():
-                              if "0x" in word:
-                                  line = re.sub('0x7', '0x1007', line)
-                      output.write(line)
-                    output.close()
-                  # end of original script
-                  else:
-                    print(kernel)
-                    print(tmp_on_the_fly_traceg)
-                    on_the_fly_addr = ""
-                    # open tmp_on_the_fly_traceg file and get the target address
-                    try:
-                      tmp_on_the_fly_traceg = open(f'/home/jueonpark/tracegen/traces/{args.model}/xla_hlo_{p}/{EXP_NAME}/{tmp_on_the_fly_traceg}', 'r').read()
-                      on_the_fly_addr = tmp_on_the_fly_traceg.split("SET_FILTER ")[1].split(" ", 1)[0].split("0x100")[1]
-                    except:
-                      on_the_fly_addr = "no on-the-fly, continuing..."
-                    print(on_the_fly_addr)
-                    tmp_line_list = []
-                    rewritten_last_stg = False
-                    for line in reversed(f.readlines()):
-                      if ('STG' in line) and (on_the_fly_addr in line) and (not rewritten_last_stg):
-                        rewritten_last_stg = True
-                        for word in line.split():
-                          if "0x" in word:
-                            line = re.sub('0x7', '0x1007', line)
-                      tmp_line_list.append(line)
-                    for line in reversed(tmp_line_list):
-                      output.write(line)
+                        if 'STG' in line:
+                            for word in line.split():
+                                if "0x" in word:
+                                    line = re.sub('0x7', '0x1007', line)
+                        output.write(line)
                     output.close()
                 else:
-                  output.write(f.read())
+                    output.write(f.read())
                 output.close()
                 f.close()
         kernelslist_tmp_file.write('\n')
     kernelslist_file.close()
     kernelslist_tmp_file.close()
-
