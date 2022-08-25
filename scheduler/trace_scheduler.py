@@ -94,12 +94,6 @@ if __name__ == "__main__":
       = match(GPU_thunks, stats_parsed)
   matched = list(zip(GPU_thunks_matched, stats_matched))
 
-  # hlo dependency manager
-  # TODO: graph가 두 개 이상이면 manager를 어떻게 만들어야 하지?
-  managers = []
-  for graph_path in graph_paths:
-    managers.append(HloDepdendencyManager(open(graph_path).read()))
-
   finish_list = []
   num_gpu_custom_call = 0
   scheduled_kernels = dict()
@@ -158,49 +152,45 @@ if __name__ == "__main__":
   # file to write:
   # - kernelslsit.g in the model directory
   f = open(output, "w+")
-  for manager in managers:
-    for (order, thunk_name), kernels in matched:
-      gpu_custom_call = custom_call_name(thunk_name)
-      for kernel_no, kernel_name in kernels:
-        f.write(f'// Thunk: {thunk_name}\n')
-        f.write(f'// Kernel Name: {kernel_name}\n')
-        if no_cxl_flags[gpu_custom_call]:
-          f.write(f'# NO_CXL\n')
-        adam_used = False
-        for ndp_thunk_name in scheduled_kernels[gpu_custom_call]:
-          if 'Adam' in ndp_thunk_name:
-            adam_used = True
-            f.write(f'_NDP_{ndp_thunk_name.split(":")[0]}_adam_reduce.traceg\n')
-        if adam_used:
-          f.write(f'_BAR_\n')
-        for ndp_thunk_name in scheduled_kernels[gpu_custom_call]:
-          if 'NdpEwiseFused' in ndp_thunk_name:
-            ndp_custom_call = custom_call_name(ndp_thunk_name)
-            # make on-the-fly trace files to be written.
-            # TODO: multiple scheduling + _ON_THE_FLY_ handling
-            for trace_file in ndpx_trace_files:
-              if ('NdpEwiseFused' in trace_file) and (ndp_custom_call in trace_file):
-                f.write(f'{trace_file}\n')
-                # if '_ON_THE_FLY' in trace_file:
-                #   f.write(f'_BAR_\n')
-          else:
-            f.write(f'{ndp_thunk_name}\n')
-        f.write(f'kernel-{kernel_no}.traceg\n')
-        f.write('\n')
-      if 'custom-call' in thunk_name:
-        num_gpu_custom_call -= 1
-      finish_list.append(thunk_name.split(':')[0])
-    first = True
-    for kernel_no, kernel_name in stats_unmatched:
+  for (order, thunk_name), kernels in matched:
+    gpu_custom_call = custom_call_name(thunk_name)
+    for kernel_no, kernel_name in kernels:
+      f.write(f'// Thunk: {thunk_name}\n')
       f.write(f'// Kernel Name: {kernel_name}\n')
-      f.write(f'# NO_CXL\n')
-      if first:
-        first = False
-        for remains in scheduled_kernels['']:
-          f.write(remains)
-          f.write('\n')
+      if no_cxl_flags[gpu_custom_call]:
+        f.write(f'# NO_CXL\n')
+      adam_used = False
+      for ndp_thunk_name in scheduled_kernels[gpu_custom_call]:
+        if 'Adam' in ndp_thunk_name:
+          adam_used = True
+          f.write(f'_NDP_{ndp_thunk_name.split(":")[0]}_adam_reduce.traceg\n')
+      if adam_used:
+        f.write(f'_BAR_\n')
+      for ndp_thunk_name in scheduled_kernels[gpu_custom_call]:
+        if 'NdpEwiseFused' in ndp_thunk_name:
+          ndp_custom_call = custom_call_name(ndp_thunk_name)
+          # make on-the-fly trace files to be written.
+          # TODO: multiple scheduling + _ON_THE_FLY_ handling
+          for trace_file in ndpx_trace_files:
+            if ('NdpEwiseFused' in trace_file) and (ndp_custom_call in trace_file):
+              f.write(f'{trace_file}\n')
+              # if '_ON_THE_FLY' in trace_file:
+              #   f.write(f'_BAR_\n')
+        else:
+          f.write(f'{ndp_thunk_name}\n')
       f.write(f'kernel-{kernel_no}.traceg\n')
       f.write('\n')
-
-  for order2, ndp_thunk_name in NDP_thunks:
-    manager.print_unfinished_parent(ndp_thunk_name.split(":")[0])
+    if 'custom-call' in thunk_name:
+      num_gpu_custom_call -= 1
+    finish_list.append(thunk_name.split(':')[0])
+  first = True
+  for kernel_no, kernel_name in stats_unmatched:
+    f.write(f'// Kernel Name: {kernel_name}\n')
+    f.write(f'# NO_CXL\n')
+    if first:
+      first = False
+      for remains in scheduled_kernels['']:
+        f.write(remains)
+        f.write('\n')
+    f.write(f'kernel-{kernel_no}.traceg\n')
+    f.write('\n')
