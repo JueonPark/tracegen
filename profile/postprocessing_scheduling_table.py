@@ -2,7 +2,7 @@
 # things to rewrite: NdpxOpLayer, GpuKernelLayer
 import os
 import argparse
-from xla_metadata_parser import parse_bert_metadata
+from xla_metadata_parser import *
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-s', '--st', type=str, help="scheduling_table.csv", required=True)
@@ -28,6 +28,17 @@ if __name__ == "__main__":
 
   original_results = open(args.st, 'r').read().split("\n")
   exp_path = os.getenv("EXP_PATH")
+  model = ""
+  if exp_path.find("bert") != -1:
+    model = "bert"
+  elif exp_path.find("resnet") != -1:
+    model = "resnet"
+  elif exp_path.find("mobilenet") != -1:
+    model = "mobilenet"
+  elif exp_path.find("transformer") != -1:
+    model = "transformer"
+  else:
+    exit(0)
   output_name = "ndpx_scheduling_table_postprocessed.csv"
   output_path = os.path.join(exp_path, output_name)
   output = open(output_path, "w+")
@@ -43,13 +54,19 @@ if __name__ == "__main__":
                   original_elements[5] + "," + \
                   original_elements[6] + ","
     try:
-      new_results += parse_bert_metadata(original_elements[7])
+      if (model == "bert"):
+        new_results += parse_bert_metadata(original_elements[7])
+      else:
+        new_results += parse_mobilenet_metadata(original_elements[7])
     except:
       new_results += original_elements[7]
     new_results += "," + original_elements[8] + "," + \
                          original_elements[9] + ","
     try:
-      new_results += parse_bert_metadata(original_elements[10])
+      if (model == "bert"):
+        new_results += parse_bert_metadata(original_elements[10])
+      else:
+        new_results += parse_mobilenet_metadata(original_elements[10])
     except:
       new_results += original_elements[10]
     new_results += "," + original_elements[11] + "\n"

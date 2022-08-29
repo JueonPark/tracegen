@@ -1,0 +1,1519 @@
+// Thunk: fusion_130
+// Kernel Name: fusion_130
+kernel-2567.traceg
+
+// Thunk: fusion_129
+// Kernel Name: fusion_129
+kernel-2568.traceg
+
+// Thunk: convert_356
+// Kernel Name: convert_356
+kernel-2569.traceg
+
+// Thunk: custom_call_192:NdpConvForward$Bias$Batchnorm$Activation_Relu
+// Kernel Name: _Z23genericTranspose_kernelI6__halfS0_fEvT1_17cudnnTensorStructPKT_S1_S2_PT0_
+kernel-2570.traceg
+
+// Thunk: custom_call_192:NdpConvForward$Bias$Batchnorm$Activation_Relu
+// Kernel Name: _ZN10cask_cudnn22first_layer_fwd_kernelILi4ELi7ELi7ELi32EEEv19FirstLayerFwdParams
+kernel-2571.traceg
+
+// Thunk: fusion_150
+// Kernel Name: fusion_150
+kernel-2572.traceg
+
+// Thunk: fusion_125
+// Kernel Name: fusion_125
+kernel-2573.traceg
+
+// Thunk: convert_338
+// Kernel Name: convert_338
+kernel-2574.traceg
+
+// Thunk: custom_call_173:NdpConvForward$Bias$Batchnorm$Activation_Relu
+// Kernel Name: _ZN5cudnn4gemm20computeOffsetsKernelENS0_20ComputeOffsetsParamsE
+kernel-2575.traceg
+
+// Thunk: custom_call_173:NdpConvForward$Bias$Batchnorm$Activation_Relu
+// Kernel Name: turing_fp16_s1688cudnn_fp16_256x64_ldg8_relu_f2f_exp_small_nhwc_tn_v1
+kernel-2576.traceg
+
+// Thunk: fusion_122
+// Kernel Name: fusion_122
+kernel-2577.traceg
+
+// Thunk: convert_340
+// Kernel Name: convert_340
+kernel-2578.traceg
+
+// Thunk: custom_call_174:NdpConvForward$Bias$Batchnorm$SkipConnection$Activation_Relu
+// Kernel Name: _ZN5cudnn4gemm20computeOffsetsKernelENS0_20ComputeOffsetsParamsE
+kernel-2579.traceg
+
+// Thunk: custom_call_174:NdpConvForward$Bias$Batchnorm$SkipConnection$Activation_Relu
+// Kernel Name: turing_fp16_s1688cudnn_fp16_256x64_ldg8_relu_f2f_exp_small_nhwc_tn_v1
+kernel-2580.traceg
+
+// Thunk: fusion_119
+// Kernel Name: fusion_119
+kernel-2581.traceg
+
+// Thunk: convert_342
+// Kernel Name: convert_342
+kernel-2582.traceg
+
+// Thunk: custom_call_175:NdpConvForward$Bias$Batchnorm$Activation_Relu
+// Kernel Name: _ZN5cudnn4gemm20computeOffsetsKernelENS0_20ComputeOffsetsParamsE
+kernel-2583.traceg
+
+// Thunk: custom_call_175:NdpConvForward$Bias$Batchnorm$Activation_Relu
+// Kernel Name: turing_fp16_s1688cudnn_fp16_256x64_ldg8_relu_f2f_exp_small_nhwc_tn_v1
+kernel-2584.traceg
+
+// Thunk: fusion_116
+// Kernel Name: fusion_116
+kernel-2585.traceg
+
+// Thunk: convert_344
+// Kernel Name: convert_344
+kernel-2586.traceg
+
+// Thunk: custom_call_176:NdpConvForward$Bias$Batchnorm$SkipConnection$Activation_Relu
+// Kernel Name: _ZN5cudnn4gemm20computeOffsetsKernelENS0_20ComputeOffsetsParamsE
+kernel-2587.traceg
+
+// Thunk: custom_call_176:NdpConvForward$Bias$Batchnorm$SkipConnection$Activation_Relu
+// Kernel Name: turing_fp16_s1688cudnn_fp16_256x64_ldg8_relu_f2f_exp_small_nhwc_tn_v1
+kernel-2588.traceg
+
+// Thunk: pad
+// Kernel Name: pad
+kernel-2589.traceg
+
+// Thunk: fusion_113
+// Kernel Name: fusion_113
+kernel-2590.traceg
+
+// Thunk: convert_346
+// Kernel Name: convert_346
+kernel-2591.traceg
+
+// Thunk: custom_call_189:NdpConvForward$Bias$Batchnorm$Activation_Relu
+// Kernel Name: _ZN5cudnn4gemm20computeOffsetsKernelENS0_20ComputeOffsetsParamsE
+kernel-2592.traceg
+
+// Thunk: custom_call_189:NdpConvForward$Bias$Batchnorm$Activation_Relu
+// Kernel Name: turing_fp16_s1688cudnn_fp16_256x64_ldg8_relu_f2f_exp_interior_nhwc_tn_v1
+kernel-2593.traceg
+
+// Thunk: fusion_110
+// Kernel Name: fusion_110
+kernel-2594.traceg
+
+// Thunk: convert_348
+// Kernel Name: convert_348
+kernel-2595.traceg
+
+// Thunk: custom_call_177:NdpConvForward$Bias$Batchnorm
+// Kernel Name: _ZN5cudnn4gemm20computeOffsetsKernelENS0_20ComputeOffsetsParamsE
+kernel-2596.traceg
+
+// Thunk: custom_call_177:NdpConvForward$Bias$Batchnorm
+// Kernel Name: turing_fp16_s1688cudnn_fp16_256x64_ldg8_relu_f2f_exp_small_nhwc_tn_v1
+kernel-2597.traceg
+
+// Thunk: fusion_107
+// Kernel Name: fusion_107
+kernel-2598.traceg
+
+// Thunk: convert_350
+// Kernel Name: convert_350
+kernel-2599.traceg
+
+// Thunk: custom_call_178:NdpConvForward$Bias$Batchnorm$SkipConnection$Activation_Relu
+// Kernel Name: _ZN5cudnn4gemm20computeOffsetsKernelENS0_20ComputeOffsetsParamsE
+kernel-2600.traceg
+
+// Thunk: custom_call_178:NdpConvForward$Bias$Batchnorm$SkipConnection$Activation_Relu
+// Kernel Name: turing_fp16_s1688cudnn_fp16_256x64_ldg8_relu_f2f_exp_interior_nhwc_tn_v1
+kernel-2601.traceg
+
+// Thunk: fusion_104
+// Kernel Name: fusion_104
+kernel-2602.traceg
+
+// Thunk: convert_352
+// Kernel Name: convert_352
+kernel-2603.traceg
+
+// Thunk: custom_call_179:NdpConvForward$Bias$Batchnorm$Activation_Relu
+// Kernel Name: _ZN5cudnn4gemm20computeOffsetsKernelENS0_20ComputeOffsetsParamsE
+kernel-2604.traceg
+
+// Thunk: custom_call_179:NdpConvForward$Bias$Batchnorm$Activation_Relu
+// Kernel Name: turing_fp16_s1688cudnn_fp16_256x64_ldg8_relu_f2f_exp_small_nhwc_tn_v1
+kernel-2605.traceg
+
+// Thunk: fusion_101
+// Kernel Name: fusion_101
+kernel-2606.traceg
+
+// Thunk: convert_354
+// Kernel Name: convert_354
+kernel-2607.traceg
+
+// Thunk: custom_call_180:NdpConvForward$Bias$Batchnorm$SkipConnection$Activation_Relu
+// Kernel Name: _ZN5cudnn4gemm20computeOffsetsKernelENS0_20ComputeOffsetsParamsE
+kernel-2608.traceg
+
+// Thunk: custom_call_180:NdpConvForward$Bias$Batchnorm$SkipConnection$Activation_Relu
+// Kernel Name: turing_fp16_s1688cudnn_fp16_256x64_ldg8_relu_f2f_exp_small_nhwc_tn_v1
+kernel-2609.traceg
+
+// Thunk: pad_1
+// Kernel Name: pad_1
+kernel-2610.traceg
+
+// Thunk: fusion_98
+// Kernel Name: fusion_98
+kernel-2611.traceg
+
+// Thunk: convert_318
+// Kernel Name: convert_318
+kernel-2612.traceg
+
+// Thunk: custom_call_190:NdpConvForward$Bias$Batchnorm$Activation_Relu
+// Kernel Name: _ZN5cudnn4gemm20computeOffsetsKernelENS0_20ComputeOffsetsParamsE
+kernel-2613.traceg
+
+// Thunk: custom_call_190:NdpConvForward$Bias$Batchnorm$Activation_Relu
+// Kernel Name: turing_fp16_s1688cudnn_fp16_128x128_ldg8_relu_f2f_exp_interior_nhwc_tn_v1
+kernel-2614.traceg
+
+// Thunk: fusion_95
+// Kernel Name: fusion_95
+kernel-2615.traceg
+
+// Thunk: convert_320
+// Kernel Name: convert_320
+kernel-2616.traceg
+
+// Thunk: custom_call_181:NdpConvForward$Bias$Batchnorm
+// Kernel Name: _ZN5cudnn4gemm20computeOffsetsKernelENS0_20ComputeOffsetsParamsE
+kernel-2617.traceg
+
+// Thunk: custom_call_181:NdpConvForward$Bias$Batchnorm
+// Kernel Name: turing_fp16_s1688cudnn_fp16_128x128_ldg8_relu_f2f_exp_small_nhwc_tn_v1
+kernel-2618.traceg
+
+// Thunk: fusion_92
+// Kernel Name: fusion_92
+kernel-2619.traceg
+
+// Thunk: convert_322
+// Kernel Name: convert_322
+kernel-2620.traceg
+
+// Thunk: custom_call_182:NdpConvForward$Bias$Batchnorm$SkipConnection$Activation_Relu
+// Kernel Name: _ZN5cudnn4gemm20computeOffsetsKernelENS0_20ComputeOffsetsParamsE
+kernel-2621.traceg
+
+// Thunk: custom_call_182:NdpConvForward$Bias$Batchnorm$SkipConnection$Activation_Relu
+// Kernel Name: turing_fp16_s1688cudnn_fp16_128x128_ldg8_relu_f2f_exp_interior_nhwc_tn_v1
+kernel-2622.traceg
+
+// Thunk: fusion_89
+// Kernel Name: fusion_89
+kernel-2623.traceg
+
+// Thunk: convert_324
+// Kernel Name: convert_324
+kernel-2624.traceg
+
+// Thunk: custom_call_183:NdpConvForward$Bias$Batchnorm$Activation_Relu
+// Kernel Name: _ZN5cudnn4gemm20computeOffsetsKernelENS0_20ComputeOffsetsParamsE
+kernel-2625.traceg
+
+// Thunk: custom_call_183:NdpConvForward$Bias$Batchnorm$Activation_Relu
+// Kernel Name: turing_fp16_s1688cudnn_fp16_128x128_ldg8_relu_f2f_exp_small_nhwc_tn_v1
+kernel-2626.traceg
+
+// Thunk: fusion_86
+// Kernel Name: fusion_86
+kernel-2627.traceg
+
+// Thunk: convert_326
+// Kernel Name: convert_326
+kernel-2628.traceg
+
+// Thunk: custom_call_184:NdpConvForward$Bias$Batchnorm$SkipConnection$Activation_Relu
+// Kernel Name: _ZN5cudnn4gemm20computeOffsetsKernelENS0_20ComputeOffsetsParamsE
+kernel-2629.traceg
+
+// Thunk: custom_call_184:NdpConvForward$Bias$Batchnorm$SkipConnection$Activation_Relu
+// Kernel Name: turing_fp16_s1688cudnn_fp16_128x128_ldg8_relu_f2f_exp_small_nhwc_tn_v1
+kernel-2630.traceg
+
+// Thunk: pad_2
+// Kernel Name: pad_2
+kernel-2631.traceg
+
+// Thunk: fusion_83
+// Kernel Name: fusion_83
+kernel-2632.traceg
+
+// Thunk: convert_328
+// Kernel Name: convert_328
+kernel-2633.traceg
+
+// Thunk: custom_call_191:NdpConvForward$Bias$Batchnorm$Activation_Relu
+// Kernel Name: _ZN5cudnn4gemm20computeOffsetsKernelENS0_20ComputeOffsetsParamsE
+kernel-2634.traceg
+
+// Thunk: custom_call_191:NdpConvForward$Bias$Batchnorm$Activation_Relu
+// Kernel Name: turing_fp16_s1688cudnn_fp16_128x128_ldg8_relu_f2f_exp_interior_nhwc_tn_v1
+kernel-2635.traceg
+
+// Thunk: fusion_80
+// Kernel Name: fusion_80
+kernel-2636.traceg
+
+// Thunk: convert_330
+// Kernel Name: convert_330
+kernel-2637.traceg
+
+// Thunk: custom_call_185:NdpConvForward$Bias$Batchnorm
+// Kernel Name: _ZN5cudnn4gemm20computeOffsetsKernelENS0_20ComputeOffsetsParamsE
+kernel-2638.traceg
+
+// Thunk: custom_call_185:NdpConvForward$Bias$Batchnorm
+// Kernel Name: turing_fp16_s1688cudnn_fp16_128x128_ldg8_relu_f2f_exp_small_nhwc_tn_v1
+kernel-2639.traceg
+
+// Thunk: fusion_77
+// Kernel Name: fusion_77
+kernel-2640.traceg
+
+// Thunk: convert_332
+// Kernel Name: convert_332
+kernel-2641.traceg
+
+// Thunk: custom_call_186:NdpConvForward$Bias$Batchnorm$SkipConnection$Activation_Relu
+// Kernel Name: _ZN5cudnn4gemm20computeOffsetsKernelENS0_20ComputeOffsetsParamsE
+kernel-2642.traceg
+
+// Thunk: custom_call_186:NdpConvForward$Bias$Batchnorm$SkipConnection$Activation_Relu
+// Kernel Name: turing_fp16_s1688cudnn_fp16_128x128_ldg8_relu_f2f_exp_interior_nhwc_tn_v1
+kernel-2643.traceg
+
+// Thunk: fusion_74
+// Kernel Name: fusion_74
+kernel-2644.traceg
+
+// Thunk: convert_334
+// Kernel Name: convert_334
+kernel-2645.traceg
+
+// Thunk: custom_call_187:NdpConvForward$Bias$Batchnorm$Activation_Relu
+// Kernel Name: _ZN5cudnn4gemm20computeOffsetsKernelENS0_20ComputeOffsetsParamsE
+kernel-2646.traceg
+
+// Thunk: custom_call_187:NdpConvForward$Bias$Batchnorm$Activation_Relu
+// Kernel Name: turing_fp16_s1688cudnn_fp16_128x128_ldg8_relu_f2f_exp_small_nhwc_tn_v1
+kernel-2647.traceg
+
+// Thunk: fusion_71
+// Kernel Name: fusion_71
+kernel-2648.traceg
+
+// Thunk: convert_336
+// Kernel Name: convert_336
+kernel-2649.traceg
+
+// Thunk: custom_call_188:NdpConvForward$Bias$Batchnorm$SkipConnection$Activation_Relu
+// Kernel Name: _ZN5cudnn4gemm20computeOffsetsKernelENS0_20ComputeOffsetsParamsE
+kernel-2650.traceg
+
+// Thunk: custom_call_188:NdpConvForward$Bias$Batchnorm$SkipConnection$Activation_Relu
+// Kernel Name: turing_fp16_s1688cudnn_fp16_128x128_ldg8_relu_f2f_exp_small_nhwc_tn_v1
+kernel-2651.traceg
+
+// Thunk: fusion_68
+// Kernel Name: fusion_68
+kernel-2652.traceg
+
+// Thunk: fusion_67
+// Kernel Name: fusion_67
+kernel-2653.traceg
+
+// Thunk: convert_359
+// Kernel Name: convert_359
+kernel-2654.traceg
+
+// Thunk: fusion_66
+// Kernel Name: fusion_66
+kernel-2655.traceg
+
+// Thunk: custom_call_111:__cublas$gemm
+// Kernel Name: turing_fp16_s884gemm_fp16_64x64_ldg8_f2f_nn
+kernel-2656.traceg
+
+// Thunk: fusion_156
+// Kernel Name: fusion_156
+kernel-2657.traceg
+
+// Thunk: fusion_155
+// Kernel Name: fusion_155
+kernel-2658.traceg
+
+// Thunk: log_1696
+// Kernel Name: log_1696
+kernel-2659.traceg
+
+// Thunk: fusion_40
+// Kernel Name: fusion_40
+kernel-2660.traceg
+
+// Thunk: add_2853
+// Kernel Name: add_2853
+kernel-2661.traceg
+
+// Thunk: fusion_62
+// Kernel Name: fusion_62
+kernel-2662.traceg
+
+// Thunk: custom_call_112:__cublas$gemm
+// Kernel Name: turing_fp16_s1688gemm_fp16_256x64_ldg8_f2f_tn
+kernel-2663.traceg
+
+// Thunk: broadcast_171
+// Kernel Name: broadcast_171
+kernel-2664.traceg
+
+// Thunk: custom_call_193:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN10cask_cudnn20computeOffsetsKernelENS_20ComputeOffsetsParamsE
+// Optim: custom-call.276:NdpAdam$WeightConv$custom-call.193
+// Optim: custom-call.231:NdpAdam$Batchnorm$custom-call.193
+// Optim: custom-call.232:NdpAdam$Batchnorm$custom-call.193
+// Optim: custom-call.275:NdpAdam$ConvBias$custom-call.193
+kernel-2665.traceg
+
+// Thunk: custom_call_193:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN10cask_cudnn21computeBOffsetsKernelENS_21ComputeBOffsetsParamsE
+// Optim: custom-call.276:NdpAdam$WeightConv$custom-call.193
+// Optim: custom-call.231:NdpAdam$Batchnorm$custom-call.193
+// Optim: custom-call.232:NdpAdam$Batchnorm$custom-call.193
+// Optim: custom-call.275:NdpAdam$ConvBias$custom-call.193
+kernel-2666.traceg
+
+// Thunk: custom_call_193:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: turing_fp16_s1688cudnn_fp16_256x64_ldg8_dgrad_relu_f2f_exp_small_nhwc_tt_v1
+// Optim: custom-call.276:NdpAdam$WeightConv$custom-call.193
+// Optim: custom-call.231:NdpAdam$Batchnorm$custom-call.193
+// Optim: custom-call.232:NdpAdam$Batchnorm$custom-call.193
+// Optim: custom-call.275:NdpAdam$ConvBias$custom-call.193
+kernel-2667.traceg
+
+// Thunk: custom_call_193:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN5cudnn4gemm25computeWgradOffsetsKernelENS0_20ComputeOffsetsParamsE
+// Optim: custom-call.276:NdpAdam$WeightConv$custom-call.193
+// Optim: custom-call.231:NdpAdam$Batchnorm$custom-call.193
+// Optim: custom-call.232:NdpAdam$Batchnorm$custom-call.193
+// Optim: custom-call.275:NdpAdam$ConvBias$custom-call.193
+kernel-2668.traceg
+
+// Thunk: custom_call_193:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z24scalePackedTensor_kernelIffEv19cudnnTensor4dStructPT_T0_
+// Optim: custom-call.276:NdpAdam$WeightConv$custom-call.193
+// Optim: custom-call.231:NdpAdam$Batchnorm$custom-call.193
+// Optim: custom-call.232:NdpAdam$Batchnorm$custom-call.193
+// Optim: custom-call.275:NdpAdam$ConvBias$custom-call.193
+kernel-2669.traceg
+
+// Thunk: custom_call_193:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: turing_s1688cudnn_fp16_128x128_ldg8_wgrad_idx_exp_interior_nhwc_nt_v1
+// Optim: custom-call.276:NdpAdam$WeightConv$custom-call.193
+// Optim: custom-call.231:NdpAdam$Batchnorm$custom-call.193
+// Optim: custom-call.232:NdpAdam$Batchnorm$custom-call.193
+// Optim: custom-call.275:NdpAdam$ConvBias$custom-call.193
+kernel-2670.traceg
+
+// Thunk: custom_call_193:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z20convertTensor_kernelIf6__halffEvT1_PKT_S1_PT0_m
+// Optim: custom-call.276:NdpAdam$WeightConv$custom-call.193
+// Optim: custom-call.231:NdpAdam$Batchnorm$custom-call.193
+// Optim: custom-call.232:NdpAdam$Batchnorm$custom-call.193
+// Optim: custom-call.275:NdpAdam$ConvBias$custom-call.193
+kernel-2671.traceg
+
+// Thunk: custom_call_194:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN10cask_cudnn20computeOffsetsKernelENS_20ComputeOffsetsParamsE
+// Optim: custom-call.274:NdpAdam$WeightConv$custom-call.194
+// Optim: custom-call.229:NdpAdam$Batchnorm$custom-call.194
+// Optim: custom-call.230:NdpAdam$Batchnorm$custom-call.194
+// Optim: custom-call.273:NdpAdam$ConvBias$custom-call.194
+kernel-2672.traceg
+
+// Thunk: custom_call_194:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN10cask_cudnn21computeBOffsetsKernelENS_21ComputeBOffsetsParamsE
+// Optim: custom-call.274:NdpAdam$WeightConv$custom-call.194
+// Optim: custom-call.229:NdpAdam$Batchnorm$custom-call.194
+// Optim: custom-call.230:NdpAdam$Batchnorm$custom-call.194
+// Optim: custom-call.273:NdpAdam$ConvBias$custom-call.194
+kernel-2673.traceg
+
+// Thunk: custom_call_194:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: turing_fp16_s1688cudnn_fp16_256x64_ldg8_dgrad_relu_f2f_exp_small_nhwc_tt_v1
+// Optim: custom-call.274:NdpAdam$WeightConv$custom-call.194
+// Optim: custom-call.229:NdpAdam$Batchnorm$custom-call.194
+// Optim: custom-call.230:NdpAdam$Batchnorm$custom-call.194
+// Optim: custom-call.273:NdpAdam$ConvBias$custom-call.194
+kernel-2674.traceg
+
+// Thunk: custom_call_194:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN5cudnn4gemm25computeWgradOffsetsKernelENS0_20ComputeOffsetsParamsE
+// Optim: custom-call.274:NdpAdam$WeightConv$custom-call.194
+// Optim: custom-call.229:NdpAdam$Batchnorm$custom-call.194
+// Optim: custom-call.230:NdpAdam$Batchnorm$custom-call.194
+// Optim: custom-call.273:NdpAdam$ConvBias$custom-call.194
+kernel-2675.traceg
+
+// Thunk: custom_call_194:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z24scalePackedTensor_kernelIffEv19cudnnTensor4dStructPT_T0_
+// Optim: custom-call.274:NdpAdam$WeightConv$custom-call.194
+// Optim: custom-call.229:NdpAdam$Batchnorm$custom-call.194
+// Optim: custom-call.230:NdpAdam$Batchnorm$custom-call.194
+// Optim: custom-call.273:NdpAdam$ConvBias$custom-call.194
+kernel-2676.traceg
+
+// Thunk: custom_call_194:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: turing_s1688cudnn_fp16_128x128_ldg8_wgrad_idx_exp_interior_nhwc_nt_v1
+// Optim: custom-call.274:NdpAdam$WeightConv$custom-call.194
+// Optim: custom-call.229:NdpAdam$Batchnorm$custom-call.194
+// Optim: custom-call.230:NdpAdam$Batchnorm$custom-call.194
+// Optim: custom-call.273:NdpAdam$ConvBias$custom-call.194
+kernel-2677.traceg
+
+// Thunk: custom_call_194:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z20convertTensor_kernelIf6__halffEvT1_PKT_S1_PT0_m
+// Optim: custom-call.274:NdpAdam$WeightConv$custom-call.194
+// Optim: custom-call.229:NdpAdam$Batchnorm$custom-call.194
+// Optim: custom-call.230:NdpAdam$Batchnorm$custom-call.194
+// Optim: custom-call.273:NdpAdam$ConvBias$custom-call.194
+kernel-2678.traceg
+
+// Thunk: custom_call_195:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN10cask_cudnn20computeOffsetsKernelENS_20ComputeOffsetsParamsE
+// Optim: custom-call.270:NdpAdam$WeightConv$custom-call.195
+// Optim: custom-call.215:NdpAdam$Batchnorm$custom-call.195
+// Optim: custom-call.216:NdpAdam$Batchnorm$custom-call.195
+// Optim: custom-call.269:NdpAdam$ConvBias$custom-call.195
+kernel-2679.traceg
+
+// Thunk: custom_call_195:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN10cask_cudnn21computeBOffsetsKernelENS_21ComputeBOffsetsParamsE
+// Optim: custom-call.270:NdpAdam$WeightConv$custom-call.195
+// Optim: custom-call.215:NdpAdam$Batchnorm$custom-call.195
+// Optim: custom-call.216:NdpAdam$Batchnorm$custom-call.195
+// Optim: custom-call.269:NdpAdam$ConvBias$custom-call.195
+kernel-2680.traceg
+
+// Thunk: custom_call_195:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: turing_fp16_s1688cudnn_fp16_256x64_ldg8_dgrad_relu_f2f_exp_small_nhwc_tt_v1
+// Optim: custom-call.270:NdpAdam$WeightConv$custom-call.195
+// Optim: custom-call.215:NdpAdam$Batchnorm$custom-call.195
+// Optim: custom-call.216:NdpAdam$Batchnorm$custom-call.195
+// Optim: custom-call.269:NdpAdam$ConvBias$custom-call.195
+kernel-2681.traceg
+
+// Thunk: custom_call_195:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN5cudnn4gemm25computeWgradOffsetsKernelENS0_20ComputeOffsetsParamsE
+// Optim: custom-call.270:NdpAdam$WeightConv$custom-call.195
+// Optim: custom-call.215:NdpAdam$Batchnorm$custom-call.195
+// Optim: custom-call.216:NdpAdam$Batchnorm$custom-call.195
+// Optim: custom-call.269:NdpAdam$ConvBias$custom-call.195
+kernel-2682.traceg
+
+// Thunk: custom_call_195:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z24scalePackedTensor_kernelIffEv19cudnnTensor4dStructPT_T0_
+// Optim: custom-call.270:NdpAdam$WeightConv$custom-call.195
+// Optim: custom-call.215:NdpAdam$Batchnorm$custom-call.195
+// Optim: custom-call.216:NdpAdam$Batchnorm$custom-call.195
+// Optim: custom-call.269:NdpAdam$ConvBias$custom-call.195
+kernel-2683.traceg
+
+// Thunk: custom_call_195:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: turing_s1688cudnn_fp16_128x128_ldg8_wgrad_idx_exp_interior_nhwc_nt_v1
+// Optim: custom-call.270:NdpAdam$WeightConv$custom-call.195
+// Optim: custom-call.215:NdpAdam$Batchnorm$custom-call.195
+// Optim: custom-call.216:NdpAdam$Batchnorm$custom-call.195
+// Optim: custom-call.269:NdpAdam$ConvBias$custom-call.195
+kernel-2684.traceg
+
+// Thunk: custom_call_195:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z20convertTensor_kernelIf6__halffEvT1_PKT_S1_PT0_m
+// Optim: custom-call.270:NdpAdam$WeightConv$custom-call.195
+// Optim: custom-call.215:NdpAdam$Batchnorm$custom-call.195
+// Optim: custom-call.216:NdpAdam$Batchnorm$custom-call.195
+// Optim: custom-call.269:NdpAdam$ConvBias$custom-call.195
+kernel-2685.traceg
+
+// Thunk: custom_call_195:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z22nhwcToFoldedNhwcKernelI6__halfS0_fLb1EEviiiiPKT_PT0_iiiiiiiiiiT1_S6_N5cudnn15reduced_divisorES8_S8_S8_S8_
+// Optim: custom-call.270:NdpAdam$WeightConv$custom-call.195
+// Optim: custom-call.215:NdpAdam$Batchnorm$custom-call.195
+// Optim: custom-call.216:NdpAdam$Batchnorm$custom-call.195
+// Optim: custom-call.269:NdpAdam$ConvBias$custom-call.195
+kernel-2686.traceg
+
+// Thunk: custom_call_209:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN10cask_cudnn20computeOffsetsKernelENS_20ComputeOffsetsParamsE
+// Optim: custom-call.268:NdpAdam$WeightConv$custom-call.209
+// Optim: custom-call.214:NdpAdam$Batchnorm$custom-call.209
+// Optim: custom-call.267:NdpAdam$ConvBias$custom-call.209
+// Optim: custom-call.213:NdpAdam$Batchnorm$custom-call.209
+kernel-2687.traceg
+
+// Thunk: custom_call_209:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN10cask_cudnn21computeBOffsetsKernelENS_21ComputeBOffsetsParamsE
+// Optim: custom-call.268:NdpAdam$WeightConv$custom-call.209
+// Optim: custom-call.214:NdpAdam$Batchnorm$custom-call.209
+// Optim: custom-call.267:NdpAdam$ConvBias$custom-call.209
+// Optim: custom-call.213:NdpAdam$Batchnorm$custom-call.209
+kernel-2688.traceg
+
+// Thunk: custom_call_209:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: turing_fp16_s1688cudnn_fp16_128x128_ldg8_dgrad_relu_f2f_exp_small_nhwc_tt_v1
+// Optim: custom-call.268:NdpAdam$WeightConv$custom-call.209
+// Optim: custom-call.214:NdpAdam$Batchnorm$custom-call.209
+// Optim: custom-call.267:NdpAdam$ConvBias$custom-call.209
+// Optim: custom-call.213:NdpAdam$Batchnorm$custom-call.209
+kernel-2689.traceg
+
+// Thunk: custom_call_209:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z22foldedNhwcToNhwcKernelI6__halfS0_fLb1EEviiiiiiiPKT_PT0_iiiiiiiiiiT1_S6_N5cudnn15reduced_divisorES8_S8_S8_S8_
+// Optim: custom-call.268:NdpAdam$WeightConv$custom-call.209
+// Optim: custom-call.214:NdpAdam$Batchnorm$custom-call.209
+// Optim: custom-call.267:NdpAdam$ConvBias$custom-call.209
+// Optim: custom-call.213:NdpAdam$Batchnorm$custom-call.209
+kernel-2690.traceg
+
+// Thunk: custom_call_209:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN5cudnn4gemm25computeWgradOffsetsKernelENS0_20ComputeOffsetsParamsE
+// Optim: custom-call.268:NdpAdam$WeightConv$custom-call.209
+// Optim: custom-call.214:NdpAdam$Batchnorm$custom-call.209
+// Optim: custom-call.267:NdpAdam$ConvBias$custom-call.209
+// Optim: custom-call.213:NdpAdam$Batchnorm$custom-call.209
+kernel-2691.traceg
+
+// Thunk: custom_call_209:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z24scalePackedTensor_kernelIffEv19cudnnTensor4dStructPT_T0_
+// Optim: custom-call.268:NdpAdam$WeightConv$custom-call.209
+// Optim: custom-call.214:NdpAdam$Batchnorm$custom-call.209
+// Optim: custom-call.267:NdpAdam$ConvBias$custom-call.209
+// Optim: custom-call.213:NdpAdam$Batchnorm$custom-call.209
+kernel-2692.traceg
+
+// Thunk: custom_call_209:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: turing_s1688cudnn_fp16_128x128_ldg8_wgrad_idx_exp_interior_nhwc_nt_v1
+// Optim: custom-call.268:NdpAdam$WeightConv$custom-call.209
+// Optim: custom-call.214:NdpAdam$Batchnorm$custom-call.209
+// Optim: custom-call.267:NdpAdam$ConvBias$custom-call.209
+// Optim: custom-call.213:NdpAdam$Batchnorm$custom-call.209
+kernel-2693.traceg
+
+// Thunk: custom_call_209:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z20convertTensor_kernelIf6__halffEvT1_PKT_S1_PT0_m
+// Optim: custom-call.268:NdpAdam$WeightConv$custom-call.209
+// Optim: custom-call.214:NdpAdam$Batchnorm$custom-call.209
+// Optim: custom-call.267:NdpAdam$ConvBias$custom-call.209
+// Optim: custom-call.213:NdpAdam$Batchnorm$custom-call.209
+kernel-2694.traceg
+
+// Thunk: slice
+// Kernel Name: slice
+kernel-2695.traceg
+
+// Thunk: custom_call_196:NdpConvBackward_backward$SkipConnection$Batchnorm$Bias
+// Kernel Name: dgrad_1x1_stride_2x2
+// Optim: custom-call.272:NdpAdam$WeightConv$custom-call.196
+// Optim: custom-call.227:NdpAdam$Batchnorm$custom-call.196
+// Optim: custom-call.228:NdpAdam$Batchnorm$custom-call.196
+// Optim: custom-call.271:NdpAdam$ConvBias$custom-call.196
+kernel-2696.traceg
+
+// Thunk: custom_call_196:NdpConvBackward_backward$SkipConnection$Batchnorm$Bias
+// Kernel Name: _ZN5cudnn4gemm25computeWgradOffsetsKernelENS0_20ComputeOffsetsParamsE
+// Optim: custom-call.272:NdpAdam$WeightConv$custom-call.196
+// Optim: custom-call.227:NdpAdam$Batchnorm$custom-call.196
+// Optim: custom-call.228:NdpAdam$Batchnorm$custom-call.196
+// Optim: custom-call.271:NdpAdam$ConvBias$custom-call.196
+kernel-2697.traceg
+
+// Thunk: custom_call_196:NdpConvBackward_backward$SkipConnection$Batchnorm$Bias
+// Kernel Name: _Z24scalePackedTensor_kernelIffEv19cudnnTensor4dStructPT_T0_
+// Optim: custom-call.272:NdpAdam$WeightConv$custom-call.196
+// Optim: custom-call.227:NdpAdam$Batchnorm$custom-call.196
+// Optim: custom-call.228:NdpAdam$Batchnorm$custom-call.196
+// Optim: custom-call.271:NdpAdam$ConvBias$custom-call.196
+kernel-2698.traceg
+
+// Thunk: custom_call_196:NdpConvBackward_backward$SkipConnection$Batchnorm$Bias
+// Kernel Name: turing_s1688cudnn_fp16_128x128_ldg8_wgrad_idx_exp_interior_nhwc_nt_v1
+// Optim: custom-call.272:NdpAdam$WeightConv$custom-call.196
+// Optim: custom-call.227:NdpAdam$Batchnorm$custom-call.196
+// Optim: custom-call.228:NdpAdam$Batchnorm$custom-call.196
+// Optim: custom-call.271:NdpAdam$ConvBias$custom-call.196
+kernel-2699.traceg
+
+// Thunk: custom_call_196:NdpConvBackward_backward$SkipConnection$Batchnorm$Bias
+// Kernel Name: _Z20convertTensor_kernelIf6__halffEvT1_PKT_S1_PT0_m
+// Optim: custom-call.272:NdpAdam$WeightConv$custom-call.196
+// Optim: custom-call.227:NdpAdam$Batchnorm$custom-call.196
+// Optim: custom-call.228:NdpAdam$Batchnorm$custom-call.196
+// Optim: custom-call.271:NdpAdam$ConvBias$custom-call.196
+kernel-2700.traceg
+
+// Thunk: custom_call_197:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN10cask_cudnn20computeOffsetsKernelENS_20ComputeOffsetsParamsE
+// Optim: custom-call.266:NdpAdam$WeightConv$custom-call.197
+// Optim: custom-call.219:NdpAdam$Batchnorm$custom-call.197
+// Optim: custom-call.220:NdpAdam$Batchnorm$custom-call.197
+// Optim: custom-call.265:NdpAdam$ConvBias$custom-call.197
+kernel-2701.traceg
+
+// Thunk: custom_call_197:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN10cask_cudnn21computeBOffsetsKernelENS_21ComputeBOffsetsParamsE
+// Optim: custom-call.266:NdpAdam$WeightConv$custom-call.197
+// Optim: custom-call.219:NdpAdam$Batchnorm$custom-call.197
+// Optim: custom-call.220:NdpAdam$Batchnorm$custom-call.197
+// Optim: custom-call.265:NdpAdam$ConvBias$custom-call.197
+kernel-2702.traceg
+
+// Thunk: custom_call_197:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: turing_fp16_s1688cudnn_fp16_128x128_ldg8_dgrad_relu_f2f_exp_small_nhwc_tt_v1
+// Optim: custom-call.266:NdpAdam$WeightConv$custom-call.197
+// Optim: custom-call.219:NdpAdam$Batchnorm$custom-call.197
+// Optim: custom-call.220:NdpAdam$Batchnorm$custom-call.197
+// Optim: custom-call.265:NdpAdam$ConvBias$custom-call.197
+kernel-2703.traceg
+
+// Thunk: custom_call_197:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN5cudnn4gemm25computeWgradOffsetsKernelENS0_20ComputeOffsetsParamsE
+// Optim: custom-call.266:NdpAdam$WeightConv$custom-call.197
+// Optim: custom-call.219:NdpAdam$Batchnorm$custom-call.197
+// Optim: custom-call.220:NdpAdam$Batchnorm$custom-call.197
+// Optim: custom-call.265:NdpAdam$ConvBias$custom-call.197
+kernel-2704.traceg
+
+// Thunk: custom_call_197:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z24scalePackedTensor_kernelIffEv19cudnnTensor4dStructPT_T0_
+// Optim: custom-call.266:NdpAdam$WeightConv$custom-call.197
+// Optim: custom-call.219:NdpAdam$Batchnorm$custom-call.197
+// Optim: custom-call.220:NdpAdam$Batchnorm$custom-call.197
+// Optim: custom-call.265:NdpAdam$ConvBias$custom-call.197
+kernel-2705.traceg
+
+// Thunk: custom_call_197:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: turing_s1688cudnn_fp16_128x128_ldg8_wgrad_idx_exp_interior_nhwc_nt_v1
+// Optim: custom-call.266:NdpAdam$WeightConv$custom-call.197
+// Optim: custom-call.219:NdpAdam$Batchnorm$custom-call.197
+// Optim: custom-call.220:NdpAdam$Batchnorm$custom-call.197
+// Optim: custom-call.265:NdpAdam$ConvBias$custom-call.197
+kernel-2706.traceg
+
+// Thunk: custom_call_197:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z20convertTensor_kernelIf6__halffEvT1_PKT_S1_PT0_m
+// Optim: custom-call.266:NdpAdam$WeightConv$custom-call.197
+// Optim: custom-call.219:NdpAdam$Batchnorm$custom-call.197
+// Optim: custom-call.220:NdpAdam$Batchnorm$custom-call.197
+// Optim: custom-call.265:NdpAdam$ConvBias$custom-call.197
+kernel-2707.traceg
+
+// Thunk: custom_call_198:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN10cask_cudnn20computeOffsetsKernelENS_20ComputeOffsetsParamsE
+// Optim: custom-call.264:NdpAdam$WeightConv$custom-call.198
+// Optim: custom-call.218:NdpAdam$Batchnorm$custom-call.198
+// Optim: custom-call.263:NdpAdam$ConvBias$custom-call.198
+// Optim: custom-call.217:NdpAdam$Batchnorm$custom-call.198
+kernel-2708.traceg
+
+// Thunk: custom_call_198:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN10cask_cudnn21computeBOffsetsKernelENS_21ComputeBOffsetsParamsE
+// Optim: custom-call.264:NdpAdam$WeightConv$custom-call.198
+// Optim: custom-call.218:NdpAdam$Batchnorm$custom-call.198
+// Optim: custom-call.263:NdpAdam$ConvBias$custom-call.198
+// Optim: custom-call.217:NdpAdam$Batchnorm$custom-call.198
+kernel-2709.traceg
+
+// Thunk: custom_call_198:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: turing_fp16_s1688cudnn_fp16_128x128_ldg8_dgrad_relu_f2f_exp_small_nhwc_tt_v1
+// Optim: custom-call.264:NdpAdam$WeightConv$custom-call.198
+// Optim: custom-call.218:NdpAdam$Batchnorm$custom-call.198
+// Optim: custom-call.263:NdpAdam$ConvBias$custom-call.198
+// Optim: custom-call.217:NdpAdam$Batchnorm$custom-call.198
+kernel-2710.traceg
+
+// Thunk: custom_call_198:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN5cudnn4gemm25computeWgradOffsetsKernelENS0_20ComputeOffsetsParamsE
+// Optim: custom-call.264:NdpAdam$WeightConv$custom-call.198
+// Optim: custom-call.218:NdpAdam$Batchnorm$custom-call.198
+// Optim: custom-call.263:NdpAdam$ConvBias$custom-call.198
+// Optim: custom-call.217:NdpAdam$Batchnorm$custom-call.198
+kernel-2711.traceg
+
+// Thunk: custom_call_198:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z24scalePackedTensor_kernelIffEv19cudnnTensor4dStructPT_T0_
+// Optim: custom-call.264:NdpAdam$WeightConv$custom-call.198
+// Optim: custom-call.218:NdpAdam$Batchnorm$custom-call.198
+// Optim: custom-call.263:NdpAdam$ConvBias$custom-call.198
+// Optim: custom-call.217:NdpAdam$Batchnorm$custom-call.198
+kernel-2712.traceg
+
+// Thunk: custom_call_198:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: turing_s1688cudnn_fp16_128x128_ldg8_wgrad_idx_exp_interior_nhwc_nt_v1
+// Optim: custom-call.264:NdpAdam$WeightConv$custom-call.198
+// Optim: custom-call.218:NdpAdam$Batchnorm$custom-call.198
+// Optim: custom-call.263:NdpAdam$ConvBias$custom-call.198
+// Optim: custom-call.217:NdpAdam$Batchnorm$custom-call.198
+kernel-2713.traceg
+
+// Thunk: custom_call_198:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z20convertTensor_kernelIf6__halffEvT1_PKT_S1_PT0_m
+// Optim: custom-call.264:NdpAdam$WeightConv$custom-call.198
+// Optim: custom-call.218:NdpAdam$Batchnorm$custom-call.198
+// Optim: custom-call.263:NdpAdam$ConvBias$custom-call.198
+// Optim: custom-call.217:NdpAdam$Batchnorm$custom-call.198
+kernel-2714.traceg
+
+// Thunk: custom_call_199:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN10cask_cudnn20computeOffsetsKernelENS_20ComputeOffsetsParamsE
+// Optim: custom-call.260:NdpAdam$WeightConv$custom-call.199
+// Optim: custom-call.223:NdpAdam$Batchnorm$custom-call.199
+// Optim: custom-call.224:NdpAdam$Batchnorm$custom-call.199
+// Optim: custom-call.259:NdpAdam$ConvBias$custom-call.199
+kernel-2715.traceg
+
+// Thunk: custom_call_199:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN10cask_cudnn21computeBOffsetsKernelENS_21ComputeBOffsetsParamsE
+// Optim: custom-call.260:NdpAdam$WeightConv$custom-call.199
+// Optim: custom-call.223:NdpAdam$Batchnorm$custom-call.199
+// Optim: custom-call.224:NdpAdam$Batchnorm$custom-call.199
+// Optim: custom-call.259:NdpAdam$ConvBias$custom-call.199
+kernel-2716.traceg
+
+// Thunk: custom_call_199:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: turing_fp16_s1688cudnn_fp16_128x128_ldg8_dgrad_relu_f2f_exp_small_nhwc_tt_v1
+// Optim: custom-call.260:NdpAdam$WeightConv$custom-call.199
+// Optim: custom-call.223:NdpAdam$Batchnorm$custom-call.199
+// Optim: custom-call.224:NdpAdam$Batchnorm$custom-call.199
+// Optim: custom-call.259:NdpAdam$ConvBias$custom-call.199
+kernel-2717.traceg
+
+// Thunk: custom_call_199:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN5cudnn4gemm25computeWgradOffsetsKernelENS0_20ComputeOffsetsParamsE
+// Optim: custom-call.260:NdpAdam$WeightConv$custom-call.199
+// Optim: custom-call.223:NdpAdam$Batchnorm$custom-call.199
+// Optim: custom-call.224:NdpAdam$Batchnorm$custom-call.199
+// Optim: custom-call.259:NdpAdam$ConvBias$custom-call.199
+kernel-2718.traceg
+
+// Thunk: custom_call_199:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z24scalePackedTensor_kernelIffEv19cudnnTensor4dStructPT_T0_
+// Optim: custom-call.260:NdpAdam$WeightConv$custom-call.199
+// Optim: custom-call.223:NdpAdam$Batchnorm$custom-call.199
+// Optim: custom-call.224:NdpAdam$Batchnorm$custom-call.199
+// Optim: custom-call.259:NdpAdam$ConvBias$custom-call.199
+kernel-2719.traceg
+
+// Thunk: custom_call_199:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: turing_s1688cudnn_fp16_128x128_ldg8_wgrad_idx_exp_interior_nhwc_nt_v1
+// Optim: custom-call.260:NdpAdam$WeightConv$custom-call.199
+// Optim: custom-call.223:NdpAdam$Batchnorm$custom-call.199
+// Optim: custom-call.224:NdpAdam$Batchnorm$custom-call.199
+// Optim: custom-call.259:NdpAdam$ConvBias$custom-call.199
+kernel-2720.traceg
+
+// Thunk: custom_call_199:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z20convertTensor_kernelIf6__halffEvT1_PKT_S1_PT0_m
+// Optim: custom-call.260:NdpAdam$WeightConv$custom-call.199
+// Optim: custom-call.223:NdpAdam$Batchnorm$custom-call.199
+// Optim: custom-call.224:NdpAdam$Batchnorm$custom-call.199
+// Optim: custom-call.259:NdpAdam$ConvBias$custom-call.199
+kernel-2721.traceg
+
+// Thunk: custom_call_210:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z22nhwcToFoldedNhwcKernelI6__halfS0_fLb1EEviiiiPKT_PT0_iiiiiiiiiiT1_S6_N5cudnn15reduced_divisorES8_S8_S8_S8_
+// Optim: custom-call.258:NdpAdam$WeightConv$custom-call.210
+// Optim: custom-call.222:NdpAdam$Batchnorm$custom-call.210
+// Optim: custom-call.257:NdpAdam$ConvBias$custom-call.210
+// Optim: custom-call.221:NdpAdam$Batchnorm$custom-call.210
+kernel-2722.traceg
+
+// Thunk: custom_call_210:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN10cask_cudnn20computeOffsetsKernelENS_20ComputeOffsetsParamsE
+// Optim: custom-call.258:NdpAdam$WeightConv$custom-call.210
+// Optim: custom-call.222:NdpAdam$Batchnorm$custom-call.210
+// Optim: custom-call.257:NdpAdam$ConvBias$custom-call.210
+// Optim: custom-call.221:NdpAdam$Batchnorm$custom-call.210
+kernel-2723.traceg
+
+// Thunk: custom_call_210:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN10cask_cudnn21computeBOffsetsKernelENS_21ComputeBOffsetsParamsE
+// Optim: custom-call.258:NdpAdam$WeightConv$custom-call.210
+// Optim: custom-call.222:NdpAdam$Batchnorm$custom-call.210
+// Optim: custom-call.257:NdpAdam$ConvBias$custom-call.210
+// Optim: custom-call.221:NdpAdam$Batchnorm$custom-call.210
+kernel-2724.traceg
+
+// Thunk: custom_call_210:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: turing_fp16_s1688cudnn_fp16_128x128_ldg8_dgrad_relu_f2f_exp_small_nhwc_tt_v1
+// Optim: custom-call.258:NdpAdam$WeightConv$custom-call.210
+// Optim: custom-call.222:NdpAdam$Batchnorm$custom-call.210
+// Optim: custom-call.257:NdpAdam$ConvBias$custom-call.210
+// Optim: custom-call.221:NdpAdam$Batchnorm$custom-call.210
+kernel-2725.traceg
+
+// Thunk: custom_call_210:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z22foldedNhwcToNhwcKernelI6__halfS0_fLb1EEviiiiiiiPKT_PT0_iiiiiiiiiiT1_S6_N5cudnn15reduced_divisorES8_S8_S8_S8_
+// Optim: custom-call.258:NdpAdam$WeightConv$custom-call.210
+// Optim: custom-call.222:NdpAdam$Batchnorm$custom-call.210
+// Optim: custom-call.257:NdpAdam$ConvBias$custom-call.210
+// Optim: custom-call.221:NdpAdam$Batchnorm$custom-call.210
+kernel-2726.traceg
+
+// Thunk: custom_call_210:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN5cudnn4gemm25computeWgradOffsetsKernelENS0_20ComputeOffsetsParamsE
+// Optim: custom-call.258:NdpAdam$WeightConv$custom-call.210
+// Optim: custom-call.222:NdpAdam$Batchnorm$custom-call.210
+// Optim: custom-call.257:NdpAdam$ConvBias$custom-call.210
+// Optim: custom-call.221:NdpAdam$Batchnorm$custom-call.210
+kernel-2727.traceg
+
+// Thunk: custom_call_210:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z24scalePackedTensor_kernelIffEv19cudnnTensor4dStructPT_T0_
+// Optim: custom-call.258:NdpAdam$WeightConv$custom-call.210
+// Optim: custom-call.222:NdpAdam$Batchnorm$custom-call.210
+// Optim: custom-call.257:NdpAdam$ConvBias$custom-call.210
+// Optim: custom-call.221:NdpAdam$Batchnorm$custom-call.210
+kernel-2728.traceg
+
+// Thunk: custom_call_210:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: turing_s1688cudnn_fp16_128x128_ldg8_wgrad_idx_exp_interior_nhwc_nt_v1
+// Optim: custom-call.258:NdpAdam$WeightConv$custom-call.210
+// Optim: custom-call.222:NdpAdam$Batchnorm$custom-call.210
+// Optim: custom-call.257:NdpAdam$ConvBias$custom-call.210
+// Optim: custom-call.221:NdpAdam$Batchnorm$custom-call.210
+kernel-2729.traceg
+
+// Thunk: custom_call_210:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z20convertTensor_kernelIf6__halffEvT1_PKT_S1_PT0_m
+// Optim: custom-call.258:NdpAdam$WeightConv$custom-call.210
+// Optim: custom-call.222:NdpAdam$Batchnorm$custom-call.210
+// Optim: custom-call.257:NdpAdam$ConvBias$custom-call.210
+// Optim: custom-call.221:NdpAdam$Batchnorm$custom-call.210
+kernel-2730.traceg
+
+// Thunk: slice_1
+// Kernel Name: slice_1
+kernel-2731.traceg
+
+// Thunk: custom_call_200:NdpConvBackward_backward$SkipConnection$Batchnorm$Bias
+// Kernel Name: dgrad_1x1_stride_2x2
+// Optim: custom-call.262:NdpAdam$WeightConv$custom-call.200
+// Optim: custom-call.226:NdpAdam$Batchnorm$custom-call.200
+// Optim: custom-call.261:NdpAdam$ConvBias$custom-call.200
+// Optim: custom-call.225:NdpAdam$Batchnorm$custom-call.200
+kernel-2732.traceg
+
+// Thunk: custom_call_200:NdpConvBackward_backward$SkipConnection$Batchnorm$Bias
+// Kernel Name: _ZN5cudnn4gemm25computeWgradOffsetsKernelENS0_20ComputeOffsetsParamsE
+// Optim: custom-call.262:NdpAdam$WeightConv$custom-call.200
+// Optim: custom-call.226:NdpAdam$Batchnorm$custom-call.200
+// Optim: custom-call.261:NdpAdam$ConvBias$custom-call.200
+// Optim: custom-call.225:NdpAdam$Batchnorm$custom-call.200
+kernel-2733.traceg
+
+// Thunk: custom_call_200:NdpConvBackward_backward$SkipConnection$Batchnorm$Bias
+// Kernel Name: _Z24scalePackedTensor_kernelIffEv19cudnnTensor4dStructPT_T0_
+// Optim: custom-call.262:NdpAdam$WeightConv$custom-call.200
+// Optim: custom-call.226:NdpAdam$Batchnorm$custom-call.200
+// Optim: custom-call.261:NdpAdam$ConvBias$custom-call.200
+// Optim: custom-call.225:NdpAdam$Batchnorm$custom-call.200
+kernel-2734.traceg
+
+// Thunk: custom_call_200:NdpConvBackward_backward$SkipConnection$Batchnorm$Bias
+// Kernel Name: turing_s1688cudnn_fp16_128x128_ldg8_wgrad_idx_exp_interior_nhwc_nt_v1
+// Optim: custom-call.262:NdpAdam$WeightConv$custom-call.200
+// Optim: custom-call.226:NdpAdam$Batchnorm$custom-call.200
+// Optim: custom-call.261:NdpAdam$ConvBias$custom-call.200
+// Optim: custom-call.225:NdpAdam$Batchnorm$custom-call.200
+kernel-2735.traceg
+
+// Thunk: custom_call_200:NdpConvBackward_backward$SkipConnection$Batchnorm$Bias
+// Kernel Name: _Z20convertTensor_kernelIf6__halffEvT1_PKT_S1_PT0_m
+// Optim: custom-call.262:NdpAdam$WeightConv$custom-call.200
+// Optim: custom-call.226:NdpAdam$Batchnorm$custom-call.200
+// Optim: custom-call.261:NdpAdam$ConvBias$custom-call.200
+// Optim: custom-call.225:NdpAdam$Batchnorm$custom-call.200
+kernel-2736.traceg
+
+// Thunk: custom_call_201:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN10cask_cudnn20computeOffsetsKernelENS_20ComputeOffsetsParamsE
+// Optim: custom-call.292:NdpAdam$WeightConv$custom-call.201
+// Optim: custom-call.251:NdpAdam$Batchnorm$custom-call.201
+// Optim: custom-call.252:NdpAdam$Batchnorm$custom-call.201
+// Optim: custom-call.291:NdpAdam$ConvBias$custom-call.201
+kernel-2737.traceg
+
+// Thunk: custom_call_201:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN10cask_cudnn21computeBOffsetsKernelENS_21ComputeBOffsetsParamsE
+// Optim: custom-call.292:NdpAdam$WeightConv$custom-call.201
+// Optim: custom-call.251:NdpAdam$Batchnorm$custom-call.201
+// Optim: custom-call.252:NdpAdam$Batchnorm$custom-call.201
+// Optim: custom-call.291:NdpAdam$ConvBias$custom-call.201
+kernel-2738.traceg
+
+// Thunk: custom_call_201:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: turing_fp16_s1688cudnn_fp16_256x64_ldg8_dgrad_relu_f2f_exp_small_nhwc_tt_v1
+// Optim: custom-call.292:NdpAdam$WeightConv$custom-call.201
+// Optim: custom-call.251:NdpAdam$Batchnorm$custom-call.201
+// Optim: custom-call.252:NdpAdam$Batchnorm$custom-call.201
+// Optim: custom-call.291:NdpAdam$ConvBias$custom-call.201
+kernel-2739.traceg
+
+// Thunk: custom_call_201:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN5cudnn4gemm25computeWgradOffsetsKernelENS0_20ComputeOffsetsParamsE
+// Optim: custom-call.292:NdpAdam$WeightConv$custom-call.201
+// Optim: custom-call.251:NdpAdam$Batchnorm$custom-call.201
+// Optim: custom-call.252:NdpAdam$Batchnorm$custom-call.201
+// Optim: custom-call.291:NdpAdam$ConvBias$custom-call.201
+kernel-2740.traceg
+
+// Thunk: custom_call_201:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z24scalePackedTensor_kernelIffEv19cudnnTensor4dStructPT_T0_
+// Optim: custom-call.292:NdpAdam$WeightConv$custom-call.201
+// Optim: custom-call.251:NdpAdam$Batchnorm$custom-call.201
+// Optim: custom-call.252:NdpAdam$Batchnorm$custom-call.201
+// Optim: custom-call.291:NdpAdam$ConvBias$custom-call.201
+kernel-2741.traceg
+
+// Thunk: custom_call_201:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: turing_s1688cudnn_fp16_128x128_ldg8_wgrad_idx_exp_interior_nhwc_nt_v1
+// Optim: custom-call.292:NdpAdam$WeightConv$custom-call.201
+// Optim: custom-call.251:NdpAdam$Batchnorm$custom-call.201
+// Optim: custom-call.252:NdpAdam$Batchnorm$custom-call.201
+// Optim: custom-call.291:NdpAdam$ConvBias$custom-call.201
+kernel-2742.traceg
+
+// Thunk: custom_call_201:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z20convertTensor_kernelIf6__halffEvT1_PKT_S1_PT0_m
+// Optim: custom-call.292:NdpAdam$WeightConv$custom-call.201
+// Optim: custom-call.251:NdpAdam$Batchnorm$custom-call.201
+// Optim: custom-call.252:NdpAdam$Batchnorm$custom-call.201
+// Optim: custom-call.291:NdpAdam$ConvBias$custom-call.201
+kernel-2743.traceg
+
+// Thunk: custom_call_202:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN10cask_cudnn20computeOffsetsKernelENS_20ComputeOffsetsParamsE
+// Optim: custom-call.290:NdpAdam$WeightConv$custom-call.202
+// Optim: custom-call.249:NdpAdam$Batchnorm$custom-call.202
+// Optim: custom-call.250:NdpAdam$Batchnorm$custom-call.202
+// Optim: custom-call.289:NdpAdam$ConvBias$custom-call.202
+kernel-2744.traceg
+
+// Thunk: custom_call_202:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN10cask_cudnn21computeBOffsetsKernelENS_21ComputeBOffsetsParamsE
+// Optim: custom-call.290:NdpAdam$WeightConv$custom-call.202
+// Optim: custom-call.249:NdpAdam$Batchnorm$custom-call.202
+// Optim: custom-call.250:NdpAdam$Batchnorm$custom-call.202
+// Optim: custom-call.289:NdpAdam$ConvBias$custom-call.202
+kernel-2745.traceg
+
+// Thunk: custom_call_202:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: turing_fp16_s1688cudnn_fp16_256x64_ldg8_dgrad_relu_f2f_exp_small_nhwc_tt_v1
+// Optim: custom-call.290:NdpAdam$WeightConv$custom-call.202
+// Optim: custom-call.249:NdpAdam$Batchnorm$custom-call.202
+// Optim: custom-call.250:NdpAdam$Batchnorm$custom-call.202
+// Optim: custom-call.289:NdpAdam$ConvBias$custom-call.202
+kernel-2746.traceg
+
+// Thunk: custom_call_202:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN5cudnn4gemm25computeWgradOffsetsKernelENS0_20ComputeOffsetsParamsE
+// Optim: custom-call.290:NdpAdam$WeightConv$custom-call.202
+// Optim: custom-call.249:NdpAdam$Batchnorm$custom-call.202
+// Optim: custom-call.250:NdpAdam$Batchnorm$custom-call.202
+// Optim: custom-call.289:NdpAdam$ConvBias$custom-call.202
+kernel-2747.traceg
+
+// Thunk: custom_call_202:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z24scalePackedTensor_kernelIffEv19cudnnTensor4dStructPT_T0_
+// Optim: custom-call.290:NdpAdam$WeightConv$custom-call.202
+// Optim: custom-call.249:NdpAdam$Batchnorm$custom-call.202
+// Optim: custom-call.250:NdpAdam$Batchnorm$custom-call.202
+// Optim: custom-call.289:NdpAdam$ConvBias$custom-call.202
+kernel-2748.traceg
+
+// Thunk: custom_call_202:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: turing_s1688cudnn_fp16_128x128_ldg8_wgrad_idx_exp_interior_nhwc_nt_v1
+// Optim: custom-call.290:NdpAdam$WeightConv$custom-call.202
+// Optim: custom-call.249:NdpAdam$Batchnorm$custom-call.202
+// Optim: custom-call.250:NdpAdam$Batchnorm$custom-call.202
+// Optim: custom-call.289:NdpAdam$ConvBias$custom-call.202
+kernel-2749.traceg
+
+// Thunk: custom_call_202:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z20convertTensor_kernelIf6__halffEvT1_PKT_S1_PT0_m
+// Optim: custom-call.290:NdpAdam$WeightConv$custom-call.202
+// Optim: custom-call.249:NdpAdam$Batchnorm$custom-call.202
+// Optim: custom-call.250:NdpAdam$Batchnorm$custom-call.202
+// Optim: custom-call.289:NdpAdam$ConvBias$custom-call.202
+kernel-2750.traceg
+
+// Thunk: custom_call_203:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN10cask_cudnn20computeOffsetsKernelENS_20ComputeOffsetsParamsE
+// Optim: custom-call.286:NdpAdam$WeightConv$custom-call.203
+// Optim: custom-call.235:NdpAdam$Batchnorm$custom-call.203
+// Optim: custom-call.236:NdpAdam$Batchnorm$custom-call.203
+// Optim: custom-call.285:NdpAdam$ConvBias$custom-call.203
+kernel-2751.traceg
+
+// Thunk: custom_call_203:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN10cask_cudnn21computeBOffsetsKernelENS_21ComputeBOffsetsParamsE
+// Optim: custom-call.286:NdpAdam$WeightConv$custom-call.203
+// Optim: custom-call.235:NdpAdam$Batchnorm$custom-call.203
+// Optim: custom-call.236:NdpAdam$Batchnorm$custom-call.203
+// Optim: custom-call.285:NdpAdam$ConvBias$custom-call.203
+kernel-2752.traceg
+
+// Thunk: custom_call_203:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: turing_fp16_s1688cudnn_fp16_256x64_ldg8_dgrad_relu_f2f_exp_small_nhwc_tt_v1
+// Optim: custom-call.286:NdpAdam$WeightConv$custom-call.203
+// Optim: custom-call.235:NdpAdam$Batchnorm$custom-call.203
+// Optim: custom-call.236:NdpAdam$Batchnorm$custom-call.203
+// Optim: custom-call.285:NdpAdam$ConvBias$custom-call.203
+kernel-2753.traceg
+
+// Thunk: custom_call_203:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN5cudnn4gemm25computeWgradOffsetsKernelENS0_20ComputeOffsetsParamsE
+// Optim: custom-call.286:NdpAdam$WeightConv$custom-call.203
+// Optim: custom-call.235:NdpAdam$Batchnorm$custom-call.203
+// Optim: custom-call.236:NdpAdam$Batchnorm$custom-call.203
+// Optim: custom-call.285:NdpAdam$ConvBias$custom-call.203
+kernel-2754.traceg
+
+// Thunk: custom_call_203:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z24scalePackedTensor_kernelIffEv19cudnnTensor4dStructPT_T0_
+// Optim: custom-call.286:NdpAdam$WeightConv$custom-call.203
+// Optim: custom-call.235:NdpAdam$Batchnorm$custom-call.203
+// Optim: custom-call.236:NdpAdam$Batchnorm$custom-call.203
+// Optim: custom-call.285:NdpAdam$ConvBias$custom-call.203
+kernel-2755.traceg
+
+// Thunk: custom_call_203:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: turing_s1688cudnn_fp16_128x128_ldg8_wgrad_idx_exp_interior_nhwc_nt_v1
+// Optim: custom-call.286:NdpAdam$WeightConv$custom-call.203
+// Optim: custom-call.235:NdpAdam$Batchnorm$custom-call.203
+// Optim: custom-call.236:NdpAdam$Batchnorm$custom-call.203
+// Optim: custom-call.285:NdpAdam$ConvBias$custom-call.203
+kernel-2756.traceg
+
+// Thunk: custom_call_203:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z20convertTensor_kernelIf6__halffEvT1_PKT_S1_PT0_m
+// Optim: custom-call.286:NdpAdam$WeightConv$custom-call.203
+// Optim: custom-call.235:NdpAdam$Batchnorm$custom-call.203
+// Optim: custom-call.236:NdpAdam$Batchnorm$custom-call.203
+// Optim: custom-call.285:NdpAdam$ConvBias$custom-call.203
+kernel-2757.traceg
+
+// Thunk: custom_call_211:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z22nhwcToFoldedNhwcKernelI6__halfS0_fLb1EEviiiiPKT_PT0_iiiiiiiiiiT1_S6_N5cudnn15reduced_divisorES8_S8_S8_S8_
+// Optim: custom-call.284:NdpAdam$WeightConv$custom-call.211
+// Optim: custom-call.234:NdpAdam$Batchnorm$custom-call.211
+// Optim: custom-call.283:NdpAdam$ConvBias$custom-call.211
+// Optim: custom-call.233:NdpAdam$Batchnorm$custom-call.211
+kernel-2758.traceg
+
+// Thunk: custom_call_211:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN10cask_cudnn20computeOffsetsKernelENS_20ComputeOffsetsParamsE
+// Optim: custom-call.284:NdpAdam$WeightConv$custom-call.211
+// Optim: custom-call.234:NdpAdam$Batchnorm$custom-call.211
+// Optim: custom-call.283:NdpAdam$ConvBias$custom-call.211
+// Optim: custom-call.233:NdpAdam$Batchnorm$custom-call.211
+kernel-2759.traceg
+
+// Thunk: custom_call_211:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN10cask_cudnn21computeBOffsetsKernelENS_21ComputeBOffsetsParamsE
+// Optim: custom-call.284:NdpAdam$WeightConv$custom-call.211
+// Optim: custom-call.234:NdpAdam$Batchnorm$custom-call.211
+// Optim: custom-call.283:NdpAdam$ConvBias$custom-call.211
+// Optim: custom-call.233:NdpAdam$Batchnorm$custom-call.211
+kernel-2760.traceg
+
+// Thunk: custom_call_211:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: turing_fp16_s1688cudnn_fp16_256x128_ldg8_dgrad_relu_f2f_exp_small_nhwc_tt_v1
+// Optim: custom-call.284:NdpAdam$WeightConv$custom-call.211
+// Optim: custom-call.234:NdpAdam$Batchnorm$custom-call.211
+// Optim: custom-call.283:NdpAdam$ConvBias$custom-call.211
+// Optim: custom-call.233:NdpAdam$Batchnorm$custom-call.211
+kernel-2761.traceg
+
+// Thunk: custom_call_211:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z22foldedNhwcToNhwcKernelI6__halfS0_fLb1EEviiiiiiiPKT_PT0_iiiiiiiiiiT1_S6_N5cudnn15reduced_divisorES8_S8_S8_S8_
+// Optim: custom-call.284:NdpAdam$WeightConv$custom-call.211
+// Optim: custom-call.234:NdpAdam$Batchnorm$custom-call.211
+// Optim: custom-call.283:NdpAdam$ConvBias$custom-call.211
+// Optim: custom-call.233:NdpAdam$Batchnorm$custom-call.211
+kernel-2762.traceg
+
+// Thunk: custom_call_211:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN5cudnn4gemm25computeWgradOffsetsKernelENS0_20ComputeOffsetsParamsE
+// Optim: custom-call.284:NdpAdam$WeightConv$custom-call.211
+// Optim: custom-call.234:NdpAdam$Batchnorm$custom-call.211
+// Optim: custom-call.283:NdpAdam$ConvBias$custom-call.211
+// Optim: custom-call.233:NdpAdam$Batchnorm$custom-call.211
+kernel-2763.traceg
+
+// Thunk: custom_call_211:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z24scalePackedTensor_kernelIffEv19cudnnTensor4dStructPT_T0_
+// Optim: custom-call.284:NdpAdam$WeightConv$custom-call.211
+// Optim: custom-call.234:NdpAdam$Batchnorm$custom-call.211
+// Optim: custom-call.283:NdpAdam$ConvBias$custom-call.211
+// Optim: custom-call.233:NdpAdam$Batchnorm$custom-call.211
+kernel-2764.traceg
+
+// Thunk: custom_call_211:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: turing_s1688cudnn_fp16_128x128_ldg8_wgrad_idx_exp_interior_nhwc_nt_v1
+// Optim: custom-call.284:NdpAdam$WeightConv$custom-call.211
+// Optim: custom-call.234:NdpAdam$Batchnorm$custom-call.211
+// Optim: custom-call.283:NdpAdam$ConvBias$custom-call.211
+// Optim: custom-call.233:NdpAdam$Batchnorm$custom-call.211
+kernel-2765.traceg
+
+// Thunk: custom_call_211:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z20convertTensor_kernelIf6__halffEvT1_PKT_S1_PT0_m
+// Optim: custom-call.284:NdpAdam$WeightConv$custom-call.211
+// Optim: custom-call.234:NdpAdam$Batchnorm$custom-call.211
+// Optim: custom-call.283:NdpAdam$ConvBias$custom-call.211
+// Optim: custom-call.233:NdpAdam$Batchnorm$custom-call.211
+kernel-2766.traceg
+
+// Thunk: slice_2
+// Kernel Name: slice_2
+kernel-2767.traceg
+
+// Thunk: custom_call_204:NdpConvBackward_backward$SkipConnection$Batchnorm$Bias
+// Kernel Name: dgrad_1x1_stride_2x2
+// Optim: custom-call.288:NdpAdam$WeightConv$custom-call.204
+// Optim: custom-call.247:NdpAdam$Batchnorm$custom-call.204
+// Optim: custom-call.248:NdpAdam$Batchnorm$custom-call.204
+// Optim: custom-call.287:NdpAdam$ConvBias$custom-call.204
+kernel-2768.traceg
+
+// Thunk: custom_call_204:NdpConvBackward_backward$SkipConnection$Batchnorm$Bias
+// Kernel Name: _ZN5cudnn4gemm25computeWgradOffsetsKernelENS0_20ComputeOffsetsParamsE
+// Optim: custom-call.288:NdpAdam$WeightConv$custom-call.204
+// Optim: custom-call.247:NdpAdam$Batchnorm$custom-call.204
+// Optim: custom-call.248:NdpAdam$Batchnorm$custom-call.204
+// Optim: custom-call.287:NdpAdam$ConvBias$custom-call.204
+kernel-2769.traceg
+
+// Thunk: custom_call_204:NdpConvBackward_backward$SkipConnection$Batchnorm$Bias
+// Kernel Name: _Z24scalePackedTensor_kernelIffEv19cudnnTensor4dStructPT_T0_
+// Optim: custom-call.288:NdpAdam$WeightConv$custom-call.204
+// Optim: custom-call.247:NdpAdam$Batchnorm$custom-call.204
+// Optim: custom-call.248:NdpAdam$Batchnorm$custom-call.204
+// Optim: custom-call.287:NdpAdam$ConvBias$custom-call.204
+kernel-2770.traceg
+
+// Thunk: custom_call_204:NdpConvBackward_backward$SkipConnection$Batchnorm$Bias
+// Kernel Name: turing_s1688cudnn_fp16_128x128_ldg8_wgrad_idx_exp_interior_nhwc_nt_v1
+// Optim: custom-call.288:NdpAdam$WeightConv$custom-call.204
+// Optim: custom-call.247:NdpAdam$Batchnorm$custom-call.204
+// Optim: custom-call.248:NdpAdam$Batchnorm$custom-call.204
+// Optim: custom-call.287:NdpAdam$ConvBias$custom-call.204
+kernel-2771.traceg
+
+// Thunk: custom_call_204:NdpConvBackward_backward$SkipConnection$Batchnorm$Bias
+// Kernel Name: _Z20convertTensor_kernelIf6__halffEvT1_PKT_S1_PT0_m
+// Optim: custom-call.288:NdpAdam$WeightConv$custom-call.204
+// Optim: custom-call.247:NdpAdam$Batchnorm$custom-call.204
+// Optim: custom-call.248:NdpAdam$Batchnorm$custom-call.204
+// Optim: custom-call.287:NdpAdam$ConvBias$custom-call.204
+kernel-2772.traceg
+
+// Thunk: custom_call_205:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN10cask_cudnn20computeOffsetsKernelENS_20ComputeOffsetsParamsE
+// Optim: custom-call.282:NdpAdam$WeightConv$custom-call.205
+// Optim: custom-call.239:NdpAdam$Batchnorm$custom-call.205
+// Optim: custom-call.240:NdpAdam$Batchnorm$custom-call.205
+// Optim: custom-call.281:NdpAdam$ConvBias$custom-call.205
+kernel-2773.traceg
+
+// Thunk: custom_call_205:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN10cask_cudnn21computeBOffsetsKernelENS_21ComputeBOffsetsParamsE
+// Optim: custom-call.282:NdpAdam$WeightConv$custom-call.205
+// Optim: custom-call.239:NdpAdam$Batchnorm$custom-call.205
+// Optim: custom-call.240:NdpAdam$Batchnorm$custom-call.205
+// Optim: custom-call.281:NdpAdam$ConvBias$custom-call.205
+kernel-2774.traceg
+
+// Thunk: custom_call_205:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: turing_fp16_s1688cudnn_fp16_256x64_ldg8_dgrad_relu_f2f_exp_small_nhwc_tt_v1
+// Optim: custom-call.282:NdpAdam$WeightConv$custom-call.205
+// Optim: custom-call.239:NdpAdam$Batchnorm$custom-call.205
+// Optim: custom-call.240:NdpAdam$Batchnorm$custom-call.205
+// Optim: custom-call.281:NdpAdam$ConvBias$custom-call.205
+kernel-2775.traceg
+
+// Thunk: custom_call_205:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN5cudnn4gemm25computeWgradOffsetsKernelENS0_20ComputeOffsetsParamsE
+// Optim: custom-call.282:NdpAdam$WeightConv$custom-call.205
+// Optim: custom-call.239:NdpAdam$Batchnorm$custom-call.205
+// Optim: custom-call.240:NdpAdam$Batchnorm$custom-call.205
+// Optim: custom-call.281:NdpAdam$ConvBias$custom-call.205
+kernel-2776.traceg
+
+// Thunk: custom_call_205:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z24scalePackedTensor_kernelIffEv19cudnnTensor4dStructPT_T0_
+// Optim: custom-call.282:NdpAdam$WeightConv$custom-call.205
+// Optim: custom-call.239:NdpAdam$Batchnorm$custom-call.205
+// Optim: custom-call.240:NdpAdam$Batchnorm$custom-call.205
+// Optim: custom-call.281:NdpAdam$ConvBias$custom-call.205
+kernel-2777.traceg
+
+// Thunk: custom_call_205:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: turing_s1688cudnn_fp16_128x128_ldg8_wgrad_idx_exp_interior_nhwc_nt_v1
+// Optim: custom-call.282:NdpAdam$WeightConv$custom-call.205
+// Optim: custom-call.239:NdpAdam$Batchnorm$custom-call.205
+// Optim: custom-call.240:NdpAdam$Batchnorm$custom-call.205
+// Optim: custom-call.281:NdpAdam$ConvBias$custom-call.205
+kernel-2778.traceg
+
+// Thunk: custom_call_205:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z20convertTensor_kernelIf6__halffEvT1_PKT_S1_PT0_m
+// Optim: custom-call.282:NdpAdam$WeightConv$custom-call.205
+// Optim: custom-call.239:NdpAdam$Batchnorm$custom-call.205
+// Optim: custom-call.240:NdpAdam$Batchnorm$custom-call.205
+// Optim: custom-call.281:NdpAdam$ConvBias$custom-call.205
+kernel-2779.traceg
+
+// Thunk: custom_call_206:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN10cask_cudnn20computeOffsetsKernelENS_20ComputeOffsetsParamsE
+// Optim: custom-call.280:NdpAdam$WeightConv$custom-call.206
+// Optim: custom-call.238:NdpAdam$Batchnorm$custom-call.206
+// Optim: custom-call.279:NdpAdam$ConvBias$custom-call.206
+// Optim: custom-call.237:NdpAdam$Batchnorm$custom-call.206
+kernel-2780.traceg
+
+// Thunk: custom_call_206:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN10cask_cudnn21computeBOffsetsKernelENS_21ComputeBOffsetsParamsE
+// Optim: custom-call.280:NdpAdam$WeightConv$custom-call.206
+// Optim: custom-call.238:NdpAdam$Batchnorm$custom-call.206
+// Optim: custom-call.279:NdpAdam$ConvBias$custom-call.206
+// Optim: custom-call.237:NdpAdam$Batchnorm$custom-call.206
+kernel-2781.traceg
+
+// Thunk: custom_call_206:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: turing_fp16_s1688cudnn_fp16_256x64_ldg8_dgrad_relu_f2f_exp_small_nhwc_tt_v1
+// Optim: custom-call.280:NdpAdam$WeightConv$custom-call.206
+// Optim: custom-call.238:NdpAdam$Batchnorm$custom-call.206
+// Optim: custom-call.279:NdpAdam$ConvBias$custom-call.206
+// Optim: custom-call.237:NdpAdam$Batchnorm$custom-call.206
+kernel-2782.traceg
+
+// Thunk: custom_call_206:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN5cudnn4gemm25computeWgradOffsetsKernelENS0_20ComputeOffsetsParamsE
+// Optim: custom-call.280:NdpAdam$WeightConv$custom-call.206
+// Optim: custom-call.238:NdpAdam$Batchnorm$custom-call.206
+// Optim: custom-call.279:NdpAdam$ConvBias$custom-call.206
+// Optim: custom-call.237:NdpAdam$Batchnorm$custom-call.206
+kernel-2783.traceg
+
+// Thunk: custom_call_206:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z24scalePackedTensor_kernelIffEv19cudnnTensor4dStructPT_T0_
+// Optim: custom-call.280:NdpAdam$WeightConv$custom-call.206
+// Optim: custom-call.238:NdpAdam$Batchnorm$custom-call.206
+// Optim: custom-call.279:NdpAdam$ConvBias$custom-call.206
+// Optim: custom-call.237:NdpAdam$Batchnorm$custom-call.206
+kernel-2784.traceg
+
+// Thunk: custom_call_206:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: turing_s1688cudnn_fp16_128x128_ldg8_wgrad_idx_exp_interior_nhwc_nt_v1
+// Optim: custom-call.280:NdpAdam$WeightConv$custom-call.206
+// Optim: custom-call.238:NdpAdam$Batchnorm$custom-call.206
+// Optim: custom-call.279:NdpAdam$ConvBias$custom-call.206
+// Optim: custom-call.237:NdpAdam$Batchnorm$custom-call.206
+kernel-2785.traceg
+
+// Thunk: custom_call_206:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z20convertTensor_kernelIf6__halffEvT1_PKT_S1_PT0_m
+// Optim: custom-call.280:NdpAdam$WeightConv$custom-call.206
+// Optim: custom-call.238:NdpAdam$Batchnorm$custom-call.206
+// Optim: custom-call.279:NdpAdam$ConvBias$custom-call.206
+// Optim: custom-call.237:NdpAdam$Batchnorm$custom-call.206
+kernel-2786.traceg
+
+// Thunk: custom_call_207:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN10cask_cudnn20computeOffsetsKernelENS_20ComputeOffsetsParamsE
+// Optim: custom-call.278:NdpAdam$WeightConv$custom-call.207
+// Optim: custom-call.243:NdpAdam$Batchnorm$custom-call.207
+// Optim: custom-call.244:NdpAdam$Batchnorm$custom-call.207
+// Optim: custom-call.277:NdpAdam$ConvBias$custom-call.207
+kernel-2787.traceg
+
+// Thunk: custom_call_207:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN10cask_cudnn21computeBOffsetsKernelENS_21ComputeBOffsetsParamsE
+// Optim: custom-call.278:NdpAdam$WeightConv$custom-call.207
+// Optim: custom-call.243:NdpAdam$Batchnorm$custom-call.207
+// Optim: custom-call.244:NdpAdam$Batchnorm$custom-call.207
+// Optim: custom-call.277:NdpAdam$ConvBias$custom-call.207
+kernel-2788.traceg
+
+// Thunk: custom_call_207:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: turing_fp16_s1688cudnn_fp16_256x64_ldg8_dgrad_relu_f2f_exp_small_nhwc_tt_v1
+// Optim: custom-call.278:NdpAdam$WeightConv$custom-call.207
+// Optim: custom-call.243:NdpAdam$Batchnorm$custom-call.207
+// Optim: custom-call.244:NdpAdam$Batchnorm$custom-call.207
+// Optim: custom-call.277:NdpAdam$ConvBias$custom-call.207
+kernel-2789.traceg
+
+// Thunk: custom_call_207:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN5cudnn4gemm25computeWgradOffsetsKernelENS0_20ComputeOffsetsParamsE
+// Optim: custom-call.278:NdpAdam$WeightConv$custom-call.207
+// Optim: custom-call.243:NdpAdam$Batchnorm$custom-call.207
+// Optim: custom-call.244:NdpAdam$Batchnorm$custom-call.207
+// Optim: custom-call.277:NdpAdam$ConvBias$custom-call.207
+kernel-2790.traceg
+
+// Thunk: custom_call_207:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z24scalePackedTensor_kernelIffEv19cudnnTensor4dStructPT_T0_
+// Optim: custom-call.278:NdpAdam$WeightConv$custom-call.207
+// Optim: custom-call.243:NdpAdam$Batchnorm$custom-call.207
+// Optim: custom-call.244:NdpAdam$Batchnorm$custom-call.207
+// Optim: custom-call.277:NdpAdam$ConvBias$custom-call.207
+kernel-2791.traceg
+
+// Thunk: custom_call_207:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: turing_s1688cudnn_fp16_128x128_ldg8_wgrad_idx_exp_interior_nhwc_nt_v1
+// Optim: custom-call.278:NdpAdam$WeightConv$custom-call.207
+// Optim: custom-call.243:NdpAdam$Batchnorm$custom-call.207
+// Optim: custom-call.244:NdpAdam$Batchnorm$custom-call.207
+// Optim: custom-call.277:NdpAdam$ConvBias$custom-call.207
+kernel-2792.traceg
+
+// Thunk: custom_call_207:NdpConvBackward_backward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z20convertTensor_kernelIf6__halffEvT1_PKT_S1_PT0_m
+// Optim: custom-call.278:NdpAdam$WeightConv$custom-call.207
+// Optim: custom-call.243:NdpAdam$Batchnorm$custom-call.207
+// Optim: custom-call.244:NdpAdam$Batchnorm$custom-call.207
+// Optim: custom-call.277:NdpAdam$ConvBias$custom-call.207
+kernel-2793.traceg
+
+// Thunk: custom_call_208:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN10cask_cudnn20computeOffsetsKernelENS_20ComputeOffsetsParamsE
+// Optim: custom-call.256:NdpAdam$WeightConv$custom-call.208
+// Optim: custom-call.242:NdpAdam$Batchnorm$custom-call.208
+// Optim: custom-call.255:NdpAdam$ConvBias$custom-call.208
+// Optim: custom-call.241:NdpAdam$Batchnorm$custom-call.208
+kernel-2794.traceg
+
+// Thunk: custom_call_208:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN10cask_cudnn21computeBOffsetsKernelENS_21ComputeBOffsetsParamsE
+// Optim: custom-call.256:NdpAdam$WeightConv$custom-call.208
+// Optim: custom-call.242:NdpAdam$Batchnorm$custom-call.208
+// Optim: custom-call.255:NdpAdam$ConvBias$custom-call.208
+// Optim: custom-call.241:NdpAdam$Batchnorm$custom-call.208
+kernel-2795.traceg
+
+// Thunk: custom_call_208:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: turing_fp16_s1688cudnn_fp16_256x64_ldg8_dgrad_relu_f2f_exp_small_nhwc_tt_v1
+// Optim: custom-call.256:NdpAdam$WeightConv$custom-call.208
+// Optim: custom-call.242:NdpAdam$Batchnorm$custom-call.208
+// Optim: custom-call.255:NdpAdam$ConvBias$custom-call.208
+// Optim: custom-call.241:NdpAdam$Batchnorm$custom-call.208
+kernel-2796.traceg
+
+// Thunk: custom_call_208:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN5cudnn4gemm25computeWgradOffsetsKernelENS0_20ComputeOffsetsParamsE
+// Optim: custom-call.256:NdpAdam$WeightConv$custom-call.208
+// Optim: custom-call.242:NdpAdam$Batchnorm$custom-call.208
+// Optim: custom-call.255:NdpAdam$ConvBias$custom-call.208
+// Optim: custom-call.241:NdpAdam$Batchnorm$custom-call.208
+kernel-2797.traceg
+
+// Thunk: custom_call_208:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z24scalePackedTensor_kernelIffEv19cudnnTensor4dStructPT_T0_
+// Optim: custom-call.256:NdpAdam$WeightConv$custom-call.208
+// Optim: custom-call.242:NdpAdam$Batchnorm$custom-call.208
+// Optim: custom-call.255:NdpAdam$ConvBias$custom-call.208
+// Optim: custom-call.241:NdpAdam$Batchnorm$custom-call.208
+kernel-2798.traceg
+
+// Thunk: custom_call_208:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: turing_s1688cudnn_fp16_128x128_ldg8_wgrad_idx_exp_interior_nhwc_nt_v1
+// Optim: custom-call.256:NdpAdam$WeightConv$custom-call.208
+// Optim: custom-call.242:NdpAdam$Batchnorm$custom-call.208
+// Optim: custom-call.255:NdpAdam$ConvBias$custom-call.208
+// Optim: custom-call.241:NdpAdam$Batchnorm$custom-call.208
+kernel-2799.traceg
+
+// Thunk: custom_call_208:NdpConvBackward_backward$SkipConnection$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z20convertTensor_kernelIf6__halffEvT1_PKT_S1_PT0_m
+// Optim: custom-call.256:NdpAdam$WeightConv$custom-call.208
+// Optim: custom-call.242:NdpAdam$Batchnorm$custom-call.208
+// Optim: custom-call.255:NdpAdam$ConvBias$custom-call.208
+// Optim: custom-call.241:NdpAdam$Batchnorm$custom-call.208
+kernel-2800.traceg
+
+// Thunk: pad_408
+// Kernel Name: pad_408
+kernel-2801.traceg
+
+// Thunk: select_and_scatter_2785
+// Kernel Name: select_and_scatter_2785
+kernel-2802.traceg
+
+// Thunk: slice_2787
+// Kernel Name: slice_2787
+kernel-2803.traceg
+
+// Thunk: custom_call_212:NdpConvFirstLayerBackward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _ZN10cask_cudnn24first_layer_wgrad_kernelILi7ELi7ELi2ELi2ELi32EEEv21FirstLayerWgradParams
+// Optim: custom-call.246:NdpAdam$Batchnorm$custom-call.212
+// Optim: custom-call.253:NdpAdam$ConvBias$custom-call.212
+// Optim: custom-call.245:NdpAdam$Batchnorm$custom-call.212
+kernel-2804.traceg
+
+// Thunk: custom_call_212:NdpConvFirstLayerBackward$Activation_Relu$Batchnorm$Bias
+// Kernel Name: _Z23genericTranspose_kernelI6__halfS0_fEvT1_17cudnnTensorStructPKT_S1_S2_PT0_
+// Optim: custom-call.246:NdpAdam$Batchnorm$custom-call.212
+// Optim: custom-call.253:NdpAdam$ConvBias$custom-call.212
+// Optim: custom-call.245:NdpAdam$Batchnorm$custom-call.212
+kernel-2805.traceg
+
+// Thunk: fusion_154
+// Kernel Name: fusion_154
+kernel-2806.traceg
+
+// Thunk: custom_call_113:__cublas$gemm
+// Kernel Name: turing_fp16_s884gemm_fp16_64x64_ldg8_f2f_nt
+// Optim: custom-call.294:NdpAdam$Gemm$custom-call.113
+kernel-2807.traceg
+
+// Thunk: fusion_42
+// Kernel Name: fusion_42
+kernel-2808.traceg
+
+// Thunk: fusion_42
+// Kernel Name: fusion_42__1
+kernel-2809.traceg
+
+// Thunk: fusion_41
+// Kernel Name: fusion_41
+kernel-2810.traceg
+
+// Thunk: fusion_44
+// Kernel Name: fusion_44
+kernel-2811.traceg
+

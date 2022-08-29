@@ -1,0 +1,443 @@
+// Thunk: custom-call.18:__cublas$gemm
+// Kernel Name: turing_fp16_s884gemm_fp16_64x64_ldg8_f2f_tn
+// Hops: 13
+# NO_CXL
+_NDP_custom-call.62_adam.traceg
+kernel-8165.traceg
+
+// Thunk: fusion.82
+// Kernel Name: fusion_82
+// Hops: 13
+# NO_CXL
+kernel-8166.traceg
+
+// Thunk: fusion.81
+// Kernel Name: fusion_81
+// Hops: 13
+# NO_CXL
+kernel-8167.traceg
+
+// Thunk: custom-call.19:__cublas$gemm
+// Kernel Name: turing_fp16_s1688gemm_fp16_128x256_ldg8_f2f_nt
+// Hops: 14
+# NO_CXL
+_NDP_custom-call.49_bw_bert_output_ph1.traceg
+_BAR_
+_NDP_custom-call.49_bw_bert_output_ph2.traceg
+_BAR_
+_NDP_custom-call.49_bw_bert_output_ph3.traceg
+kernel-8168.traceg
+
+// Thunk: custom-call.23:__cublas$gemm
+// Kernel Name: turing_fp16_s1688gemm_fp16_256x128_ldg8_f2f_nn
+// Hops: 13
+# NO_CXL
+_NDP_custom-call.64_adam.traceg
+kernel-8187.traceg
+
+// Thunk: fusion.61
+// Kernel Name: fusion_61
+// Hops: 13
+# NO_CXL
+kernel-8188.traceg
+
+// Thunk: fusion.11
+// Kernel Name: fusion_11
+// Hops: 13
+# NO_CXL
+kernel-8189.traceg
+
+// Thunk: custom-call.24:__cublas$gemm
+// Kernel Name: turing_fp16_s884gemm_fp16_64x64_ldg8_f2f_tn
+// Hops: 14
+# NO_CXL
+_NDP_custom-call.50_adam.traceg
+_NDP_custom-call.1334_adam.traceg
+kernel-8190.traceg
+
+// Thunk: fusion.59
+// Kernel Name: fusion_59
+// Hops: 14
+# NO_CXL
+kernel-8191.traceg
+
+// Thunk: fusion.59
+// Kernel Name: fusion_59__1
+// Hops: 14
+# NO_CXL
+kernel-8192.traceg
+
+// Thunk: convert.5
+// Kernel Name: convert_5
+// Hops: 14
+kernel-8193.traceg
+
+// Thunk: custom-call.25:__cublas$gemm
+// Kernel Name: turing_fp16_s884gemm_fp16_64x64_ldg8_f2f_tn
+// Hops: 14
+# NO_CXL
+_NDP_custom-call.63_adam.traceg
+_NDP_custom-call.65_adam.traceg
+kernel-8194.traceg
+
+// Thunk: fusion.58
+// Kernel Name: fusion_58
+// Hops: 14
+kernel-8195.traceg
+
+// Thunk: custom-call.26:__cublas$gemm
+// Kernel Name: turing_fp16_s1688gemm_fp16_128x256_ldg8_f2f_tn
+// Hops: 16
+# NO_CXL
+_NDP_custom-call.51_adam.traceg
+_NDP_custom-call.55_adam.traceg
+_NDP_custom-call.66_adam.traceg
+kernel-8196.traceg
+
+// Thunk: fusion.57
+// Kernel Name: fusion_57
+// Hops: 16
+# NO_CXL
+kernel-8197.traceg
+
+// Thunk: fusion.56
+// Kernel Name: fusion_56
+// Hops: 16
+# NO_CXL
+kernel-8198.traceg
+
+// Thunk: fusion.55
+// Kernel Name: fusion_55
+// Hops: 16
+# NO_CXL
+kernel-8199.traceg
+
+// Thunk: fusion.54
+// Kernel Name: fusion_54
+// Hops: 16
+# NO_CXL
+kernel-8200.traceg
+
+// Thunk: custom-call.27:__cublas$gemm
+// Kernel Name: turing_fp16_s1688gemm_fp16_128x128_ldg8_f2f_nt
+// Hops: 17
+# NO_CXL
+_NDP_custom-call.48_bw_bert_output_ph1.traceg
+_BAR_
+_NDP_custom-call.48_bw_bert_output_ph2.traceg
+_BAR_
+_NDP_custom-call.48_bw_bert_output_ph3.traceg
+kernel-8201.traceg
+
+// Thunk: custom-call.28:__cublas$gemm
+// Kernel Name: turing_fp16_s1688gemm_fp16_128x128_ldg8_f2f_nt
+// Hops: 16
+# NO_CXL
+_NDP_custom-call.52_adam.traceg
+_NDP_custom-call.56_adam.traceg
+kernel-8202.traceg
+
+// Thunk: custom-call.29:__cublas$gemm
+// Kernel Name: turing_fp16_s1688gemm_fp16_128x128_ldg8_f2f_tn
+// Hops: 17
+# NO_CXL
+_NDP_custom-call.987_adam.traceg
+_NDP_custom-call.54_adam.traceg
+kernel-8205.traceg
+
+// Thunk: fusion.51
+// Kernel Name: fusion_51
+// Hops: 17
+kernel-8206.traceg
+
+// Thunk: custom-call.30:__cublas$gemm
+// Kernel Name: turing_fp16_s1688gemm_fp16_128x128_ldg8_f2f_tn
+// Hops: 19
+# NO_CXL
+_NDP_custom-call.53_adam.traceg
+_NDP_custom-call.59_adam.traceg
+kernel-8208.traceg
+
+// Thunk: fusion.111
+// Kernel Name: fusion_111
+// Hops: 19
+# NO_CXL
+kernel-8209.traceg
+
+// Thunk: custom-call.31:__cublas$gemm
+// Kernel Name: turing_fp16_s884gemm_fp16_64x64_ldg8_f2f_nn
+// Hops: 20
+_NDP_custom-call.1309_adam.traceg
+kernel-8211.traceg
+
+// Thunk: custom-call.32:__cublas$gemm
+// Kernel Name: turing_fp16_s884gemm_fp16_64x64_ldg8_f2f_nt
+// Hops: 22
+# NO_CXL
+_NDP_custom-call.1154_adam.traceg
+kernel-8213.traceg
+
+// Thunk: fusion.126
+// Kernel Name: fusion_126
+// Hops: 22
+# NO_CXL
+kernel-8214.traceg
+
+// Thunk: fusion.46
+// Kernel Name: fusion_46
+// Hops: 22
+# NO_CXL
+kernel-8215.traceg
+
+// Thunk: fusion.45
+// Kernel Name: fusion_45
+// Hops: 22
+# NO_CXL
+kernel-8216.traceg
+
+// Thunk: custom-call.33:__cublas$gemm
+// Kernel Name: turing_fp16_s1688gemm_fp16_256x128_ldg8_f2f_nn
+// Hops: 23
+# NO_CXL
+_NDP_custom-call.1097_adam.traceg
+kernel-8217.traceg
+
+// Thunk: fusion.44
+// Kernel Name: fusion_44
+// Hops: 23
+# NO_CXL
+kernel-8218.traceg
+
+// Thunk: custom-call.34:__cublas$gemm
+// Kernel Name: turing_fp16_s884gemm_fp16_64x64_ldg8_f2f_nn
+// Hops: 22
+# NO_CXL
+_NDP_custom-call.1301_adam.traceg
+kernel-8219.traceg
+
+// Thunk: fusion.127
+// Kernel Name: fusion_127
+// Hops: 22
+# NO_CXL
+kernel-8220.traceg
+
+// Thunk: fusion.42
+// Kernel Name: fusion_42
+// Hops: 22
+# NO_CXL
+kernel-8221.traceg
+
+// Thunk: fusion.41
+// Kernel Name: fusion_41
+// Hops: 22
+# NO_CXL
+kernel-8222.traceg
+
+// Thunk: custom-call.35:__cublas$gemm
+// Kernel Name: turing_fp16_s1688gemm_fp16_256x128_ldg8_f2f_nn
+// Hops: 23
+# NO_CXL
+_NDP_custom-call.1127_adam.traceg
+kernel-8223.traceg
+
+// Thunk: fusion.40
+// Kernel Name: fusion_40
+// Hops: 23
+# NO_CXL
+kernel-8224.traceg
+
+// Thunk: fusion.39
+// Kernel Name: fusion_39
+// Hops: 19
+# NO_CXL
+kernel-8225.traceg
+
+// Thunk: custom-call.36:__cublas$gemm
+// Kernel Name: turing_fp16_s884gemm_fp16_64x64_ldg8_f2f_nn
+// Hops: 20
+# NO_CXL
+_NDP_custom-call.1_bw_bert_softmax_ph1.traceg
+_BAR_
+_NDP_custom-call.1_bw_bert_softmax_reduce_accum_1.traceg
+_BAR_
+_NDP_custom-call.1_bw_bert_softmax_reduce_accum_2.traceg
+_BAR_
+_NDP_custom-call.1_bw_bert_softmax_mul.traceg
+kernel-8226.traceg
+
+// Thunk: fusion.128
+// Kernel Name: fusion_128
+// Hops: 20
+# NO_CXL
+kernel-8227.traceg
+
+// Thunk: fusion.37
+// Kernel Name: fusion_37
+// Hops: 20
+# NO_CXL
+kernel-8228.traceg
+
+// Thunk: fusion.32
+// Kernel Name: fusion_32
+// Hops: 20
+# NO_CXL
+kernel-8229.traceg
+
+// Thunk: custom-call.39:__cublas$gemm
+// Kernel Name: turing_fp16_s1688gemm_fp16_128x128_ldg8_f2f_tn
+// Hops: 21
+# NO_CXL
+kernel-8231.traceg
+
+// Thunk: fusion.34
+// Kernel Name: fusion_34
+// Hops: 22
+# NO_CXL
+kernel-8232.traceg
+
+// Thunk: custom-call.38:__cublas$gemm
+// Kernel Name: turing_fp16_s1688gemm_fp16_128x128_ldg8_f2f_tn
+// Hops: 23
+# NO_CXL
+kernel-8234.traceg
+
+// Thunk: fusion.36
+// Kernel Name: fusion_36
+// Hops: 22
+# NO_CXL
+kernel-8235.traceg
+
+// Thunk: custom-call.37:__cublas$gemm
+// Kernel Name: turing_fp16_s1688gemm_fp16_128x128_ldg8_f2f_tn
+// Hops: 23
+# NO_CXL
+kernel-8237.traceg
+
+// Thunk: fusion.24
+// Kernel Name: fusion_24
+// Hops: 23
+# NO_CXL
+kernel-8238.traceg
+
+// Thunk: fusion.29
+// Kernel Name: fusion_29
+// Hops: 23
+# NO_CXL
+kernel-8239.traceg
+
+// Thunk: fusion.23
+// Kernel Name: fusion_23
+// Hops: 23
+# NO_CXL
+kernel-8240.traceg
+
+// Thunk: fusion.22
+// Kernel Name: fusion_22
+// Hops: 23
+# NO_CXL
+kernel-8241.traceg
+
+// Thunk: fusion.21
+// Kernel Name: fusion_21
+// Hops: 20
+# NO_CXL
+kernel-8242.traceg
+
+// Thunk: custom-call.40:__cublas$gemm
+// Kernel Name: turing_fp16_s1688gemm_fp16_256x128_ldg8_f2f_nn
+// Hops: 21
+# NO_CXL
+kernel-8243.traceg
+
+// Thunk: fusion.20
+// Kernel Name: fusion_20
+// Hops: 21
+# NO_CXL
+kernel-8244.traceg
+
+// Thunk: custom-call.41:__cublas$gemm
+// Kernel Name: turing_fp16_s1688gemm_fp16_128x128_ldg8_f2f_nt
+// Hops: 19
+# NO_CXL
+_NDP_custom-call.57_adam.traceg
+_NDP_custom-call.60_adam.traceg
+kernel-8245.traceg
+
+// Thunk: fusion.19
+// Kernel Name: fusion_19
+// Hops: 19
+# NO_CXL
+kernel-8246.traceg
+
+// Thunk: custom-call.42:__cublas$gemm
+// Kernel Name: turing_fp16_s884gemm_fp16_64x64_ldg8_f2f_nt
+// Hops: 24
+# NO_CXL
+_NDP_custom-call.1107_adam.traceg
+_NDP_custom-call.1137_adam.traceg
+_NDP_custom-call.1293_adam.traceg
+_NDP_custom-call.1279_adam.traceg
+_NDP_custom-call.58_adam.traceg
+_NDP_custom-call.1357_adam.traceg
+kernel-8247.traceg
+
+// Thunk: custom-call.43:__cublas$gemm
+// Kernel Name: turing_fp16_s1688gemm_fp16_256x128_ldg8_f2f_nt
+// Hops: 13
+# NO_CXL
+kernel-8249.traceg
+
+// Thunk: custom-call.44:__cublas$gemm
+// Kernel Name: turing_fp16_s1688gemm_fp16_128x128_ldg8_f2f_nt
+// Hops: 13
+# NO_CXL
+kernel-8251.traceg
+
+// Thunk: fusion.14
+// Kernel Name: fusion_14
+// Hops: 23
+# NO_CXL
+kernel-8252.traceg
+
+// Thunk: fusion.14
+// Kernel Name: fusion_14__1
+// Hops: 23
+# NO_CXL
+kernel-8253.traceg
+
+// Thunk: custom-call.45:__cublas$gemm
+// Kernel Name: turing_fp16_s1688gemm_fp16_256x128_ldg8_f2f_nt
+// Hops: 14
+# NO_CXL
+_NDP_custom-call.1348_adam.traceg
+kernel-8254.traceg
+
+// Kernel Name: _ZN5Eigen8internal15EigenMetaKernelINS_15TensorEvaluatorIKNS_14TensorAssignOpINS_9TensorMapINS_6TensorIfLi1ELi1ElEELi16ENS_11MakePointerEEEKNS_19TensorCwiseBinaryOpINS0_13scalar_sum_opIKfSB_EEKS8_KNS4_INS5_ISB_Li1ELi1ElEELi16ES7_EEEEEENS_9GpuDeviceEEElEEvT_T0_
+# NO_CXL
+custom-call.61:NdpAdam$Gemm$custom-call.42
+kernel-8258.traceg
+
+// Kernel Name: _ZN5Eigen8internal15EigenMetaKernelINS_15TensorEvaluatorIKNS_14TensorAssignOpINS_9TensorMapINS_6TensorIfLi1ELi1ElEELi16ENS_11MakePointerEEEKNS_19TensorCwiseBinaryOpINS0_13scalar_sum_opIKfSB_EEKS8_KNS4_INS5_ISB_Li1ELi1ElEELi16ES7_EEEEEENS_9GpuDeviceEEElEEvT_T0_
+# NO_CXL
+kernel-8259.traceg
+
+// Kernel Name: _ZN5Eigen8internal15EigenMetaKernelINS_15TensorEvaluatorIKNS_14TensorAssignOpINS_9TensorMapINS_6TensorIfLi1ELi1ElEELi16ENS_11MakePointerEEEKNS_19TensorCwiseBinaryOpINS0_13scalar_sum_opIKfSB_EEKS8_KNS4_INS5_ISB_Li1ELi1ElEELi16ES7_EEEEEENS_9GpuDeviceEEElEEvT_T0_
+# NO_CXL
+kernel-8260.traceg
+
+// Kernel Name: _ZN5Eigen8internal15EigenMetaKernelINS_15TensorEvaluatorIKNS_14TensorAssignOpINS_9TensorMapINS_6TensorIfLi1ELi1ElEELi16ENS_11MakePointerEEEKNS_19TensorCwiseBinaryOpINS0_13scalar_sum_opIKfSB_EEKS8_KNS4_INS5_ISB_Li1ELi1ElEELi16ES7_EEEEEENS_9GpuDeviceEEElEEvT_T0_
+# NO_CXL
+kernel-8261.traceg
+
+// Kernel Name: _ZN5Eigen8internal15EigenMetaKernelINS_15TensorEvaluatorIKNS_14TensorAssignOpINS_9TensorMapINS_6TensorIfLi1ELi1ElEELi16ENS_11MakePointerEEEKNS_19TensorCwiseBinaryOpINS0_13scalar_sum_opIKfSB_EEKS8_KNS4_INS5_ISB_Li1ELi1ElEELi16ES7_EEEEEENS_9GpuDeviceEEElEEvT_T0_
+# NO_CXL
+kernel-8262.traceg
+
+// Kernel Name: _ZN5Eigen8internal15EigenMetaKernelINS_15TensorEvaluatorIKNS_14TensorAssignOpINS_9TensorMapINS_6TensorIxLi1ELi1ElEELi16ENS_11MakePointerEEEKNS_19TensorCwiseBinaryOpINS0_13scalar_sum_opIKxSB_EEKS8_KNS4_INS5_ISB_Li1ELi1ElEELi16ES7_EEEEEENS_9GpuDeviceEEElEEvT_T0_
+# NO_CXL
+kernel-8263.traceg
+
+// Kernel Name: _ZN5Eigen8internal15EigenMetaKernelINS_15TensorEvaluatorIKNS_14TensorAssignOpINS_9TensorMapINS_6TensorIfLi1ELi1EiEELi16ENS_11MakePointerEEEKNS_19TensorCwiseBinaryOpINS0_13div_no_nan_opIfEEKNS4_INS5_IKfLi1ELi1EiEELi16ES7_EEKNS4_INS5_ISC_Li1ELi1ElEELi16ES7_EEEEEENS_9GpuDeviceEEElEEvT_T0_
+# NO_CXL
+kernel-8264.traceg
+

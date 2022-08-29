@@ -1,0 +1,446 @@
+// Thunk: fusion.109
+// Kernel Name: fusion_109
+// Hops: 0
+# NO_CXL
+kernel-8125.traceg
+
+// Thunk: fusion.108
+// Kernel Name: fusion_108
+// Hops: 0
+# NO_CXL
+kernel-8126.traceg
+
+// Thunk: fusion.107
+// Kernel Name: fusion_107
+// Hops: 0
+# NO_CXL
+kernel-8127.traceg
+
+// Thunk: custom-call.6:__cublas$gemm
+// Kernel Name: turing_fp16_s884gemm_fp16_128x64_ldg8_f2f_nn
+// Hops: 1
+# NO_CXL
+kernel-8128.traceg
+
+// Thunk: fusion.105
+// Kernel Name: fusion_105
+// Hops: 1
+# NO_CXL
+kernel-8129.traceg
+
+// Thunk: fusion.102
+// Kernel Name: fusion_102
+// Hops: 1
+# NO_CXL
+kernel-8130.traceg
+
+// Thunk: fusion.99
+// Kernel Name: fusion_99
+// Hops: 1
+# NO_CXL
+kernel-8131.traceg
+
+// Thunk: fusion.117
+// Kernel Name: fusion_117
+// Hops: 0
+# NO_CXL
+kernel-8132.traceg
+
+// Thunk: custom-call.7:__cublas$gemm
+// Kernel Name: turing_fp16_s1688gemm_fp16_256x128_ldg8_f2f_nn
+// Hops: 2
+# NO_CXL
+kernel-8133.traceg
+
+// Thunk: fusion.98
+// Kernel Name: fusion_98
+// Hops: 2
+# NO_CXL
+kernel-8134.traceg
+
+// Thunk: fusion.116
+// Kernel Name: fusion_116
+// Hops: 0
+# NO_CXL
+kernel-8135.traceg
+
+// Thunk: custom-call.8:__cublas$gemm
+// Kernel Name: turing_fp16_s1688gemm_fp16_256x128_ldg8_f2f_nn
+// Hops: 2
+# NO_CXL
+kernel-8136.traceg
+
+// Thunk: fusion.120
+// Kernel Name: fusion_120
+// Hops: 2
+# NO_CXL
+kernel-8137.traceg
+
+// Thunk: custom-call.9:__cublas$gemm
+// Kernel Name: turing_fp16_s884gemm_fp16_64x64_ldg8_f2f_nn
+// Hops: 3
+_ON_THE_FLY_custom-call_fw_bert_softmax_ph1.traceg
+kernel-8138.traceg
+
+// Thunk: fusion.96
+// Kernel Name: fusion_96
+// Hops: 0
+# NO_CXL
+kernel-8139.traceg
+
+// Thunk: fusion.115
+// Kernel Name: fusion_115
+// Hops: 0
+# NO_CXL
+kernel-8140.traceg
+
+// Thunk: custom-call.10:__cublas$gemm
+// Kernel Name: turing_fp16_s1688gemm_fp16_256x128_ldg8_f2f_nn
+// Hops: 2
+_NDP_custom-call_fw_bert_softmax_reduce_max_1.traceg
+_BAR_
+_NDP_custom-call_fw_bert_softmax_reduce_max_2.traceg
+_BAR_
+_NDP_custom-call_fw_bert_softmax_reduce_accum_1.traceg
+_BAR_
+_NDP_custom-call_fw_bert_softmax_reduce_accum_2.traceg
+_BAR_
+_NDP_custom-call_fw_bert_softmax_mul_and_dropout.traceg
+# NO_CXL
+kernel-8141.traceg
+
+// Thunk: fusion.121
+// Kernel Name: fusion_121
+// Hops: 2
+# NO_CXL
+kernel-8142.traceg
+
+// Thunk: custom-call.11:__cublas$gemm
+// Kernel Name: turing_fp16_s884gemm_fp16_64x64_ldg8_f2f_nn
+// Hops: 5
+# NO_CXL
+kernel-8143.traceg
+
+// Thunk: fusion.94
+// Kernel Name: fusion_94
+// Hops: 5
+# NO_CXL
+kernel-8144.traceg
+
+// Thunk: fusion.114
+// Kernel Name: fusion_114
+// Hops: 0
+# NO_CXL
+kernel-8145.traceg
+
+// Thunk: custom-call.12:__cublas$gemm
+// Kernel Name: turing_fp16_s1688gemm_fp16_256x128_ldg8_f2f_nn
+// Hops: 6
+_ON_THE_FLY_custom-call.45_fw_bert_output_ph1.traceg
+_BAR_
+_NDP_custom-call.45_fw_bert_output_ph2_mean.traceg
+_BAR_
+_NDP_custom-call.45_fw_bert_output_ph2_var.traceg
+kernel-8146.traceg
+
+// Thunk: convert.214
+// Kernel Name: convert_214
+// Hops: 0
+# NO_CXL
+kernel-8147.traceg
+
+// Thunk: custom-call.13:__cublas$gemm
+// Kernel Name: turing_fp16_s1688gemm_fp16_256x128_ldg8_f2f_nn
+// Hops: 8
+# NO_CXL#
+_ON_THE_FLY_custom-call.45_fw_bert_output_ph3.traceg
+kernel-8148.traceg
+
+// Thunk: fusion.92
+// Kernel Name: fusion_92
+// Hops: 8
+# NO_CXL
+kernel-8149.traceg
+
+// Thunk: fusion.91
+// Kernel Name: fusion_91
+// Hops: 8
+# NO_CXL
+kernel-8150.traceg
+
+// Thunk: convert.216
+// Kernel Name: convert_216
+// Hops: 0
+# NO_CXL
+kernel-8151.traceg
+
+// Thunk: custom-call.14:__cublas$gemm
+// Kernel Name: turing_fp16_s1688gemm_fp16_128x256_ldg8_f2f_nn
+// Hops: 9
+_ON_THE_FLY_custom-call.46_fw_bert_output_ph1.traceg
+_BAR_
+_NDP_custom-call.46_fw_bert_output_ph2_mean.traceg
+_BAR_
+_NDP_custom-call.46_fw_bert_output_ph2_var.traceg
+_BAR_
+_NDP_custom-call.46_fw_bert_output_ph3.traceg
+kernel-8152.traceg
+
+// Thunk: fusion.90
+// Kernel Name: fusion_90
+// Hops: 10
+# NO_CXL
+kernel-8153.traceg
+
+// Thunk: convert.184
+// Kernel Name: convert_184
+// Hops: 0
+# NO_CXL
+kernel-8154.traceg
+
+// Thunk: fusion.89
+// Kernel Name: fusion_89
+// Hops: 0
+# NO_CXL
+kernel-8155.traceg
+
+// Thunk: custom-call.16:__cublas$gemm
+// Kernel Name: turing_fp16_s884gemm_fp16_64x64_ldg8_f2f_nn
+// Hops: 11
+# NO_CXL
+kernel-8156.traceg
+
+// Thunk: tanh.468
+// Kernel Name: tanh_468
+// Hops: 11
+# NO_CXL
+kernel-8157.traceg
+
+// Thunk: fusion.88
+// Kernel Name: fusion_88
+// Hops: 0
+# NO_CXL
+kernel-8158.traceg
+
+// Thunk: custom-call.17:__cublas$gemm
+// Kernel Name: turing_fp16_s884gemm_fp16_64x64_ldg8_f2f_nn
+// Hops: 12
+# NO_CXL
+kernel-8159.traceg
+
+// Thunk: fusion.86
+// Kernel Name: fusion_86
+// Hops: 12
+# NO_CXL
+kernel-8160.traceg
+
+// Thunk: fusion.122
+// Kernel Name: fusion_122
+// Hops: 12
+# NO_CXL
+kernel-8161.traceg
+
+// Thunk: fusion.132
+// Kernel Name: fusion_132
+// Hops: 12
+# NO_CXL
+kernel-8162.traceg
+
+// Thunk: fusion.83
+// Kernel Name: fusion_83
+// Hops: 12
+# NO_CXL
+kernel-8163.traceg
+
+// Thunk: pad.4
+// Kernel Name: pad_4
+// Hops: 12
+# NO_CXL
+kernel-8164.traceg
+
+// Thunk: fusion.123
+// Kernel Name: fusion_123
+// Hops: 10
+# NO_CXL
+kernel-8169.traceg
+
+// Thunk: convert.647
+// Kernel Name: convert_647
+// Hops: 0
+# NO_CXL
+kernel-8170.traceg
+
+// Thunk: fusion.79
+// Kernel Name: fusion_79
+// Hops: 0
+# NO_CXL
+kernel-8171.traceg
+
+// Thunk: custom-call.21:__cublas$gemm
+// Kernel Name: turing_fp16_s884gemm_fp16_64x64_ldg8_f2f_nn
+// Hops: 11
+# NO_CXL
+kernel-8172.traceg
+
+// Thunk: fusion.75
+// Kernel Name: fusion_75
+// Hops: 11
+# NO_CXL
+kernel-8173.traceg
+
+// Thunk: fusion.72
+// Kernel Name: fusion_72
+// Hops: 11
+# NO_CXL
+kernel-8174.traceg
+
+// Thunk: fusion.70
+// Kernel Name: fusion_70
+// Hops: 11
+# NO_CXL
+kernel-8175.traceg
+
+// Thunk: fusion.112
+// Kernel Name: fusion_112
+// Hops: 0
+# NO_CXL
+kernel-8176.traceg
+
+// Thunk: custom-call.22:__cublas$gemm
+// Kernel Name: turing_fp16_s1688gemm_fp16_128x128_ldg8_f2f_tn
+// Hops: 12
+# NO_CXL
+kernel-8177.traceg
+
+// Thunk: fusion.68
+// Kernel Name: fusion_68
+// Hops: 12
+# NO_CXL
+kernel-8178.traceg
+
+// Thunk: fusion.131
+// Kernel Name: fusion_131
+// Hops: 12
+# NO_CXL
+kernel-8179.traceg
+
+// Thunk: fusion.130
+// Kernel Name: fusion_130
+// Hops: 12
+# NO_CXL
+kernel-8180.traceg
+
+// Thunk: fusion.3
+// Kernel Name: fusion_3
+// Hops: 12
+# NO_CXL
+kernel-8181.traceg
+
+// Thunk: fusion.3
+// Kernel Name: fusion_3__1
+// Hops: 12
+# NO_CXL
+kernel-8182.traceg
+
+// Thunk: log.764
+// Kernel Name: log_764
+// Hops: 12
+# NO_CXL
+kernel-8183.traceg
+
+// Thunk: fusion.7
+// Kernel Name: fusion_7
+// Hops: 12
+# NO_CXL
+kernel-8184.traceg
+
+// Thunk: fusion.2
+// Kernel Name: fusion_2
+// Hops: 12
+# NO_CXL
+kernel-8185.traceg
+
+// Thunk: fusion.125
+// Kernel Name: fusion_125
+// Hops: 12
+# NO_CXL
+kernel-8186.traceg
+
+// Thunk: fusion.133
+// Kernel Name: fusion_133
+// Hops: 10
+# NO_CXL
+kernel-8203.traceg
+
+// Thunk: fusion.134
+// Kernel Name: fusion_134
+// Hops: 10
+# NO_CXL
+kernel-8204.traceg
+
+// Thunk: fusion.50
+// Kernel Name: fusion_50
+// Hops: 0
+# NO_CXL
+kernel-8207.traceg
+
+// Thunk: fusion.49
+// Kernel Name: fusion_49
+// Hops: 2
+# NO_CXL
+kernel-8210.traceg
+
+// Thunk: fusion.48
+// Kernel Name: fusion_48
+// Hops: 2
+# NO_CXL
+kernel-8212.traceg
+
+// Thunk: fusion.31
+// Kernel Name: fusion_31
+// Hops: 0
+# NO_CXL
+kernel-8230.traceg
+
+// Thunk: fusion.33
+// Kernel Name: fusion_33
+// Hops: 0
+# NO_CXL
+kernel-8233.traceg
+
+// Thunk: fusion.35
+// Kernel Name: fusion_35
+// Hops: 0
+# NO_CXL
+kernel-8236.traceg
+
+// Thunk: fusion.16
+// Kernel Name: fusion_16
+// Hops: 12
+# NO_CXL
+kernel-8248.traceg
+
+// Thunk: fusion.15
+// Kernel Name: fusion_15
+// Hops: 12
+# NO_CXL
+kernel-8250.traceg
+
+// Thunk: fusion.9
+// Kernel Name: fusion_9
+// Hops: 12
+# NO_CXL
+kernel-8255.traceg
+
+// Thunk: fusion.8
+// Kernel Name: fusion_8
+// Hops: 12
+# NO_CXL
+kernel-8256.traceg
+
+// Thunk: fusion
+// Kernel Name: fusion
+// Hops: 12
+# NO_CXL
+kernel-8257.traceg
+

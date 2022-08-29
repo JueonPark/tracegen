@@ -1,0 +1,13 @@
+kernel_names/*
+__pycache__/*
+*/__pycache__/*
+*.output
+*.schedule
+*.thunk_schedule
+*.txt
+*.tmp
+*.temp
+*.csv
+*.fw
+*.bw
+*.g
