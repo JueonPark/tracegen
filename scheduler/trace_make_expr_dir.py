@@ -17,7 +17,7 @@ CUDA_SYNC = 'cudaDeviceSynchronize 0'
 
 def kernel_num(kernel_string):
     s = kernel_string.find('kernel-')
-    kernel_ = kernel_string[s:s+11]
+    kernel_ = kernel_string[s:-19]
     return kernel_
 
 
