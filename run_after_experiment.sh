@@ -17,8 +17,9 @@ then
   #                                      --kfw traces/$1/kernelslist.g \
   #                                      --ne traces/$1/xla_hlo/ndpx_scheduling_table_cluster_0.csv
 
-  python profile/postprocessing_candidate_table.py --ct traces/$1/xla_hlo/ndpx_candidate_table_cluster_0.csv
-  python profile/postprocessing_scheduling_table.py --st traces/$1/xla_hlo/ndpx_scheduling_table_cluster_0.csv
+  python profile/postprocessing_candidate_table.py --model $1
+  
+  python profile/postprocessing_scheduling_table.py --model $1
 
   # after finishing all the jobs, compress to single zip file and 
   tar -cvf  $1-result.tar.gz experiments_results/$1
