@@ -16,5 +16,3 @@ BERT_NDPX/scripts/utils2/__pycache__/*
 *output
 */__pycache__
 *.pyc
-sim_env_*
-sim_result_*
