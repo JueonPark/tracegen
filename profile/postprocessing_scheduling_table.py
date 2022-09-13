@@ -72,6 +72,8 @@ if __name__ == "__main__":
         new_results += parse_bert_metadata(original_elements[7])
       elif (model == "dlrm"):
         new_results += parse_dlrm_metadata(original_elements[7])
+      elif (model == "vit"):
+        new_results += parse_vit_metadata(original_elements[7])
       else:
         new_results += parse_mobilenet_metadata(original_elements[7])
     except:
@@ -84,7 +86,7 @@ if __name__ == "__main__":
       elif (model == "dlrm"):
         new_results += parse_dlrm_metadata(original_elements[10])
       elif (model == "vit"):
-        new_results += parse_dlrm_metadata(original_elements[10])
+        new_results += parse_vit_metadata(original_elements[10])
       else:
         new_results += parse_mobilenet_metadata(original_elements[10])
     except:
