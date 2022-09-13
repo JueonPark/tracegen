@@ -22,6 +22,8 @@ if __name__ == "__main__":
     model = "transformer"
   elif (args.model).find("dlrm") != -1:
     model = "dlrm"
+  elif (args.model).find("vit") != -1:
+    model = "vit"
   else:
     exit(0)
 
@@ -51,6 +53,8 @@ if __name__ == "__main__":
         layer_parsed = parse_bert_metadata(original_elements[1])
       elif model == "dlrm":
         layer_parsed = parse_dlrm_metadata(original_elements[1])
+      elif model == "vit":
+        layer_parsed = parse_vit_metadata(original_elements[1])
     except:
       layer_parsed = original_elements[1]
     new_results = original_elements[0] + "," + \

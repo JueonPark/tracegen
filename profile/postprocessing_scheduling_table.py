@@ -38,6 +38,8 @@ if __name__ == "__main__":
     model = "transformer"
   elif (args.model).find("dlrm") != -1:
     model = "dlrm"
+  elif (args.model).find("vit") != -1:
+    model = "vit"
   else:
     exit(0)
 
@@ -80,6 +82,8 @@ if __name__ == "__main__":
       if (model == "bert"):
         new_results += parse_bert_metadata(original_elements[10])
       elif (model == "dlrm"):
+        new_results += parse_dlrm_metadata(original_elements[10])
+      elif (model == "vit"):
         new_results += parse_dlrm_metadata(original_elements[10])
       else:
         new_results += parse_mobilenet_metadata(original_elements[10])
