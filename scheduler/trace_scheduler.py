@@ -34,15 +34,24 @@ def match(ts_parsed, stats_parsed):
         ts_matched.append((order,thunk_name))
         stats_matched.append([(kernel_no, kernel_name)])
         break
+      # for XLA-generated kernels
       elif thunk_name.replace(".", "_").replace("-", "_") == kernel_name:
+        print("39")
+        print(thunk_name)
+        print(kernel_name)
         try:
-          ts_unmatched.remove((order,thunk_name))
-          ts_matched.append((order,thunk_name))
+          ts_unmatched.remove((order, thunk_name))
+          ts_matched.append((order, thunk_name))
           stats_matched_chunk.append((kernel_no, kernel_name))
           stats_unmatched.remove((kernel_no, kernel_name))
         except:
+          print("qwer")
           continue
+      # for XLA-generated kernels
       elif '__' in kernel_name and thunk_name.replace(".", "_").replace("-", "_") == kernel_name[:kernel_name.find('__')]:
+        print("51")
+        print(thunk_name)
+        print(kernel_name)
         stats_unmatched.remove((kernel_no, kernel_name))
         stats_matched_chunk.append((kernel_no, kernel_name))
     if len(stats_matched_chunk) > 0:
@@ -114,7 +123,11 @@ if __name__ == "__main__":
     for trace_file in ndpx_trace_files:
       if 'page_table' in trace_file:
         ndpx_trace_files.remove(trace_file)
-  print(ndpx_trace_files)
+  print("list of ndpx trace files to schedule")
+  for file in ndpx_trace_files:
+    print(file)
+
+  ndpx_trace_files_to_write = ndpx_trace_files.copy()
 
   """
   fusion offloading overlapping
@@ -133,7 +146,7 @@ if __name__ == "__main__":
       # _ON_THE_FLY_custom-call.133_0_NdpEwiseFusedOnTheFly$fusion.201.traceg
       # _ON_THE_FLY_custom-call.133_2_NdpEwiseFusedOnTheFly$fusion.197.traceg
       for trace_file in ndpx_trace_files:
-        if (ndp_custom_call in trace_file) and ('adam' not in trace_file):
+        if ndp_custom_call in trace_file:
           # the trace file have the overlapping information 
           overlap_candidate_name = (trace_file.split("$")[1]).split(".traceg")[0]
           # try overlapping for identified gpu thunk
@@ -147,6 +160,7 @@ if __name__ == "__main__":
               print(f'NDP({trace_file}) mapped to {gpu_custom_call}')
               if "NdpEwiseFusedOnTheFly" in ndp_thunk_name:
                 no_cxl_flags[gpu_custom_call] = False
+              ndpx_trace_files.remove(trace_file)
               break
 
   # file to write:
@@ -159,19 +173,12 @@ if __name__ == "__main__":
       f.write(f'// Kernel Name: {kernel_name}\n')
       if no_cxl_flags[gpu_custom_call]:
         f.write(f'# NO_CXL\n')
-      adam_used = False
-      for ndp_thunk_name in scheduled_kernels[gpu_custom_call]:
-        if 'Adam' in ndp_thunk_name:
-          adam_used = True
-          f.write(f'_NDP_{ndp_thunk_name.split(":")[0]}_adam_reduce.traceg\n')
-      if adam_used:
-        f.write(f'_BAR_\n')
       for ndp_thunk_name in scheduled_kernels[gpu_custom_call]:
         if 'NdpEwiseFused' in ndp_thunk_name:
           ndp_custom_call = custom_call_name(ndp_thunk_name)
           # make on-the-fly trace files to be written.
           # TODO: multiple scheduling + _ON_THE_FLY_ handling
-          for trace_file in ndpx_trace_files:
+          for trace_file in ndpx_trace_files_to_write:
             if ('NdpEwiseFused' in trace_file) and (ndp_custom_call in trace_file):
               f.write(f'{trace_file}\n')
               # if '_ON_THE_FLY' in trace_file:
