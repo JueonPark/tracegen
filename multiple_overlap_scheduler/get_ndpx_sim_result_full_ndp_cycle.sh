@@ -25,9 +25,11 @@ echo "GPUS,CONFIG,ID,NAME,CYCLE" > $CSV_PATH
 ls $RESULT_DIR | while read line 
 do
   pushd $RESULT_DIR/$line/
-  FINISHED=`cat sim_result.out | grep -c "Spent"`
+  CYCLE_CNT=`cat GPU_0.out | grep -c "tot_sim_cycle"`
   CYCLE=`cat GPU_0.out | grep "sim_cycle" | head -n1 | awk '{print($3)}'` 
   CYCLE2=`cat GPU_0.out | grep "sim_cycle" | tail -n1 | awk '{print($3)}'` 
+  NDP_CYCLE=`cat sim_result.out | grep "NDP kernel" | grep "launched" | awk '{print($11)}'`
+  NDP_CYCLE2=`cat sim_result.out | grep "NDP kernel" | grep "finished" | awk '{print($11)}'`
   NAME=`cat GPU_0.out | grep "kernel_name" | head -n1 | awk '{print($3)}'` 
   JOB_NAME="${TARGET_MODEL}-GPU${3}-${line}-${CONFIG}"
 		echo $JOB_NAME
@@ -38,7 +40,7 @@ do
   fi
 
   RUNNING=`squeue --format "%.200j %u %i" | grep -w $JOB_NAME`
-  if [ $FINISHED -ne 1 ]; then  
+  if [ $CYCLE_CNT -ne 2 ]; then  
     if [ -z "$RUNNING" ]; then
       echo "RUNNING NOT FOUND ${line}" 
       if [ "$RESUBMIT" = "1" ]; then
@@ -50,20 +52,13 @@ do
     echo "NOT FOUND $line"
     echo `cat sim_result.out | tail -n1` 
     echo $DEVICE_SETTING,$CONFIG,$line,$NAME,$CYCLE " NOT FOUND" >> $CSV_PATH  ;
-  else
+  else    
     if [ -n "$RUNNING" ]; then
         echo "POSSIBLE DEADLOCK $line"
     fi
     if [[ "$line" == *"_NDP_"* ]]; then
-      TOTAL_NAMES=`cat GPU_0.out | grep "kernel_name"`
-      NAMES=$(echo $TOTAL_NAMES | tr '\n' '\n' | awk '{print($3)}')
-      for NAME in $NAMES
-      do
-        START_CYCLE=`cat sim_result.out | grep "$NAME at cycle" | head -n1 | awk '{print($11)}'`
-        END_CYCLE=`cat sim_result.out | grep "$NAME at cycle" | tail -n1 | awk '{print($11)}'`
-        echo $DEVICE_SETTING,$CONFIG,$line,$NAME,$(( END_CYCLE - START_CYCLE )) >> $CSV_PATH ;
-      done
-      echo $DEVICE_SETTING,$CONFIG,$line,NDP_OP,$(( CYCLE2 - CYCLE )) >> $CSV_PATH ;
+      echo $DEVICE_SETTING,$CONFIG,$line,$NAME,$CYCLE >> $CSV_PATH ;
+      echo $DEVICE_SETTING,$CONFIG,$line,NDP_OP,$(( NDP_CYCLE2 - NDP_CYCLE )) >> $CSV_PATH ;
     else
       echo $DEVICE_SETTING,$CONFIG,$line,$NAME,$CYCLE >> $CSV_PATH ;
     fi
