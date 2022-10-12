@@ -1,60 +1,70 @@
-# input: ndpx_scheduling_table_cluster_0.csv
-# merges estimated ndpx cycles and real ndpx cycles
+# input: ndpx_scheduling_table.csv
+# things to rewrite: NdpxOpLayer, GpuKernelLayer
 import os
-import csv
+import pathlib
 import argparse
+from xla_metadata_parser import *
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--csv', type=str, help="full-cycle.csv", required=True)
-parser.add_argument('--kfw', type=str, help="kernelslist.g.fw", required=True)
-parser.add_argument('--kbw', type=str, help="kernelslist.g.bw", required=True)
-parser.add_argument('-n', '--ne', type=str, help="ndpx_estimation.csv", required=True)
+parser.add_argument("--model", type=str, required=True)
 
+# The content consists of:
+# NdpxKernel information
+# - NdpxKernel
+# - original instruction name
+# - NdpxKernel's shape size
+# - #input
+# - #output
+# - #op
+# - estimated cost of NdpxKernel
+# - layer(metadata) of NdpxKernel
+# overlapping GPU kernel information
+# - GpuKernel (basically GPU instruction's name)
+# - pre-measured GpuKernel's cost
+# - layer of GpuKernel
+# execution option
+# - on-the-fly or not (true if on-the-fly)
 if __name__ == "__main__":
   args = parser.parse_args()
   exp_path = os.getenv("EXP_PATH")
+  model = ""
+  if (args.model).find("bert") != -1:
+    model = "bert"
+  elif (args.model).find("resnet") != -1:
+    model = "resnet"
+  elif (args.model).find("mobilenet") != -1:
+    model = "mobilenet"
+  elif (args.model).find("transformer") != -1:
+    model = "transformer"
+  elif (args.model).find("dlrm") != -1:
+    model = "dlrm"
+  elif (args.model).find("vit") != -1:
+    model = "vit"
+  elif (args.model).find("transformer") != -1:
+    model = "transformer"
+  else:
+    exit(0)
 
-  # full cycle information
-  total_result = open(args.csv, 'r').read()
-  # NDPX trace file path
-  model = exp_path.split('/')[-1]
-  # ndpx_scheduling_table_cluster_0.csv
-  ndpx_trace_dir_path = f'/home/jueonpark/tracegen/traces/{model}/xla_hlo/packet_32_buffer_1_gpu_1_sync_0_simd_8/'
-  ndpx_trace_files = os.listdir(ndpx_trace_dir_path)
-  for ndpx_trace_file in ndpx_trace_files:
-    if 'page_table' in ndpx_trace_file:
-      ndpx_trace_files.remove(ndpx_trace_file)
-  print(ndpx_trace_files)
-  
-  # then merge the estimation
-  # - add the real result column to the estimation file
-  # read gpu kernel name and find the appropriate kernel
-  kernelslist = open(args.kfw, 'r').read() + '\n\n' + open(args.kbw, 'r').read()
-  kernelslists = kernelslist.split('\n\n')
-  ne_file_object = csv.reader(open(args.ne, 'r'))
-  ne_output_path = os.path.join(exp_path, "ndpx_estimation_result.csv")
-  ne_output = open(ne_output_path, "w+")
-  
-  # The header of ndpx_scheduling_table_cluster_0.csv consists of:
-  # - NdpxKernel,
-  # - NdpxKernelDimm,
-  # - #inputs,
-  # - #outputs,
-  # - #ops,
-  # - EstimatedNdpxCost,
-  # - NdpxOpLayer,
-  # - GpuKernel,
-  # - EstimatedGpuCost,
-  # - GpuKernelLayer,
-  # - OnTheFly
-  new_header = "NdpxKernel,OverlappedKernelNum,NdpxKernelDimm,#inputs,#outputs,#ops,EstimatedNdpxCost,RealNdpxCost,MultipleNdpx,IntendedSchedule\n"
-  ne_output.write(new_header)
-  estimation_result = []
-  estimation_result.append(new_header)
-  prev_header = next(ne_file_object)
-  
+  total_result = open(f'/home/jueonpark/tracegen/csv_files/{args.model}--NDPX_baseline_64-1-nosync.csv', 'r').read()
   total_results = total_result.split('\n')
-  for ne_row in ne_file_object:
+  kernelslist = open(f'/home/jueonpark/tracegen/traces/{args.model}/kernelslist.g', 'r').read()
+  kernelslists = kernelslist.split('\n\n')
+
+  xla_hlo_path_str = f'/home/jueonpark/tracegen/traces/{args.model}/xla_hlo'
+  xla_hlo_path = pathlib.Path(xla_hlo_path_str)
+  table_paths = list(xla_hlo_path.glob("*ndpx_scheduling_table*"))
+  original_data = open(table_paths[0], "r").read().split("\n")[0] + "\n"
+  for table_path in table_paths:
+    table = open(table_path, "r").read()
+    original_data += table.split("\n", 1)[1]
+  original_results = original_data.split("\n")
+  
+  output_path = f'/home/jueonpark/tracegen/experiments_results/{args.model}/ndpx_estimation_result.csv'
+  output = open(output_path, "w+")
+
+  new_header = "NdpxKernel,OverlappedKernelNum,NdpxKernelDimm,#inputs,#outputs,#ops,EstimatedNdpxCost,RealNdpxCost,MultipleNdpx,IntendedSchedule\n"
+  output.write(new_header)
+  for original_row in original_results[1:-1]:
     # find kernel number and real cycle
     found = False
     multiple_ndpx = False
@@ -69,7 +79,7 @@ if __name__ == "__main__":
       knl_elements = kernel.split('\n', 4)
       if len(knl_elements) < 4:
         continue
-      if knl_elements[4].find(ne_row[0]) != -1:
+      if knl_elements[4].find(original_elements[0]) != -1:
         found = True
         kernel_num = kernel.split('\n')[-1]
         kernel_num = kernel_num.split('-')[1]
@@ -78,8 +88,8 @@ if __name__ == "__main__":
         if knl_elements[4].count('_NDP_') > 1:
           multiple_ndpx = True
         # find whether the scheduling is done as intended
-        candidate = ne_row[0].rsplit('$', 1)[1].split('.traceg')[0]
-        if knl_elements[0].find(candidate) != -1 and knl_elements[4].find(ne_row[0]) != -1:
+        candidate = original_elements[0].rsplit('$', 1)[1].split('.traceg')[0]
+        if knl_elements[0].find(candidate) != -1 and knl_elements[4].find(original_elements[0]) != -1:
           intended_schedule = True
         break
     if found:
@@ -88,25 +98,18 @@ if __name__ == "__main__":
         if tr_row.find(kernel_num) != -1 and tr_row.find('NDP_OP') != -1:
           kernel_cycle = tr_row.split(',')[6]
           break
-    # output format would be:
-    # - NdpxKernel
-    # - OverlappedKernelNum
-    # - ShapeSize
-    # - #input
-    # - #output
-    # - #op
-    # - EstimateNdpxCost
-    # - RealNdpxCost
-    # - MultipleNdpx
-    # - IntendedSchedule
-    output_line = ne_row[0] + ',' + \
-                  kernel_num + ',' + \
-                  ne_row[1] + ',' + \
-                  ne_row[2] + ',' + \
-                  ne_row[3] + ',' + \
-                  ne_row[4] + ',' + \
-                  ne_row[5] + ',' + \
+
+    new_results = ""
+    original_elements = original_row.split(",")
+
+    new_results = original_elements[0] + "," + \
+                  kernel_num + "," + \
+                  original_elements[1] + "," + \
+                  original_elements[2] + "," + \
+                  original_elements[3] + "," + \
+                  original_elements[4] + "," + \
+                  original_elements[5] + "," + \
                   str(kernel_cycle) + ',' + \
                   str(multiple_ndpx) + ',' + \
                   str(intended_schedule) + "\n"
-    ne_output.write(output_line)
+    output.write(new_results)
