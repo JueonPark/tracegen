@@ -45,7 +45,7 @@ if __name__ == "__main__":
   else:
     exit(0)
 
-  total_result = open(f'/home/jueonpark/tracegen/csv_files/{args.model}--NDPX_baseline_64-1-nosync.csv', 'r').read()
+  total_result = open(f'/home/jueonpark/tracegen/csv_files/{args.model}-NDPX_baseline_64-1-nosync-full-ndp-cycle.csv', 'r').read()
   total_results = total_result.split('\n')
   kernelslist = open(f'/home/jueonpark/tracegen/traces/{args.model}/kernelslist.g', 'r').read()
   kernelslists = kernelslist.split('\n\n')
@@ -65,6 +65,7 @@ if __name__ == "__main__":
   new_header = "NdpxKernel,OverlappedKernelNum,NdpxKernelDimm,#inputs,#outputs,#ops,EstimatedNdpxCost,RealNdpxCost,MultipleNdpx,IntendedSchedule\n"
   output.write(new_header)
   for original_row in original_results[1:-1]:
+    original_elements = original_row.split(",")
     # find kernel number and real cycle
     found = False
     multiple_ndpx = False
@@ -79,7 +80,7 @@ if __name__ == "__main__":
       knl_elements = kernel.split('\n', 4)
       if len(knl_elements) < 4:
         continue
-      if knl_elements[4].find(original_elements[0]) != -1:
+      if knl_elements[3].find(original_elements[0]) != -1:
         found = True
         kernel_num = kernel.split('\n')[-1]
         kernel_num = kernel_num.split('-')[1]
@@ -96,7 +97,7 @@ if __name__ == "__main__":
       # find from total_results
       for tr_row in total_results:
         if tr_row.find(kernel_num) != -1 and tr_row.find('NDP_OP') != -1:
-          kernel_cycle = tr_row.split(',')[6]
+          kernel_cycle = tr_row.split(',')[5]
           break
 
     new_results = ""
@@ -104,11 +105,11 @@ if __name__ == "__main__":
 
     new_results = original_elements[0] + "," + \
                   kernel_num + "," + \
-                  original_elements[1] + "," + \
                   original_elements[2] + "," + \
                   original_elements[3] + "," + \
                   original_elements[4] + "," + \
                   original_elements[5] + "," + \
+                  original_elements[6] + "," + \
                   str(kernel_cycle) + ',' + \
                   str(multiple_ndpx) + ',' + \
                   str(intended_schedule) + "\n"

@@ -13,9 +13,8 @@ then
   python HLO_breakdown/main.py --model $1
 
   # overlap scheduling
-  # python profile/ndpx_result_merger.py --csv $EXP_PATH/$1-ndp-full-cycle.csv \
-  #                                      --kfw traces/$1/kernelslist.g \
-  #                                      --ne traces/$1/xla_hlo/ndpx_scheduling_table_cluster_0.csv
+  # CAUTION: requires {args.model}-NDPX_baseline_64-1-nosync-full-ndp-cycle.csv to exist!
+  python profile/ndpx_result_merger.py --model $1
 
   python profile/postprocessing_candidate_table.py --model $1
   

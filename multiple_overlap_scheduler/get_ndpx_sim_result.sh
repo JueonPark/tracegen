@@ -19,7 +19,7 @@ if [ ${SYNC} -eq 1 ]; then
 else
   CSV_PATH=$CSV_PATH-nosync.csv
 fi
-echo "GPUS,CONFIG,ID,NAME,CYCLE" > $CSV_PATH
+echo "GPUS,CONFIG,SYNC,ID,NAME,CYCLE" > $CSV_PATH
 
 # iterate and get each results
 ls $RESULT_DIR | while read line 
@@ -49,23 +49,45 @@ do
     fi
     echo "NOT FOUND $line"
     echo `cat sim_result.out | tail -n1` 
-    echo $DEVICE_SETTING,$CONFIG,$line,$NAME,$CYCLE " NOT FOUND" >> $CSV_PATH  ;
+    echo $DEVICE_SETTING,$CONFIG,0,$line,$NAME,$CYCLE " NOT FOUND" >> $CSV_PATH  ;
   else
     if [ -n "$RUNNING" ]; then
         echo "POSSIBLE DEADLOCK $line"
     fi
     if [[ "$line" == *"_NDP_"* ]]; then
       TOTAL_NAMES=`cat GPU_0.out | grep "kernel_name"`
-      NAMES=$(echo $TOTAL_NAMES | tr '\n' '\n' | awk '{print($3)}')
-      for NAME in $NAMES
+      delimiter="kernel_name = "
+      s=$TOTAL_NAMES$delimiter  
+      NAMES=();  
+      while [[ $s ]];  
+      do  
+      NAMES+=( "${s%%"$delimiter"*}" );  
+      s=${s#*"$delimiter"};  
+      done;  
+      declare -p NAMES  
+      # SEP="kernel_name = "
+      # IFS=$SEP read -r -a NAMES <<< "$TOTAL_NAMES"
+      # NAMES=$(echo $TOTAL_NAMES | tr '\n' '\n' | awk '{print($3)}')
+      # NAMES=$(echo $TOTAL_NAMES | tr "kernel_name = " '\n')
+      echo "total_names: $TOTAL_NAMES"
+      echo "names: $NAMES"
+      for NAME in ${NAMES[@]}
       do
+        if [ -z $NAME ]
+        then
+          continue
+        fi
+        echo "name: $NAME"
         START_CYCLE=`cat sim_result.out | grep "$NAME at cycle" | head -n1 | awk '{print($11)}'`
         END_CYCLE=`cat sim_result.out | grep "$NAME at cycle" | tail -n1 | awk '{print($11)}'`
-        echo $DEVICE_SETTING,$CONFIG,$line,$NAME,$(( END_CYCLE - START_CYCLE )) >> $CSV_PATH ;
+        echo $DEVICE_SETTING,$CONFIG,0,$line,$NAME,$(( END_CYCLE - START_CYCLE )) >> $CSV_PATH ;
       done
-      echo $DEVICE_SETTING,$CONFIG,$line,NDP_OP,$(( CYCLE2 - CYCLE )) >> $CSV_PATH ;
+      NDP_START_CYCLE=`cat sim_result.out | grep "launched NDP kernel" | awk '{print($11)}'`
+      NDP_END_CYCLE=`cat sim_result.out | grep "finished NDP kernel" | awk '{print($11)}'`
+      NDP_CYCLE=$(( CYCLE2 > NDP_END_CYCLE ? 0 : NDP_END_CYCLE - CYCLE2 ))
+      echo $DEVICE_SETTING,$CONFIG,0,$line,NDP_OP,$NDP_CYCLE >> $CSV_PATH ;
     else
-      echo $DEVICE_SETTING,$CONFIG,$line,$NAME,$CYCLE >> $CSV_PATH ;
+      echo $DEVICE_SETTING,$CONFIG,0,$line,$NAME,$CYCLE >> $CSV_PATH ;
     fi
   fi
   popd

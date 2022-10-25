@@ -65,5 +65,6 @@ if __name__ == "__main__":
                   layer_parsed + "," + \
                   original_elements[2] + "," + \
                   original_elements[3] + "," + \
-                  original_elements[4] + "," + "\n"
+                  original_elements[4] + "," + \
+                  original_elements[5] + "," + "\n"
     output.write(new_results)
