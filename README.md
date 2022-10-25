@@ -20,6 +20,8 @@ This repository provides a collection of scripts to run the NDPX experiments. To
 
 Put your model results on `./traces/{your-model}`. Remember that `{your-model}` must have both `traces/` and `xla_hlo/`.
 
+# Experiments
+
 ## Quick Start
 Just do the following:
 
@@ -55,3 +57,26 @@ To run the multiple overlapping experiement, do the followings:
 3. `sh multiple_overlap_scheduler/get_ndpx_sim_result.sh {MODEL}`
 
  * This would run the simulation.
+
+# Other Analysis Tools
+
+## Postprocessing the results of the experiment
+After finishing the experiment, we need to fetch the postprocessed data.
+
+To get the data without NDPX cycle information, do:
+
+`./run_after_experiment.sh {your-model}`
+
+To get the data with NDPX cycle information, do:
+
+`sim_result_jueon_full_ndp_cycle.sh {your-model}`
+
+`./run_after_experiment.sh {your-model}`
+
+
+## Calculating the overlapping cost
+`ndpx_candidate_table.csv` contains the offloading decisions of NDPX-offloadable HLO instructions. It is inside `{your-model-path}/xla_hlo/`.
+
+To analyze the cost of the overlapped NDPX kernels, do the following:
+
+`python profile/calculate_candidate_table.py --model {your-model-path}`
