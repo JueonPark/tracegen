@@ -65,11 +65,6 @@ do
       s=${s#*"$delimiter"};  
       done;  
       declare -p NAMES  
-      # SEP="kernel_name = "
-      # IFS=$SEP read -r -a NAMES <<< "$TOTAL_NAMES"
-      # NAMES=$(echo $TOTAL_NAMES | tr '\n' '\n' | awk '{print($3)}')
-      # NAMES=$(echo $TOTAL_NAMES | tr "kernel_name = " '\n')
-      echo "total_names: $TOTAL_NAMES"
       echo "names: $NAMES"
       for NAME in ${NAMES[@]}
       do

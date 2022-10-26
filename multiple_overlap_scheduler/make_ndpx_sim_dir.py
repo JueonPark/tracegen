@@ -45,7 +45,7 @@ def match(ts_parsed, stats_parsed):
           stats_matched_chunk.append((kernel_no, kernel_name))
           stats_unmatched.remove((kernel_no, kernel_name))
         except:
-          print("qwer")
+          print(f"EXCEPTION: {kernel_name}")
           continue
       # for XLA-generated kernels
       elif '__' in kernel_name and thunk_name.replace(".", "_").replace("-", "_") == kernel_name[:kernel_name.find('__')]:
@@ -75,6 +75,23 @@ def count_comma(txt):
       result += 1
   return result
 
+def construct_ndpx_sched_table(ndpx_sched_table_paths):
+  total_sched_table = {}
+  for ndpx_sched_table_path in ndpx_sched_table_paths:
+    ndpx_sched_table = open(ndpx_sched_table_path).read().split("\n")[1:-1]
+    for line in ndpx_sched_table:
+      ndpx_sched_info = line.split(",")
+      if ndpx_sched_info[0] in total_sched_table:
+        if ndpx_sched_info[8] in total_sched_table[ndpx_sched_info[0]]:
+          continue
+        else:
+          total_sched_table[ndpx_sched_info[0]].append(ndpx_sched_info[8])
+      else:
+        total_sched_table[ndpx_sched_info[0]] = []
+        total_sched_table[ndpx_sched_info[0]].append(ndpx_sched_info[8])
+  print(total_sched_table)
+  return total_sched_table
+
 if __name__ == "__main__":
   args = parser.parse_args()
   # trace-related paths
@@ -85,6 +102,7 @@ if __name__ == "__main__":
   xla_hlo_path_str=f'/home/jueonpark/tracegen/traces/{args.model}/xla_hlo/'
   xla_hlo_path = pathlib.Path(xla_hlo_path_str)
   graph_paths = list(xla_hlo_path.glob("*after_optimizations.txt"))
+  ndpx_sched_table_paths = list(xla_hlo_path.glob("ndpx_scheduling_table*"))
   ts_paths = list(xla_hlo_path.glob("*thunk_schedule"))
   ndpx_trace_dir_path=f'./traces/{args.model}/xla_hlo/packet_32_buffer_1_gpu_1_sync_0_simd_8'  # for NdpEwiseFused files
   # output trace dir path which all the traceg files woudld gather to generate a simulation environment.
@@ -102,6 +120,7 @@ if __name__ == "__main__":
   matched = list(zip(GPU_thunks_matched, stats_matched))
 
   # list-up ndpx_traces
+  ndpx_sched_table = construct_ndpx_sched_table(ndpx_sched_table_paths)
   ndpx_trace_files = os.listdir(ndpx_trace_dir_path)
   for i in range(3):
     for trace_file in ndpx_trace_files:
@@ -120,17 +139,9 @@ if __name__ == "__main__":
     os.makedirs(new_ndpx_gpu0_path, exist_ok=True)
     ndpx_file_path = os.path.join(ndpx_trace_dir_path, file)
     new_ndpx_file_path = os.path.join(new_ndpx_gpu0_path, file)
-    shutil.move(ndpx_file_path, new_ndpx_file_path)
+    shutil.copy(ndpx_file_path, new_ndpx_file_path)
     # find GPU kernels that is to be scheduled to NDPX kernel
-    overlap_candidate_str = (file.split("$")[1]).split(".traceg")[0]
-    overlap_candidates = []
-    if count_comma(overlap_candidate_str) > 0:
-      # multiple overlapping
-      overlap_candidates_ = overlap_candidate_str.split(",")
-      overlap_candidates.extend(overlap_candidates_)
-    else:
-      # one-by-one overlapping
-      overlap_candidates.append(overlap_candidate_str)
+    overlap_candidates = ndpx_sched_table[file]
     # find corresponding GPU kernels and move the kernel files to ndpx_dir_path
     gpu_traces = []
     for (order, thunk_name), kernels in matched:
@@ -143,7 +154,7 @@ if __name__ == "__main__":
           gpu_traces.append(kernel_file)
           kernel_file_path = os.path.join(trace_path, kernel_file)
           new_kernel_file_path = os.path.join(new_ndpx_gpu0_path, kernel_file)
-          shutil.move(kernel_file_path, new_kernel_file_path)
+          shutil.copy(kernel_file_path, new_kernel_file_path)
         matched.remove(((order, thunk_name), kernels))
     # write kernelslist.g file.
     kernelslist_base_file_path = os.path.join(new_ndpx_dir_path, "kernelslist.g")
@@ -161,15 +172,17 @@ if __name__ == "__main__":
     kernelslist_file.close()
     
   # make directories for each GPU kernel
+  print("MATCHED:")
   for (_, thunk_name), kernels in matched:
     for kernel_no, kernel_name in kernels:
       kernel_file = f'kernel-{kernel_no}.traceg'
+      print(kernel_file)
       kernel_file_path = os.path.join(trace_path, kernel_file)
       new_kernel_dir_path = os.path.join(output_trace_dir, str(kernel_no))
       new_kernel_gpu0_path = os.path.join(new_kernel_dir_path, "GPU_0")
       os.makedirs(new_kernel_gpu0_path, exist_ok=True)
       new_kernel_file_path = os.path.join(new_kernel_gpu0_path, kernel_file)
-      shutil.move(kernel_file_path, new_kernel_file_path)
+      shutil.copy(kernel_file_path, new_kernel_file_path)
       # write kernelslist.g file.
       kernelslist_base_file_path = os.path.join(new_kernel_dir_path, "kernelslist.g")
       kernelslist_base_file = open(kernelslist_base_file_path, "w+")
@@ -181,3 +194,25 @@ if __name__ == "__main__":
       kernelslist_file = open(kernelslist_file_path, "w+")
       kernelslist_file.write(kernel_file + '\n')
       kernelslist_file.close()
+
+  print("UNMATCHED:")
+  for (kernel_no, kernel_name) in stats_unmatched:
+    kernel_file = f'kernel-{kernel_no}.traceg'
+    print(kernel_file)
+    kernel_file_path = os.path.join(trace_path, kernel_file)
+    new_kernel_dir_path = os.path.join(output_trace_dir, str(kernel_no))
+    new_kernel_gpu0_path = os.path.join(new_kernel_dir_path, "GPU_0")
+    os.makedirs(new_kernel_gpu0_path, exist_ok=True)
+    new_kernel_file_path = os.path.join(new_kernel_gpu0_path, kernel_file)
+    shutil.copy(kernel_file_path, new_kernel_file_path)
+    # write kernelslist.g file.
+    kernelslist_base_file_path = os.path.join(new_kernel_dir_path, "kernelslist.g")
+    kernelslist_base_file = open(kernelslist_base_file_path, "w+")
+    kernelslist_base_file.write(kernel_file + '\n')
+    kernelslist_base_file.write(CUDA_SYNC)
+    kernelslist_base_file.close()
+    # write kernelslist.g file in GPU_0.
+    kernelslist_file_path = os.path.join(new_kernel_gpu0_path, "kernelslist.g")
+    kernelslist_file = open(kernelslist_file_path, "w+")
+    kernelslist_file.write(kernel_file + '\n')
+    kernelslist_file.close()
