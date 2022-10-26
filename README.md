@@ -22,41 +22,32 @@ Put your model results on `./traces/{your-model}`. Remember that `{your-model}` 
 
 # Experiments
 
-## Quick Start
+## Running pattern-based scheduling for BERT
+**WARNING - THIS IS ONLY AVAILABLE FOR BERT**
+
+To run the pattern-matching-based experiment on BERT, do the following:
+
+``` bash
+./run_bert_experiment.sh {MODEL}
+```
+
+## Running one-by-one mapping experiment for ANY MODEL
+From now, one-by-one mapping is the default experiment running script for NDPX experiment.
+
 Just do the following:
 
 ``` bash
 ./run_overall_experiment.sh {MODEL}
 ```
 
-## Running pattern-based scheduling for BERT
-**WARNING - THIS IS ONLY AVAILABLE FOR BERT**
-
-To run the pattern-matching-based experiment on BERT, do the following:
-
-`./run_bert_experiment.sh {MODEL}`.
-
-## Running one-by-one mapping experiment for ANY MODEL
-From now, one-by-one mapping is the default experiment running script for NDPX experiment.
-
-Just do `./run_overall_experiment.sh {MODEL}`.
-
 ## Running multiple overlapping experiment for ANY MODEL (EXPERIMENTAL)
 Multiple overlapping is done by the scripts in `multiple_overlap_scheduler/`.
 
-To run the multiple overlapping experiement, do the followings:
+To run the multiple overlapping experiement, just do the following:
 
-1. `python multiple_overlap_scheduler/make_ndpx_sim_dir.py --model {your-model}`
-
- * This would schedule the traces and generate the trace directories.
-
-2. `sh multiple_overlap_scheduler/make_ndpx_sim_env.sh {MODEL}`
-
- * This would generate the simulation environment.
-
-3. `sh multiple_overlap_scheduler/get_ndpx_sim_result.sh {MODEL}`
-
- * This would run the simulation.
+``` bash
+./run_multiple_overlapping_experiment.sh {MODEL}
+```
 
 # Other Analysis Tools
 
