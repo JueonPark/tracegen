@@ -42,7 +42,7 @@ if __name__ == "__main__":
       sim_result = sim_results[sim_result_idx].split(",")
       off_row = offline_execution_object[off_exec_idx].split(",")
       print(f"current: {off_row[0]}, {sim_result[4]}")
-      print(f"off_exec_idx: {off_exec_idx}, sim_result_idx: {sim_result_idx}")
+      # print(f"off_exec_idx: {off_exec_idx}, sim_result_idx: {sim_result_idx}")
 
       while sim_results[sim_result_idx].find("Eigen") != -1:
         sim_result_idx += 1
@@ -55,18 +55,23 @@ if __name__ == "__main__":
         output_file.write(output_line)
 
       elif off_row[0].find("custom-call") != -1:
-        # custom-call
-        if sim_result[4].find("cu") != -1:
-          # found?
-          kernel_cycle = sim_result[5]
-          output_line = off_row[0] + ',' + str(kernel_cycle) + "\n"
-          output_file.write(output_line)
-          sim_result_idx += 1  
-        elif sim_result[4].find("gemm") != -1:
+        if sim_result[4].find("gemm") != -1:
           kernel_cycle = sim_result[5]
           output_line = off_row[0] + ',' + str(kernel_cycle) + "\n"
           output_file.write(output_line)
           sim_result_idx += 1
+          continue
+        elif sim_result[4].find("scudnn") != -1:
+          kernel_cycle = sim_result[5]
+          output_line = off_row[0] + ',' + str(kernel_cycle) + "\n"
+          output_file.write(output_line)
+          sim_result_idx += 1
+          continue
+        elif sim_result[4].find("cu") != -1:
+          # found?
+          sim_result_idx += 1
+          off_exec_idx -= 1
+          continue
       
       elif sim_result[4].replace("__", ".").replace("_", ".").find(off_row[0]) != -1:
         # XLA-lowered operation found!
