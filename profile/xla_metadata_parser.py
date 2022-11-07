@@ -371,3 +371,55 @@ def parse_transformer_metadata(input):
       return status + input
   else:
     return status + input
+
+def parse_lstm_metadata(input):
+  status = ""
+  if (input.find("gradient_tape") != -1):
+    status = "BW_"
+  elif (input.find("Layer") != -1):
+    return input
+  elif (len(input) > 0):
+    status = ""
+  else:
+    return "Others"
+  if (input.find("SparseSoftmaxCrossEntropyWithLogits") != -1):
+    return status + "Loss"
+  elif (input.find("multi_head_self_attention") != -1):
+    return status + "MultiHeadSelfAttention"
+  elif (input.find("loss") != -1):
+    return status + "Loss"
+  elif (input.find("layer_norm") != -1):
+    return status + "LN"
+  elif (input.find("layer_normalization") != -1):
+    return status + "LN"
+  elif (input.find("LayerNorm") != -1):
+    return status + "LN"
+  elif (input.find("layernorm") != -1):
+    return status + "LN"
+  elif (input.find("batch_norm") != -1):
+    return status + "LN"
+  elif (input.find("BatchNorm") != -1):
+    return status + "LN"
+  elif (input.find("batchnorm") != -1):
+    return status + "LN"
+  elif (input.find("Relu") != -1):
+    return status + "Relu"
+  elif (input.find("dropout") != -1):
+    return status + "Dropout"
+  elif (input.find("Softmax") != -1):
+    return status + "Softmax"
+  elif (input.find("transpose") != -1):
+    return status + "Transpose"
+  elif (input.find("Adam") != -1):
+    return status + "Adam"
+  elif (input.find("strided_slice") !=- -1):
+    return status + "strided_slice"
+  elif (input.find("BiasAdd") != -1):
+    return status + "Biasadd"
+  elif (input.find("layer_0") != -1):
+    try:
+      return status + input.split("layer_0/")[1]
+    except:
+      return status + input
+  else:
+    return status + input

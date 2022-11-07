@@ -13,6 +13,8 @@ parser.add_argument('-E', '--end', type=int, help="kernel end number", default=-
 
 CUDA_SYNC = 'cudaDeviceSynchronize 0'
 
+# 이게 제대로 된 함수가 맞나?
+# 더 precise하게 matching을 해줘야 하는게 아닌가? 특히 hlo module이 더 쪼개진다면?
 def match(ts_parsed, stats_parsed):
   ts_matched = []
   stats_matched = []

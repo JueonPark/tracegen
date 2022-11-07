@@ -2,6 +2,10 @@
 
 # gets one input - model
 MODEL=$1
+if [ -z $MODEL ]
+then
+  exit 0
+fi
 
 # make_ndpx_sim_dir.py generates experiment directory.
 python multiple_overlap_scheduler/make_ndpx_sim_dir.py --model $MODEL

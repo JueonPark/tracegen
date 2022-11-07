@@ -12,6 +12,11 @@ CONFIG_DIR=/home/shared/CXL_memory_buffer/ASPLOS_simulator/cxl-simulator/sim_con
 TRACE_DIR=`pwd`/traces/$TARGET_MODEL/exp_trace_dir
 RESULT_DIR=`pwd`"/results/$DEVICE_SETTING/$TARGET_MODEL"
 
+if [ -z $TARGET_MODEL ]
+then
+  exit 0
+fi
+
 #make directories
 mkdir -p $RESULT_DIR
 

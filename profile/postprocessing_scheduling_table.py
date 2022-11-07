@@ -42,6 +42,8 @@ if __name__ == "__main__":
     model = "vit"
   elif (args.model).find("transformer") != -1:
     model = "transformer"
+  elif (args.model).find("lstm") != -1:
+    model = "lstm"
   else:
     exit(0)
 
@@ -78,6 +80,8 @@ if __name__ == "__main__":
         new_results += parse_vit_metadata(original_elements[7])
       elif (model == "transformer"):
         new_results += parse_transformer_metadata(original_elements[7])
+      elif (model == "lstm"):
+        new_results += parse_lstm_metadata(original_elements[7])
       else:
         new_results += parse_mobilenet_metadata(original_elements[7])
     except:
@@ -93,6 +97,8 @@ if __name__ == "__main__":
         new_results += parse_vit_metadata(original_elements[10])
       elif (model == "transformer"):
         new_results += parse_transformer_metadata(original_elements[10])
+      elif (model == "lstm"):
+        new_results += parse_lstm_metadata(original_elements[10])
       else:
         new_results += parse_mobilenet_metadata(original_elements[10])
     except:

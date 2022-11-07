@@ -9,6 +9,11 @@ DEVICE_SETTING=GPU_${GPUS}_Buffer_${BUFFERS}
 SIMULATOR_DIR=/home/jueonpark/cxl-simulator
 SIMULATOR_BINARY_DIR=$SIMULATOR_DIR/multi_gpu_simulator/gpu-simulator/bin/release
 
+if [ -z $TARGET_MODEL ]
+then
+  exit 0
+fi
+
 TRACE_DIR=`pwd`/traces/$1/exp_trace_dir
 RESULT_DIR=`pwd`"/results/$DEVICE_SETTING/$TARGET_MODEL/"
 

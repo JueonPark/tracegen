@@ -26,6 +26,8 @@ if __name__ == "__main__":
     model = "vit"
   elif (args.model).find("transformer") != -1:
     model = "transformer"
+  elif (args.model).find("lstm") != -1:
+    model = "lstm"
   else:
     exit(0)
 
@@ -59,6 +61,8 @@ if __name__ == "__main__":
         layer_parsed = parse_vit_metadata(original_elements[1])
       elif model == "transformer":
         layer_parsed = parse_transformer_metadata(original_elements[1])
+      elif model == "lstm":
+        layer_parsed = parse_lstm_metadata(original_elements[1])
     except:
       layer_parsed = original_elements[1]
     new_results = original_elements[0] + "," + \
