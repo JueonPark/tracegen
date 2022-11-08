@@ -35,8 +35,8 @@ if __name__ == "__main__":
   csv_to_rewrite.writerow(header)
 
   for row in csv_result:
-    # 0               1                 2 3     4         5           6
-    # GPU_1_Buffer_1	NDPX_baseline_64	0	8433	backward	fusion_219	332801
+    # 0               1                 2 3     4           5
+    # GPU_1_Buffer_1	NDPX_baseline_64	0	8433	fusion_219	332801
     # print(row[4])
     if row[4].replace("__", ".").replace("_", ".") in candidates:
       row.append("NDPX-offloadable")

@@ -12,6 +12,7 @@ then
   # breakdown
   python HLO_breakdown/main.py --model $1
   python profile/offloadable_breakdown.py --model $1
+  python profile/easy_op_breakdown.py --model $1
 
   # overlap scheduling
   # CAUTION: requires {args.model}-NDPX_baseline_64-1-nosync-full-ndp-cycle.csv to exist!

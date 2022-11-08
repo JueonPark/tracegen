@@ -26,15 +26,28 @@ if __name__ == "__main__":
   csv_to_rewrite.writerow(header)
 
   for row in csv_result:
-    # 0               1                 2 3     4         5           6
-    # GPU_1_Buffer_1	NDPX_baseline_64	0	8433	backward	fusion_219	332801
-    print(row[4])
+    # 0               1                 2 3     4           5
+    # GPU_1_Buffer_1	NDPX_baseline_64	0	8433	fusion_219	332801
     if row[4].find("fusion") != -1:
-      row.append("fusion")
-    elif row[4] == "NDP_OP":
-      row.append("NDPX")
-    elif row[4] == "NDP_OP":
-      row.append("NDPX")
+      row.append("XLA compution")
+    elif row[4].find("broadcast") != -1:
+      row.append("XLA compution")
+    elif row[4].find("add") != -1:
+      row.append("XLA compution")
+    elif row[4].find("sub") != -1:
+      row.append("XLA compution")
+    elif row[4].find("mul") != -1:
+      row.append("XLA compution")
+    elif row[4].find("div") != -1:
+      row.append("XLA compution")
+    elif row[4].find("log") != -1:
+      row.append("XLA compution")
+    elif row[4].find("tanh") != -1:
+      row.append("XLA compution")
+    elif row[4].find("gemm") != -1:
+      row.append("cuBLAS GEMM")
+    elif row[4].find("cu") != -1:
+      row.append("cuDNN call")
     else:
-      row.append("GPU-only")
+      row.append("others")
     csv_to_rewrite.writerow(row)
