@@ -124,16 +124,20 @@ if __name__ == "__main__":
   # list-up ndpx_traces
   ndpx_sched_table = construct_ndpx_sched_table(ndpx_sched_table_paths)
   ndpx_trace_files = os.listdir(ndpx_trace_dir_path)
-  for i in range(3):
+  for i in range(10): # 왜 한 번에 안없어지지?
     for trace_file in ndpx_trace_files:
       if 'page_table' in trace_file:
         ndpx_trace_files.remove(trace_file)
       elif "_ON_THE_FLY_" in trace_file:
+        print(trace_file)
+        ndpx_trace_files.remove(trace_file)
+      elif "NdpEwiseFusedSeq" in trace_file:
+        print(trace_file)
         ndpx_trace_files.remove(trace_file)
   
   # make directories for each NDPX kernel
   for file in ndpx_trace_files:
-    print(file)
+    print(f"processing {file}")
     # make directory for each NDPX trace file
     ndpx_name = file.split("_0_")[0]  # this would be the name of the NDPX directory
     new_ndpx_dir_path = os.path.join(output_trace_dir, ndpx_name)
