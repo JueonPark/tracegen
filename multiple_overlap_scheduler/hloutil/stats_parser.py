@@ -11,10 +11,10 @@ def parse_stats(stats_string, start_no, end_no):
     if line == "":
       continue
     line_parsed = line.split(', ')
-    kernel_no = int(line_parsed[0].split('-')[1].split('.')[0])
+    kernel_num = int(line_parsed[0].split('-')[1].split('.')[0])
     kernel_name = line_parsed[1]
-    if kernel_no >= start_no and kernel_no <= end_no:
-      result.append((kernel_no, kernel_name))
+    if kernel_num >= start_no and kernel_num <= end_no:
+      result.append((kernel_name, kernel_num))
   return result
 
 if __name__ == "__main__":

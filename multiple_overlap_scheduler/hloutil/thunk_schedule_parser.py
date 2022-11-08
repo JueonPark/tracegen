@@ -16,12 +16,14 @@ def parse_thunk_schedule(ts_string):
       continue
     kernel_name = line_parsed[1].split(' ')[0]
     if 'Ndp' in kernel_name:
-      NDP_thunks.append((order,kernel_name.replace('%','')))
+      # NDP_thunks.append((order,kernel_name.replace('%','')))
+      NDP_thunks.append(kernel_name.replace('%',''))
       order+=1
     elif 'copy' in kernel_name:
       continue
     else: 
-      GPU_thunks.append((order, kernel_name.replace('%','')))
+      # GPU_thunks.append((order, kernel_name.replace('%','')))
+      GPU_thunks.append(kernel_name.replace('%',''))
       order+=1
   return GPU_thunks, NDP_thunks
 

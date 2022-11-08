@@ -1,5 +1,6 @@
 import os
 import sys
+from tqdm import tqdm
 import shutil
 import argparse
 import pathlib
@@ -13,53 +14,15 @@ parser.add_argument('-E', '--end', type=int, help="kernel end number", default=-
 
 CUDA_SYNC = 'cudaDeviceSynchronize 0'
 
-# 이게 제대로 된 함수가 맞나?
-# 더 precise하게 matching을 해줘야 하는게 아닌가? 특히 hlo module이 더 쪼개진다면?
-def match(ts_parsed, stats_parsed):
-  ts_matched = []
-  stats_matched = []
-  ts_unmatched = [i for i in ts_parsed]
-  stats_unmatched = [i for i in stats_parsed]
-
-  for order, thunk_name in ts_parsed:
-    stats_matched_chunk = []
-    unmatched_cpy = stats_unmatched.copy()
-    for kernel_no, kernel_name in unmatched_cpy:
-      # for Transformer and BERT
-      if 'custom-call' in thunk_name and 'gemm' in kernel_name:
-        ts_unmatched.remove((order, thunk_name))
-        stats_unmatched.remove((kernel_no, kernel_name))
-        ts_matched.append((order,thunk_name))
-        stats_matched.append([(kernel_no, kernel_name)])
-        break
-      # for CNNs
-      elif 'custom-call' in thunk_name and 'conv' in kernel_name:
-        ts_unmatched.remove((order, thunk_name))
-        stats_unmatched.remove((kernel_no, kernel_name))
-        ts_matched.append((order,thunk_name))
-        stats_matched.append([(kernel_no, kernel_name)])
-        break
-      # for XLA-generated kernels
-      elif thunk_name.replace(".", "_").replace("-", "_") == kernel_name:
-        try:
-          ts_unmatched.remove((order, thunk_name))
-          ts_matched.append((order, thunk_name))
-          stats_matched_chunk.append((kernel_no, kernel_name))
-          stats_unmatched.remove((kernel_no, kernel_name))
-        except:
-          print(f"EXCEPTION: {kernel_name}")
-          continue
-      # for XLA-generated kernels
-      elif '__' in kernel_name and thunk_name.replace(".", "_").replace("-", "_") == kernel_name[:kernel_name.find('__')]:
-        stats_unmatched.remove((kernel_no, kernel_name))
-        stats_matched_chunk.append((kernel_no, kernel_name))
-    if len(stats_matched_chunk) > 0:
-      stats_matched.append(stats_matched_chunk)
-
-  return (ts_matched, stats_matched), (ts_unmatched, stats_unmatched)
-
-def gpu_instr_name(thunk):
+def instr_name(thunk):
   return thunk.split(':')[0]
+
+def get_overlap_instructions(thunk):
+  if thunk.find("Ndp") == -1:
+    print("NOT A NDPX THUNK")
+    exit(-1)
+  overlap_instrs = thunk.split('$')[1].split(",")
+  return overlap_instrs
 
 def get_first_kernel_id(path):
   kernelslist_file = open(path)
@@ -69,13 +32,6 @@ def get_first_kernel_id(path):
     start = line.find('-') + 1
     end = line.find('.')
     return int(line[start:end])
-
-def count_comma(txt):
-  result = 0
-  for char in txt:
-    if char == ',':
-      result += 1
-  return result
 
 def construct_ndpx_sched_table(ndpx_sched_table_paths):
   total_sched_table = {}
@@ -110,18 +66,7 @@ if __name__ == "__main__":
   # output trace dir path which all the traceg files woudld gather to generate a simulation environment.
   output_trace_dir=f'./traces/{args.model}/exp_trace_dir'
 
-  # parsed thunk schedule and stats.csv
-  GPU_thunks, NDP_thunks = [], []
-  for ts_path in ts_paths:
-    GPU_thunk_list, NDP_thunk_list = parse_thunk_schedule(open(ts_path).read())
-    GPU_thunks.extend(GPU_thunk_list)
-    NDP_thunks.extend(NDP_thunk_list)
-  stats_parsed = parse_stats(open(stats_path).read(), get_first_kernel_id(list_path), args.end)
-  (GPU_thunks_matched, stats_matched), (GPU_thunks_unmatched, stats_unmatched) \
-      = match(GPU_thunks, stats_parsed)
-  matched = list(zip(GPU_thunks_matched, stats_matched))
-
-  # list-up ndpx_traces
+    # list-up ndpx_traces
   ndpx_sched_table = construct_ndpx_sched_table(ndpx_sched_table_paths)
   ndpx_trace_files = os.listdir(ndpx_trace_dir_path)
   for i in range(10): # 왜 한 번에 안없어지지?
@@ -134,91 +79,161 @@ if __name__ == "__main__":
       elif "NdpEwiseFusedSeq" in trace_file:
         print(trace_file)
         ndpx_trace_files.remove(trace_file)
-  
-  # make directories for each NDPX kernel
-  for file in ndpx_trace_files:
-    print(f"processing {file}")
-    # make directory for each NDPX trace file
-    ndpx_name = file.split("_0_")[0]  # this would be the name of the NDPX directory
-    new_ndpx_dir_path = os.path.join(output_trace_dir, ndpx_name)
-    new_ndpx_gpu0_path = os.path.join(new_ndpx_dir_path, "GPU_0")
-    os.makedirs(new_ndpx_gpu0_path, exist_ok=True)
-    ndpx_file_path = os.path.join(ndpx_trace_dir_path, file)
-    new_ndpx_file_path = os.path.join(new_ndpx_gpu0_path, file)
-    shutil.copy(ndpx_file_path, new_ndpx_file_path)
-    # find GPU kernels that is to be scheduled to NDPX kernel
-    overlap_candidates = ndpx_sched_table[file]
-    # find corresponding GPU kernels and move the kernel files to ndpx_dir_path
-    gpu_traces = []
-    for (order, thunk_name), kernels in matched:
-      gpu_instr = gpu_instr_name(thunk_name)
-      if gpu_instr in overlap_candidates:
-        print(gpu_instr)
-        print(kernels)
-        for kernel_no, kernel_name in kernels:
-          kernel_file = f'kernel-{kernel_no}.traceg'
-          gpu_traces.append(kernel_file)
-          kernel_file_path = os.path.join(trace_path, kernel_file)
-          new_kernel_file_path = os.path.join(new_ndpx_gpu0_path, kernel_file)
-          shutil.copy(kernel_file_path, new_kernel_file_path)
-        matched.remove(((order, thunk_name), kernels))
-    # write kernelslist.g file.
-    kernelslist_base_file_path = os.path.join(new_ndpx_dir_path, "kernelslist.g")
-    kernelslist_base_file = open(kernelslist_base_file_path, "w+")
-    for gpu_trace in gpu_traces:
-      kernelslist_base_file.write(gpu_trace + '\n')
-    kernelslist_base_file.write(CUDA_SYNC)
-    kernelslist_base_file.close()
-    # write kernelslist.g file in GPU_0.
-    kernelslist_file_path = os.path.join(new_ndpx_gpu0_path, "kernelslist.g")
-    kernelslist_file = open(kernelslist_file_path, "w+")
-    kernelslist_file.write(file + '\n')
-    for gpu_trace in gpu_traces:
-      kernelslist_file.write(gpu_trace + '\n')
-    kernelslist_file.close()
-    
-  # make directories for each GPU kernel
-  print("MATCHED:")
-  for (_, thunk_name), kernels in matched:
-    for kernel_no, kernel_name in kernels:
-      kernel_file = f'kernel-{kernel_no}.traceg'
-      print(kernel_file)
-      kernel_file_path = os.path.join(trace_path, kernel_file)
-      new_kernel_dir_path = os.path.join(output_trace_dir, str(kernel_no))
-      new_kernel_gpu0_path = os.path.join(new_kernel_dir_path, "GPU_0")
-      os.makedirs(new_kernel_gpu0_path, exist_ok=True)
-      new_kernel_file_path = os.path.join(new_kernel_gpu0_path, kernel_file)
-      shutil.copy(kernel_file_path, new_kernel_file_path)
-      # write kernelslist.g file.
-      kernelslist_base_file_path = os.path.join(new_kernel_dir_path, "kernelslist.g")
-      kernelslist_base_file = open(kernelslist_base_file_path, "w+")
-      kernelslist_base_file.write(kernel_file + '\n')
-      kernelslist_base_file.write(CUDA_SYNC)
-      kernelslist_base_file.close()
-      # write kernelslist.g file in GPU_0.
-      kernelslist_file_path = os.path.join(new_kernel_gpu0_path, "kernelslist.g")
-      kernelslist_file = open(kernelslist_file_path, "w+")
-      kernelslist_file.write(kernel_file + '\n')
-      kernelslist_file.close()
 
-  print("UNMATCHED:")
-  for (kernel_no, kernel_name) in stats_unmatched:
-    kernel_file = f'kernel-{kernel_no}.traceg'
-    print(kernel_file)
-    kernel_file_path = os.path.join(trace_path, kernel_file)
-    new_kernel_dir_path = os.path.join(output_trace_dir, str(kernel_no))
-    new_kernel_gpu0_path = os.path.join(new_kernel_dir_path, "GPU_0")
-    os.makedirs(new_kernel_gpu0_path, exist_ok=True)
-    new_kernel_file_path = os.path.join(new_kernel_gpu0_path, kernel_file)
-    shutil.copy(kernel_file_path, new_kernel_file_path)
-    # write kernelslist.g file.
-    kernelslist_base_file_path = os.path.join(new_kernel_dir_path, "kernelslist.g")
-    kernelslist_base_file = open(kernelslist_base_file_path, "w+")
-    kernelslist_base_file.write(kernel_file + '\n')
-    kernelslist_base_file.write(CUDA_SYNC)
-    kernelslist_base_file.close()
-    # write kernelslist.g file in GPU_0.
-    kernelslist_file_path = os.path.join(new_kernel_gpu0_path, "kernelslist.g")
-    kernelslist_file = open(kernelslist_file_path, "w+")
-    kernelslist_file.write(kernel_file + '\n')
-    kernelslist_file.close()
+  # parse stats.csv
+  stats_parsed = parse_stats(open(stats_path).read(), get_first_kernel_id(list_path), args.end)
+  # for stats in stats_parsed:
+  print("########## stats.csv parsed ##########")
+  stats_idx = 0
+  for ts_path in ts_paths:
+    # for each cluster, parse thunk_schedule
+    # ASSUMPTION: we assume that the thunk_schedule is sorted in timewise order
+    print(f"current ts_path: {ts_path}")
+    GPU_thunk_list, NDP_thunk_list = parse_thunk_schedule(open(ts_path).read())
+    print("GPU_thunk_list:")
+    print(GPU_thunk_list)
+
+    # now, match the GPU thunk list and stats_parsed
+    gpu_match_table = {}
+    gpu_thunk_idx = 0
+    gpu_match_table["unmatched"] = []
+    while gpu_thunk_idx <= len(GPU_thunk_list) - 1:
+      print(f"gpu_thunk: {GPU_thunk_list[gpu_thunk_idx]}, stats: {stats_parsed[stats_idx][0]}")
+
+      while stats_parsed[stats_idx][0].find("Eigen") != -1:
+        if stats_idx < len(stats_parsed) - 1:
+          stats_idx += 1
+
+      if GPU_thunk_list[gpu_thunk_idx].find("custom-call") != -1:
+        if stats_parsed[stats_idx][0].find("gemm") != -1:
+          gpu_match_table[instr_name(GPU_thunk_list[gpu_thunk_idx])] = [stats_parsed[stats_idx]]
+          gpu_thunk_idx += 1
+          stats_idx += 1
+          continue
+        elif stats_parsed[stats_idx][0].find("conv") != -1:
+          gpu_match_table[instr_name(GPU_thunk_list[gpu_thunk_idx])] = [stats_parsed[stats_idx]]
+          gpu_thunk_idx += 1
+          stats_idx += 1
+          continue
+        elif stats_parsed[stats_idx][0].find("scudnn") != -1:
+          gpu_match_table[instr_name(GPU_thunk_list[gpu_thunk_idx])] = [stats_parsed[stats_idx]]
+          gpu_thunk_idx += 1
+          stats_idx += 1
+          continue
+        else:
+          print(stats_parsed[stats_idx])
+          stats_idx += 1
+          continue
+      
+      elif (stats_parsed[stats_idx][0].find("_") == -1) and \
+            stats_parsed[stats_idx][0] == GPU_thunk_list[gpu_thunk_idx]:
+        # case for things such as "fusion" "add" without *.{num}
+        gpu_match_table[GPU_thunk_list[gpu_thunk_idx]] = [stats_parsed[stats_idx]]
+        stats_idx += 1
+        gpu_thunk_idx += 1
+        continue
+
+      elif stats_parsed[stats_idx][0].replace("__", ".").replace("_", ".")\
+              .find(GPU_thunk_list[gpu_thunk_idx]) != -1:
+        gpu_match_table[GPU_thunk_list[gpu_thunk_idx]] = []
+        while stats_parsed[stats_idx][0].replace("__", ".").replace("_", ".").find(GPU_thunk_list[gpu_thunk_idx]) != -1:
+          gpu_match_table[GPU_thunk_list[gpu_thunk_idx]].append(stats_parsed[stats_idx])
+          if stats_idx < len(stats_parsed) - 1:
+            stats_idx += 1
+          else:
+            break
+        gpu_thunk_idx += 1
+        continue
+      
+      else:
+        print("unmatched:")
+        print(f"gpu_thunk: {GPU_thunk_list[gpu_thunk_idx]}, stats: {stats_parsed[stats_idx][0]}")
+        gpu_match_table["unmatched"].append(stats_parsed[stats_idx])
+        stats_idx += 1
+      # end of GPU thunk - stats.csv matching for current cluster
+
+    #################### start making NDP experiment directories ####################
+    print("NDP_thunk_list:")
+    print(NDP_thunk_list)
+
+    for ndp_thunk in tqdm(NDP_thunk_list):
+      print(f"ndp_thunk: {ndp_thunk}")
+      ndp_call = instr_name(ndp_thunk)
+      print(f"ndp_call: {ndp_call}")
+      # find corresponding file
+      for file in ndpx_trace_files:
+        if file.find(ndp_call) != -1:
+          # found the file!
+          new_ndpx_dir_path = os.path.join(output_trace_dir, ndp_call)
+          new_ndpx_gpu0_path = os.path.join(new_ndpx_dir_path, "GPU_0")
+          os.makedirs(new_ndpx_gpu0_path, exist_ok=True)
+
+          ndpx_file_path = os.path.join(ndpx_trace_dir_path, file)
+          new_ndpx_file_path = os.path.join(new_ndpx_gpu0_path, file)
+          shutil.copy(ndpx_file_path, new_ndpx_file_path)
+      
+          # move overlapping GPU kernels to NDPX directory
+          overlap_instrs = get_overlap_instructions(ndp_thunk)
+          gpu_traces = []
+          for overlap_instr in overlap_instrs:
+            print(f"overlap_instr: {overlap_instr}")
+            kernel_pairs = []
+            try:
+              kernel_pairs = gpu_match_table[overlap_instr]
+            except:
+              print("WRONG SCHEDULING")
+              pass
+              # exit(-1)
+            for kernel_pair in kernel_pairs:
+              print(f"kernel_name: {kernel_pair[0]}, kernel_num: {kernel_pair[1]}")
+              kernel_file = f'kernel-{kernel_pair[1]}.traceg'
+              gpu_traces.append(kernel_file)
+              kernel_file_path = os.path.join(trace_path, kernel_file)
+              new_kernel_file_path = os.path.join(new_ndpx_gpu0_path, kernel_file)
+              shutil.copy(kernel_file_path, new_kernel_file_path)
+              try:
+                gpu_match_table.pop(overlap_instr)
+              except:
+                pass
+
+          # write base kernelslist.g file.
+          kernelslist_base_file_path = os.path.join(new_ndpx_dir_path, "kernelslist.g")
+          kernelslist_base_file = open(kernelslist_base_file_path, "w+")
+          for gpu_trace in gpu_traces:
+            kernelslist_base_file.write(gpu_trace + '\n')
+          kernelslist_base_file.write(CUDA_SYNC)
+          kernelslist_base_file.close()
+
+          # write kernelslist.g file in GPU_0.
+          kernelslist_file_path = os.path.join(new_ndpx_gpu0_path, "kernelslist.g")
+          kernelslist_file = open(kernelslist_file_path, "w+")
+          kernelslist_file.write(file + '\n')
+          for gpu_trace in gpu_traces:
+            kernelslist_file.write(gpu_trace + '\n')
+          kernelslist_file.close()
+          break
+
+    #################### start making GPU experiment directories ####################
+    for gpu_instr in tqdm(gpu_match_table):
+      for gpu_pair in gpu_match_table[gpu_instr]:
+        kernel_name = gpu_pair[0]
+        kernel_num = gpu_pair[1]
+        print(f"handling {kernel_num}, {kernel_name}")
+        kernel_file = f'kernel-{kernel_num}.traceg'
+        kernel_file_path = os.path.join(trace_path, kernel_file)
+        new_kernel_dir_path = os.path.join(output_trace_dir, str(kernel_num))
+        new_kernel_gpu0_path = os.path.join(new_kernel_dir_path, "GPU_0")
+        os.makedirs(new_kernel_gpu0_path, exist_ok=True)
+        new_kernel_file_path = os.path.join(new_kernel_gpu0_path, kernel_file)
+        shutil.copy(kernel_file_path, new_kernel_file_path)
+        # write kernelslist.g file.
+        kernelslist_base_file_path = os.path.join(new_kernel_dir_path, "kernelslist.g")
+        kernelslist_base_file = open(kernelslist_base_file_path, "w+")
+        kernelslist_base_file.write(kernel_file + '\n')
+        kernelslist_base_file.write(CUDA_SYNC)
+        kernelslist_base_file.close()
+        # write kernelslist.g file in GPU_0.
+        kernelslist_file_path = os.path.join(new_kernel_gpu0_path, "kernelslist.g")
+        kernelslist_file = open(kernelslist_file_path, "w+")
+        kernelslist_file.write(kernel_file + '\n')
+        kernelslist_file.close()
