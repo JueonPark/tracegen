@@ -74,11 +74,22 @@ if __name__ == "__main__":
           continue
       
       elif sim_result[4].replace("__", ".").replace("_", ".").find(off_row[0]) != -1:
+        if sim_result[4].find("_") == -1:
+          # case for things such as "fusion" "add" without *.{num}
+          kernel_cycle += int(sim_result[5])
+          sim_result_idx += 1
+          off_exec_idx += 1
+          output_line = off_row[0] + ',' + str(kernel_cycle) + "\n"
+          output_file.write(output_line)
+          continue
         # XLA-lowered operation found!
         while sim_results[sim_result_idx].split(",")[4].replace("__", ".").replace("_", ".").find(off_row[0]) != -1:
           kernel_cycle += int(sim_result[5])
           sim_result_idx += 1
         output_line = off_row[0] + ',' + str(kernel_cycle) + "\n"
         output_file.write(output_line)
+
+      # else:
+      #   print(f"case: {off_row[0]}, {sim_result[4]}")
 
       off_exec_idx += 1
