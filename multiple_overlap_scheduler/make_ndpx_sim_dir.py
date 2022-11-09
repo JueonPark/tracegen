@@ -122,6 +122,7 @@ if __name__ == "__main__":
           continue
         else:
           print(stats_parsed[stats_idx])
+          gpu_match_table["unmatched"].append(stats_parsed[stats_idx])
           stats_idx += 1
           continue
       

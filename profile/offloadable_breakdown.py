@@ -30,7 +30,7 @@ if __name__ == "__main__":
   csv_result = csv.reader(result_file)
   header = next(csv_result)
   header.append("OFFLOADABLE")
-  output_path = f'/home/jueonpark/tracegen/experiments_results/{args.model}/{args.model}-NDPX_baseline_64-1-nosync_deviec_breakdown.csv'
+  output_path = f'/home/jueonpark/tracegen/experiments_results/{args.model}/{args.model}-NDPX_baseline_64-1-nosync_offloadable_breakdown.csv'
   csv_to_rewrite = csv.writer(open(output_path, "w+"))
   csv_to_rewrite.writerow(header)
 

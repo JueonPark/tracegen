@@ -20,7 +20,7 @@ if __name__ == "__main__":
 
   csv_result = csv.reader(result_file)
   header = next(csv_result)
-  header.append("BREAKDOWN")
+  header.append("EASY_BREAKDOWN")
   output_path = f'/home/jueonpark/tracegen/experiments_results/{args.model}/{args.model}-NDPX_baseline_64-1-nosync_easy_breakdown.csv'
   csv_to_rewrite = csv.writer(open(output_path, "w+"))
   csv_to_rewrite.writerow(header)
@@ -44,10 +44,16 @@ if __name__ == "__main__":
       row.append("XLA compution")
     elif row[4].find("tanh") != -1:
       row.append("XLA compution")
+    elif row[4].find("reduce") != -1:
+      row.append("XLA compution")
+    elif row[4].find("convert") != -1:
+      row.append("XLA compution")
     elif row[4].find("gemm") != -1:
       row.append("cuBLAS GEMM")
     elif row[4].find("cu") != -1:
       row.append("cuDNN call")
+    elif row[4].find("NDP_OP") != -1:
+      row.append("NDPX")
     else:
       row.append("others")
     csv_to_rewrite.writerow(row)
