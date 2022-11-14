@@ -71,7 +71,7 @@ def rewrite_addr(original_filepath, new_filepath):
   print(f"rewrite to {original_filepath} -> {new_filepath}")
   file = open(original_filepath, "r")
   new_file = open(new_filepath, "w+")
-  for line in file.readlines():
+  for line in tqdm(file.readlines()):
     if "STG" in line:
       for word in line.split():
         if "0x" in word:
