@@ -1,3 +1,4 @@
+import re
 import os
 import sys
 from tqdm import tqdm
@@ -7,6 +8,7 @@ import pathlib
 
 from hloutil import parse_thunk_schedule
 from hloutil import parse_stats
+from hloutil import HloDepdendencyManager
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-m', '--model', type=str, help="Model name", required=True)
@@ -50,6 +52,35 @@ def construct_ndpx_sched_table(ndpx_sched_table_paths):
   print(total_sched_table)
   return total_sched_table
 
+# find GPU HloInstructions to rewrite (writing to NDPX)]
+def find_instrs_to_rewrite(hlo_graph_path, ndp_thunk_list):
+  hlo_dependency_manager = HloDepdendencyManager(open(hlo_graph_path).read())
+  ndp_instrs = [instr_name(ndp_thunk) for ndp_thunk in ndp_thunk_list]
+  # simple. for all the NDPX co
+  rewrite_instr_list = []
+  for ndp_instr in ndp_instrs:
+    parents = hlo_dependency_manager.hlo_table[ndp_instr]
+    for parent in parents:
+      if "get-tuple-element" in parent:
+        parents += hlo_dependency_manager.hlo_table[parent]
+    rewrite_instr_list += parents
+  return rewrite_instr_list
+
+# rewrite the GPU kernel file's STG address from 0x7* to 0x1007*
+def rewrite_addr(original_filepath, new_filepath):
+  print(f"rewrite to {original_filepath} -> {new_filepath}")
+  file = open(original_filepath, "r")
+  new_file = open(new_filepath, "w+")
+  for line in file.readlines():
+    if "STG" in line:
+      for word in line.split():
+        if "0x" in word:
+          line = re.sub("0x7", "0x1007", line)
+    new_file.write(line)
+  file.close()
+  new_file.close()
+  return 
+
 if __name__ == "__main__":
   args = parser.parse_args()
   # trace-related paths
@@ -62,6 +93,7 @@ if __name__ == "__main__":
   graph_paths = list(xla_hlo_path.glob("*after_optimizations.txt"))
   ndpx_sched_table_paths = list(xla_hlo_path.glob("ndpx_scheduling_table*"))
   ts_paths = list(xla_hlo_path.glob("*thunk_schedule"))
+  ts_paths.sort(key=lambda x: str(x))
   ndpx_trace_dir_path=f'./traces/{args.model}/xla_hlo/packet_32_buffer_1_gpu_1_sync_0_simd_8'  # for NdpEwiseFused files
   # output trace dir path which all the traceg files woudld gather to generate a simulation environment.
   output_trace_dir=f'./traces/{args.model}/exp_trace_dir'
@@ -79,6 +111,7 @@ if __name__ == "__main__":
       elif "NdpEwiseFusedSeq" in trace_file:
         print(trace_file)
         ndpx_trace_files.remove(trace_file)
+  # 어차피 지금은 on-the-fly가 없으니 상관이 없다 개꿀 ㅅㅅ
 
   # parse stats.csv
   stats_parsed = parse_stats(open(stats_path).read(), get_first_kernel_id(list_path), args.end)
@@ -93,13 +126,27 @@ if __name__ == "__main__":
     print("GPU_thunk_list:")
     print(GPU_thunk_list)
 
+    ts_str = (ts_path.as_posix()).split("xla_hlo/")[1]
+    print(ts_str)
+    current_cluster = ts_str.split("_", 1)[1].split(".module")[0]
+    print(f"current_cluster: {current_cluster}")
+    current_module = ts_str.split(current_cluster + ".")[1].split(".thunk_schedule")[0]
+    print(f"current_module: {current_module}")
+    current_graph = ""
+    for graph in graph_paths:
+      if current_module in graph.as_posix():
+        current_graph = graph
+        break
+
+    instrs_to_rewrite = find_instrs_to_rewrite(os.path.join(xla_hlo_path_str, current_graph),\
+                                               NDP_thunk_list)
+
     # now, match the GPU thunk list and stats_parsed
     gpu_match_table = {}
     gpu_thunk_idx = 0
     gpu_match_table["unmatched"] = []
     while gpu_thunk_idx <= len(GPU_thunk_list) - 1:
       print(f"gpu_thunk: {GPU_thunk_list[gpu_thunk_idx]}, stats: {stats_parsed[stats_idx][0]}")
-
       while stats_parsed[stats_idx][0].find("Eigen") != -1:
         if stats_idx < len(stats_parsed) - 1:
           stats_idx += 1
@@ -226,7 +273,10 @@ if __name__ == "__main__":
         new_kernel_gpu0_path = os.path.join(new_kernel_dir_path, "GPU_0")
         os.makedirs(new_kernel_gpu0_path, exist_ok=True)
         new_kernel_file_path = os.path.join(new_kernel_gpu0_path, kernel_file)
-        shutil.copy(kernel_file_path, new_kernel_file_path)
+        if gpu_instr in instrs_to_rewrite:
+          rewrite_addr(kernel_file_path, new_kernel_file_path)
+        else:
+          shutil.copy(kernel_file_path, new_kernel_file_path)
         # write kernelslist.g file.
         kernelslist_base_file_path = os.path.join(new_kernel_dir_path, "kernelslist.g")
         kernelslist_base_file = open(kernelslist_base_file_path, "w+")

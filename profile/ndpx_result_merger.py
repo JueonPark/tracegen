@@ -45,7 +45,7 @@ if __name__ == "__main__":
   else:
     exit(0)
 
-  total_result = open(f'/home/jueonpark/tracegen/csv_files/{args.model}-NDPX_baseline_64-1-nosync-full-ndp-cycle.csv', 'r').read()
+  total_result = open(f'/home/jueonpark/tracegen/csv_files/{args.model}-NDPX_baseline_64-1-nosync-ndpx-cycle.csv', 'r').read()
   total_results = total_result.split('\n')
   kernelslist = open(f'/home/jueonpark/tracegen/traces/{args.model}/kernelslist.g', 'r').read()
   kernelslists = kernelslist.split('\n\n')
