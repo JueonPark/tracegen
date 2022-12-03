@@ -35,7 +35,7 @@ do
   CYCLE2=`cat GPU_0.out | grep "sim_cycle" | tail -n1 | awk '{print($3)}'` 
   NAME=`cat GPU_0.out | grep "kernel_name" | head -n1 | awk '{print($3)}'` 
   JOB_NAME="${TARGET_MODEL}-GPU${3}-${line}-${CONFIG}"
-		echo $JOB_NAME
+  echo $JOB_NAME
   if [ ${SYNC} -eq 1 ]; then
     JOB_NAME="${JOB_NAME}-sync"
   else
@@ -59,8 +59,9 @@ do
     if [ -n "$RUNNING" ]; then
         echo "POSSIBLE DEADLOCK $line"
     fi
-    if [[ "$line" == *"_NDP_"* ]]; then
+    if [[ "$line" == *"custom-call"* ]]; then
       TOTAL_NAMES=`cat GPU_0.out | grep "kernel_name"`
+      echo $TOTAL_NAMES
       delimiter="kernel_name = "
       s=$TOTAL_NAMES$delimiter  
       NAMES=();  
