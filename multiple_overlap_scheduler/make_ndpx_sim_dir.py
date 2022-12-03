@@ -111,6 +111,15 @@ if __name__ == "__main__":
       elif "NdpEwiseFusedSeq" in trace_file:
         print(trace_file)
         ndpx_trace_files.remove(trace_file)
+      elif "noopt" in trace_file:
+        print(trace_file)
+        ndpx_trace_files.remove(trace_file)
+      elif "numbering" in trace_file:
+        print(trace_file)
+        ndpx_trace_files.remove(trace_file)
+      elif "memory" in trace_file:
+        print(trace_file)
+        ndpx_trace_files.remove(trace_file)
   # 어차피 지금은 on-the-fly가 없으니 상관이 없다 개꿀 ㅅㅅ
 
   # parse stats.csv

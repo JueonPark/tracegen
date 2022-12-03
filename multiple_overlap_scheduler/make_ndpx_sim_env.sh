@@ -1,5 +1,5 @@
 #!/bin/bash
-CONFIG=NDPX_baseline_64
+CONFIG=NDPX_baseline
 TARGET_MODEL=$1
 GPUS=1
 BUFFERS=1
@@ -8,7 +8,8 @@ RESUBMIT=1
 SIMULATOR_DIR=/home/jueonpark/cxl-simulator
 SIMULATOR_BINARY_DIR=$SIMULATOR_DIR/multi_gpu_simulator/gpu-simulator/bin/release
 DEVICE_SETTING=GPU_${GPUS}_Buffer_${BUFFERS}
-CONFIG_DIR=/home/shared/CXL_memory_buffer/ASPLOS_simulator/cxl-simulator/sim_configs/$DEVICE_SETTING/$CONFIG
+# CONFIG_DIR=/home/jueonpark/cxl-simulator/sim_configs/$DEVICE_SETTING/$CONFIG
+CONFIG_DIR=/home/jueonpark/NDPX_baseline_64
 TRACE_DIR=`pwd`/traces/$TARGET_MODEL/exp_trace_dir
 RESULT_DIR=`pwd`"/results/$DEVICE_SETTING/$TARGET_MODEL"
 
