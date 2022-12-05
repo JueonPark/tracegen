@@ -16,7 +16,7 @@ then
 
   # overlap scheduling
   # CAUTION: requires {args.model}-NDPX_baseline_64-1-nosync-full-ndp-cycle.csv to exist!
-  python profile/ndpx_result_merger.py --model $1
+  # python profile/ndpx_result_merger.py --model $1
 
   python profile/postprocessing_candidate_table.py --model $1
   
