@@ -59,7 +59,6 @@ do
     if [ -n "$RUNNING" ]; then
         echo "POSSIBLE DEADLOCK $line"
     fi
-    GPU_END_CYCLE=0
     if [[ "$line" == *"custom-call"* ]]; then
       TOTAL_NAMES=`cat GPU_0.out | grep "kernel_name"`
       echo $TOTAL_NAMES
@@ -82,12 +81,11 @@ do
         echo "name: $NAME"
         START_CYCLE=`cat sim_result.out | grep "$NAME at cycle" | head -n1 | awk '{print($11)}'`
         END_CYCLE=`cat sim_result.out | grep "$NAME at cycle" | tail -n1 | awk '{print($11)}'`
-        GPU_END_CYCLE=$END_CYCLE
         echo $DEVICE_SETTING,$CONFIG,0,$line,$NAME,$(( END_CYCLE - START_CYCLE )) >> $CSV_PATH ;
       done
       NDP_START_CYCLE=`cat sim_result.out | grep "launched NDP kernel" | awk '{print($11)}'`
       NDP_END_CYCLE=`cat sim_result.out | grep "finished NDP kernel" | awk '{print($11)}'`
-      NDP_CYCLE=$(( GPU_END_CYCLE > NDP_END_CYCLE ? 0 : NDP_END_CYCLE - GPU_END_CYCLE ))
+      NDP_CYCLE=$(( CYCLE2 > NDP_END_CYCLE ? 0 : NDP_END_CYCLE - CYCLE2 ))
       echo "ndp cycle: $NDP_CYCLE"
       echo $DEVICE_SETTING,$CONFIG,0,$line,NDP_OP,$NDP_CYCLE >> $CSV_PATH ;
     else
