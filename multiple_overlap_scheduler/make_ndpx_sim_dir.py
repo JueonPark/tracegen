@@ -35,22 +35,22 @@ def get_first_kernel_id(path):
     end = line.find('.')
     return int(line[start:end])
 
-def construct_ndpx_sched_table(ndpx_sched_table_paths):
-  total_sched_table = {}
-  for ndpx_sched_table_path in ndpx_sched_table_paths:
-    ndpx_sched_table = open(ndpx_sched_table_path).read().split("\n")[1:-1]
-    for line in ndpx_sched_table:
-      ndpx_sched_info = line.split(",")
-      if ndpx_sched_info[0] in total_sched_table:
-        if ndpx_sched_info[8] in total_sched_table[ndpx_sched_info[0]]:
-          continue
-        else:
-          total_sched_table[ndpx_sched_info[0]].append(ndpx_sched_info[8])
-      else:
-        total_sched_table[ndpx_sched_info[0]] = []
-        total_sched_table[ndpx_sched_info[0]].append(ndpx_sched_info[8])
-  print(total_sched_table)
-  return total_sched_table
+# def construct_ndpx_sched_table(ndpx_sched_table_paths):
+#   total_sched_table = {}
+#   for ndpx_sched_table_path in ndpx_sched_table_paths:
+#     ndpx_sched_table = open(ndpx_sched_table_path).read().split("\n")[1:-1]
+#     for line in ndpx_sched_table:
+#       ndpx_sched_info = line.split(",")
+#       if ndpx_sched_info[0] in total_sched_table:
+#         if ndpx_sched_info[8] in total_sched_table[ndpx_sched_info[0]]:
+#           continue
+#         else:
+#           total_sched_table[ndpx_sched_info[0]].append(ndpx_sched_info[8])
+#       else:
+#         total_sched_table[ndpx_sched_info[0]] = []
+#         total_sched_table[ndpx_sched_info[0]].append(ndpx_sched_info[8])
+#   print(total_sched_table)
+#   return total_sched_table
 
 # find GPU HloInstructions to rewrite (writing to NDPX)]
 def find_instrs_to_rewrite(hlo_graph_path, ndp_thunk_list):
@@ -91,36 +91,12 @@ if __name__ == "__main__":
   xla_hlo_path_str=f'/home/jueonpark/tracegen/traces/{args.model}/xla_hlo/'
   xla_hlo_path = pathlib.Path(xla_hlo_path_str)
   graph_paths = list(xla_hlo_path.glob("*after_optimizations.txt"))
-  ndpx_sched_table_paths = list(xla_hlo_path.glob("ndpx_scheduling_table*"))
+  # ndpx_sched_table_paths = list(xla_hlo_path.glob("ndpx_scheduling_table*"))
   ts_paths = list(xla_hlo_path.glob("*thunk_schedule"))
   ts_paths.sort(key=lambda x: str(x))
-  ndpx_trace_dir_path=f'./traces/{args.model}/xla_hlo/packet_32_buffer_1_gpu_1_sync_0_simd_8'  # for NdpEwiseFused files
-  # output trace dir path which all the traceg files woudld gather to generate a simulation environment.
+  # output trace dir path which all the traceg files woudld gather 
+  # to generate a simulation environment.
   output_trace_dir=f'./traces/{args.model}/exp_trace_dir'
-
-    # list-up ndpx_traces
-  ndpx_sched_table = construct_ndpx_sched_table(ndpx_sched_table_paths)
-  ndpx_trace_files = os.listdir(ndpx_trace_dir_path)
-  for i in range(10): # 왜 한 번에 안없어지지?
-    for trace_file in ndpx_trace_files:
-      if 'page_table' in trace_file:
-        ndpx_trace_files.remove(trace_file)
-      elif "_ON_THE_FLY_" in trace_file:
-        print(trace_file)
-        ndpx_trace_files.remove(trace_file)
-      elif "NdpEwiseFusedSeq" in trace_file:
-        print(trace_file)
-        ndpx_trace_files.remove(trace_file)
-      elif "noopt" in trace_file:
-        print(trace_file)
-        ndpx_trace_files.remove(trace_file)
-      elif "numbering" in trace_file:
-        print(trace_file)
-        ndpx_trace_files.remove(trace_file)
-      elif "memory" in trace_file:
-        print(trace_file)
-        ndpx_trace_files.remove(trace_file)
-  # 어차피 지금은 on-the-fly가 없으니 상관이 없다 개꿀 ㅅㅅ
 
   # parse stats.csv
   stats_parsed = parse_stats(open(stats_path).read(), get_first_kernel_id(list_path), args.end)
@@ -146,6 +122,26 @@ if __name__ == "__main__":
       if current_module in graph.as_posix():
         current_graph = graph
         break
+    # list-up ndpx_traces
+    ndpx_trace_dir_path=f'./traces/{args.model}/xla_hlo/packet_32_buffer_1_gpu_1_sync_0_simd_8/{current_cluster}'
+    # ndpx_sched_table = construct_ndpx_sched_table(ndpx_sched_table_paths)
+    ndpx_trace_files = os.listdir(ndpx_trace_dir_path)
+    for i in range(10): # 왜 한 번에 안없어지지?
+      for trace_file in ndpx_trace_files:
+        if 'page_table' in trace_file:
+          ndpx_trace_files.remove(trace_file)
+        elif "_ON_THE_FLY_" in trace_file:
+          ndpx_trace_files.remove(trace_file)
+        elif "NdpEwiseFusedSeq" in trace_file:
+          ndpx_trace_files.remove(trace_file)
+        elif "noopt" in trace_file:
+          ndpx_trace_files.remove(trace_file)
+        elif "numbering" in trace_file:
+          ndpx_trace_files.remove(trace_file)
+        elif "memory" in trace_file:
+          ndpx_trace_files.remove(trace_file)
+    print(f"ndpx_trace_files: {ndpx_trace_files}")
+    # 어차피 지금은 on-the-fly가 없으니 상관이 없다
 
     instrs_to_rewrite = find_instrs_to_rewrite(os.path.join(xla_hlo_path_str, current_graph),\
                                                NDP_thunk_list)
@@ -216,12 +212,13 @@ if __name__ == "__main__":
     for ndp_thunk in tqdm(NDP_thunk_list):
       print(f"ndp_thunk: {ndp_thunk}")
       ndp_call = instr_name(ndp_thunk)
-      print(f"ndp_call: {ndp_call}")
+      new_ndp_path = f"{current_cluster}_{ndp_call}"
+      print(f"new_ndp_path: {new_ndp_path}")
       # find corresponding file
       for file in ndpx_trace_files:
         if file.find(ndp_call) != -1:
           # found the file!
-          new_ndpx_dir_path = os.path.join(output_trace_dir, ndp_call)
+          new_ndpx_dir_path = os.path.join(output_trace_dir, new_ndp_path)
           new_ndpx_gpu0_path = os.path.join(new_ndpx_dir_path, "GPU_0")
           os.makedirs(new_ndpx_gpu0_path, exist_ok=True)
 
