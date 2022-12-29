@@ -28,8 +28,6 @@ def parse_bert_metadata(input):
     return status + "Dropout"
   elif (input.find("Softmax") != -1):
     return status + "Softmax"
-  elif (input.find("BiasAdd") != -1):
-    return status + "Biasadd"
   elif (input.find("Gelu") != -1):
     return status + "Gelu"
   elif (input.find("TanhGrad") != -1):
@@ -45,7 +43,7 @@ def parse_bert_metadata(input):
   elif (input.find("pooler_transform") != -1):
     return status + "pooler_transform"
   elif (input.find("strided_slice") !=- -1):
-    return status + "strided_slice"
+    return status + "FeedForward+SelfAttentionOutput"
   elif (input.find("type_embedding") !=- -1):
     return status + "type_embedding"
   elif (input.find("position_embedding") !=- -1):
@@ -84,8 +82,6 @@ def parse_resnet_metadata(input):
     return status + "BN"
   elif (input.find("batchnorm") != -1):
     return status + "BN"
-  elif (input.find("BiasAdd") != -1):
-    return status + "BiasAdd"
   elif (input.find("Cast") != -1):
     return status + "Cast"
   elif (input.find("Relu") != -1):
@@ -129,8 +125,6 @@ def parse_mobilenet_metadata(input):
     return status + "BN"
   elif (input.find("batchnorm") != -1):
     return status + "BN"
-  elif (input.find("BiasAdd") != -1):
-    return status + "BiasAdd"
   elif (input.find("Cast") != -1):
     return status + "Cast"
   elif (input.find("Relu") != -1):
@@ -174,8 +168,6 @@ def parse_transformer_metadata(input):
     return status + "BN"
   elif (input.find("batchnorm") != -1):
     return status + "BN"
-  elif (input.find("BiasAdd") != -1):
-    return status + "BiasAdd"
   elif (input.find("Cast") != -1):
     return status + "Cast"
   elif (input.find("Relu") != -1):
@@ -193,7 +185,7 @@ def parse_transformer_metadata(input):
   elif (input.find("pooler_transform") != -1):
     return status + "pooler_transform"
   elif (input.find("strided_slice") !=- -1):
-    return status + "strided_slice"
+    return status + "FeedForward+SelfAttentionOutput"
   elif (input.find("type_embedding") !=- -1):
     return status + "type_embedding"
   elif (input.find("position_embedding") !=- -1):
@@ -232,8 +224,6 @@ def parse_dlrm_metadata(input):
     return status + "BN"
   elif (input.find("batchnorm") != -1):
     return status + "BN"
-  elif (input.find("BiasAdd") != -1):
-    return status + "BiasAdd"
   elif (input.find("Cast") != -1):
     return status + "Cast"
   elif (input.find("Relu") != -1):
@@ -309,9 +299,7 @@ def parse_vit_metadata(input):
   elif (input.find("Adam") != -1):
     return status + "Adam"
   elif (input.find("strided_slice") !=- -1):
-    return status + "strided_slice"
-  elif (input.find("BiasAdd") != -1):
-    return status + "Biasadd"
+    return status + "FeedForward+SelfAttentionOutput"
   elif (input.find("layer_0") != -1):
     try:
       return status + input.split("layer_0/")[1]
@@ -361,9 +349,7 @@ def parse_transformer_metadata(input):
   elif (input.find("Adam") != -1):
     return status + "Adam"
   elif (input.find("strided_slice") !=- -1):
-    return status + "strided_slice"
-  elif (input.find("BiasAdd") != -1):
-    return status + "Biasadd"
+    return status + "FeedForward+SelfAttentionOutput"
   elif (input.find("layer_0") != -1):
     try:
       return status + input.split("layer_0/")[1]
@@ -413,9 +399,7 @@ def parse_lstm_metadata(input):
   elif (input.find("Adam") != -1):
     return status + "Adam"
   elif (input.find("strided_slice") !=- -1):
-    return status + "strided_slice"
-  elif (input.find("BiasAdd") != -1):
-    return status + "Biasadd"
+    return status + "FeedForward+SelfAttentionOutput"
   elif (input.find("layer_0") != -1):
     try:
       return status + input.split("layer_0/")[1]
