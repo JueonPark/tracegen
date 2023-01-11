@@ -59,8 +59,8 @@ if __name__ == "__main__":
   output_path = f'/home/jueonpark/tracegen/experiments_results/{args.model}/ndpx_scheduling_table_postprocessed.csv'
   output = open(output_path, "w+")
 
-
-  for original_row in original_results[:-1]:
+  output.write(original_results[0])
+  for original_row in original_results[1:-1]:
     new_results = ""
     original_elements = original_row.split(",")
 
@@ -83,7 +83,7 @@ if __name__ == "__main__":
       elif (model == "lstm"):
         new_results += parse_lstm_metadata(original_elements[7])
       else:
-        new_results += parse_mobilenet_metadata(original_elements[7])
+        new_results += parse_cnn_metadata(original_elements[7])
     except:
       new_results += original_elements[7]
     new_results += "," + original_elements[8] + "," + \
@@ -100,7 +100,7 @@ if __name__ == "__main__":
       elif (model == "lstm"):
         new_results += parse_lstm_metadata(original_elements[10])
       else:
-        new_results += parse_mobilenet_metadata(original_elements[10])
+        new_results += parse_cnn_metadata(original_elements[10])
     except:
       new_results += original_elements[10]
     new_results += "," + original_elements[11] + "\n"

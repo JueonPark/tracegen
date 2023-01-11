@@ -20,7 +20,7 @@ if __name__ == "__main__":
   # finding offline_execution_result*.csv files
   xla_hlo_path_str = f'/home/jueonpark/tracegen/traces/{args.model}/xla_hlo/'
   xla_hlo_path = pathlib.Path(xla_hlo_path_str)
-  offline_execution_paths = list(xla_hlo_path.glob("./offline_execution_result*.csv"))
+  offline_execution_paths = list(xla_hlo_path.glob("./*offline_execution_result*.csv"))
   offline_execution_objects = []
 
   sim_result_idx = 1

@@ -244,7 +244,10 @@ if __name__ == "__main__":
               gpu_traces.append(kernel_file)
               kernel_file_path = os.path.join(trace_path, kernel_file)
               new_kernel_file_path = os.path.join(new_ndpx_gpu0_path, kernel_file)
-              shutil.copy(kernel_file_path, new_kernel_file_path)
+              if overlap_instr in instrs_to_rewrite:
+                rewrite_addr(kernel_file_path, new_kernel_file_path)
+              else:
+                shutil.copy(kernel_file_path, new_kernel_file_path)
               try:
                 gpu_match_table.pop(overlap_instr)
               except:

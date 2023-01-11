@@ -43,16 +43,17 @@ if __name__ == "__main__":
   output_path = f'/home/jueonpark/tracegen/experiments_results/{args.model}/ndpx_candidate_table_postprocessed.csv'
   output = open(output_path, "w+")
 
-  for original_row in original_results[:-1]:
+  output.write(original_results[0])
+  for original_row in original_results[1:-1]:
     original_elements = original_row.split(",")
     layer_parsed = ""
     try:
       if model == "bert":
         layer_parsed = parse_bert_metadata(original_elements[1])
       elif model == "resnet":
-        layer_parsed = parse_resnet_metadata(original_elements[1])
+        layer_parsed = parse_cnn_metadata(original_elements[1])
       elif model == "mobilenet":
-        layer_parsed = parse_mobilenet_metadata(original_elements[1])
+        layer_parsed = parse_cnn_metadata(original_elements[1])
       elif model == "resnet":
         layer_parsed = parse_bert_metadata(original_elements[1])
       elif model == "dlrm":
