@@ -36,6 +36,8 @@ if __name__ == "__main__":
     model = "mobilenet"
   elif (args.model).find("transformer") != -1:
     model = "transformer"
+  elif (args.model).find("trans") != -1:
+    model = "transformer"
   elif (args.model).find("dlrm") != -1:
     model = "dlrm"
   elif (args.model).find("vit") != -1:
